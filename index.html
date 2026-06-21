@@ -66,7 +66,7 @@ body{
     radial-gradient(980px 640px at 8% 2%, rgba(227,192,105,.06), transparent 56%),
     var(--navy);
   color:var(--ink-pearl);font-family:var(--type-body);font-weight:300;
-  font-size:19px;line-height:1.84;letter-spacing:.004em;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  font-size:19px;line-height:1.84;letter-spacing:.004em;-webkit-font-smoothing:antialiased;overflow-x:clip;}
 ::selection{background:rgba(227,192,105,.22);color:var(--ink-ivory);}
 
 /* shared inline Chinese */
@@ -1562,7 +1562,7 @@ mark.search-hit.current{background:var(--gold);color:#0c1422;}
 <style id="vital-layer">
 .ox-grid .gloss-zh{font-size:1.5rem;}
 /* live glossary tooltips */
-.zh.has-gloss,.zh-lg.has-gloss{border-bottom:1px dotted rgba(227,192,105,.45);cursor:help;}
+.zh.has-gloss,.zh-lg.has-gloss,.p-zh.has-gloss{border-bottom:1px dotted rgba(227,192,105,.45);cursor:help;}
 #zhTip{position:fixed;z-index:400;max-width:280px;background:rgba(9,16,28,.98);border:1px solid rgba(227,192,105,.34);
   border-radius:10px;padding:12px 14px;box-shadow:0 18px 50px rgba(0,0,0,.55);pointer-events:none;opacity:0;
   transition:opacity .14s;backdrop-filter:blur(6px);}
@@ -1619,51 +1619,8 @@ mark.motif-hit{background:rgba(87,179,160,.32);color:#fff;border-radius:2px;box-
 /* clean opening film: hide chrome while the overture is on screen */
 .sitenav,.siteprog,.nav-search-btn,.swing-toggle,.pulse-dot{transition:opacity .45s ease;}
 body.in-overture .sitenav,body.in-overture .siteprog,body.in-overture .nav-search-btn,
-body.in-overture #searchBar,body.in-overture .swing-toggle{opacity:0 !important;pointer-events:none !important;}
-/* ---------- overture ---------- */
-.overture{position:relative;background:#0a1322;}
-.ov-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.ov-scenes{position:relative;}
-.ov-scene{height:92vh;}
-.ov-svg{position:absolute;inset:0;width:100%;height:100%;}
-.ov-ridge{fill:#0e1d31;stroke:rgba(227,192,105,.5);stroke-width:1.5;
-  stroke-dasharray:3000;stroke-dashoffset:calc(3000 * (1 - var(--draw,0)));transition:none;}
-.ov-ridge.far{fill:#0c1828;stroke:rgba(227,192,105,.28);opacity:calc(.5 + .5*var(--draw,0));}
-.ov-ridge.near{filter:drop-shadow(0 -2px 30px rgba(227,192,105,.15));}
-.ov-haze{opacity:calc(.4 + .6*var(--draw,0));}
-.ov-stage[data-phase="2"] .ov-ridge,.ov-stage[data-phase="3"] .ov-ridge{transition:opacity .8s;opacity:.16;}
-.ov-stage[data-phase="2"] .ov-ridge.far,.ov-stage[data-phase="3"] .ov-ridge.far{opacity:.08;}
-.ov-constel{opacity:0;transition:opacity 1s;}
-.ov-stage[data-phase="2"] .ov-constel,.ov-stage[data-phase="3"] .ov-constel{opacity:1;}
-.ov-link{stroke:rgba(227,192,105,.32);stroke-width:1;stroke-dasharray:600;stroke-dashoffset:600;
-  transition:stroke-dashoffset 1.1s ease;}
-.ov-stage[data-phase="2"] .ov-link,.ov-stage[data-phase="3"] .ov-link{stroke-dashoffset:0;}
-.ov-node{opacity:0;transform:scale(.3);transform-origin:center;transform-box:fill-box;
-  transition:opacity .7s, transform .7s;transition-delay:calc(var(--d,0) * 1.4s);}
-.ov-stage[data-phase="2"] .ov-node,.ov-stage[data-phase="3"] .ov-node,
-.ov-stage[data-phase="2"] .ov-centre,.ov-stage[data-phase="3"] .ov-centre{opacity:1;transform:scale(1);}
-.ov-node.hub circle{fill:rgba(227,192,105,.12);stroke:var(--gold);stroke-width:1.6;}
-.ov-node.sat circle{fill:rgba(87,179,160,.14);stroke:rgba(87,179,160,.55);stroke-width:1;}
-.ov-centre{opacity:0;transform:scale(.3);transform-origin:center;transform-box:fill-box;transition:opacity .7s,transform .7s;}
-.ov-ring{fill:rgba(10,19,34,.6);stroke:rgba(227,192,105,.6);stroke-width:1.4;}
-.ov-zh{font-family:var(--type-chinese);font-size:26px;fill:var(--gold-pale);text-anchor:middle;}
-.ov-centre-zh{font-size:19px;fill:var(--ink-ivory);}
-.ov-titles{position:relative;text-align:center;z-index:2;padding:0 24px;pointer-events:none;}
-.ov-seal{font-family:var(--type-chinese);font-size:clamp(2.4rem,8vw,4.2rem);
-  background:linear-gradient(166deg,#fff3cf,var(--gold) 60%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 4px 30px rgba(227,192,105,.35));opacity:calc(1 - 1.4*var(--ov,0));transition:opacity .2s;}
-.ov-title{font-family:var(--type-display);font-weight:600;font-size:clamp(1.5rem,4.6vw,2.9rem);color:var(--ink-ivory);
-  margin:.3em 0 0;line-height:1.15;opacity:calc(1 - 1.6*var(--ov,0));}
-.ov-sub{font-family:var(--type-display);font-style:italic;color:var(--gold-pale);font-size:clamp(1rem,2.4vw,1.3rem);margin-top:14px;transition:opacity .5s;}
-.ov-sub1{opacity:0;}.ov-stage[data-phase="1"] .ov-sub1{opacity:1;}
-.ov-sub2{opacity:0;margin-top:6px;}.ov-stage[data-phase="2"] .ov-sub2,.ov-stage[data-phase="3"] .ov-sub2{opacity:1;}
-.ov-enter{position:absolute;left:50%;transform:translateX(-50%);bottom:-30vh;pointer-events:auto;
-  font-family:var(--type-mono);font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-dim);
-  text-decoration:none;border:1px solid rgba(227,192,105,.3);border-radius:999px;padding:10px 20px;
-  opacity:0;transition:opacity .6s;}
-.ov-enter span{display:inline-block;margin-left:6px;}
-.ov-stage[data-phase="3"] .ov-enter{opacity:1;}
-.ov-enter:hover{background:rgba(227,192,105,.1);color:var(--gold-pale);}
+body.in-overture #searchBar,body.in-overture .swing-toggle,body.in-overture .cadence-toggle{opacity:0 !important;pointer-events:none !important;}
+/* ---------- overture visuals now provided by the shared film engine (filmkit) ---------- */
 /* ---------- score: tempo markings ---------- */
 .tempo-mark{font-family:var(--type-mono);font-size:.6rem;letter-spacing:.26em;text-transform:uppercase;
   color:var(--jade-pale);opacity:.8;margin:6px 0 2px;}
@@ -1721,6 +1678,156 @@ body.swing-on .margin-note{display:block;max-width:768px;margin:0 auto;padding:8
 }
 @media print{ .overture,.swing-toggle,.pulse-dot,.tw-go{display:none !important;} }
 </style>
+<style id="film-kit-css">
+.film{position:relative;background:#060b15;}
+.film-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.film-scenes{position:relative;pointer-events:none;}
+.film-scene{height:96vh;}
+.film-svg{position:absolute;inset:0;width:100%;height:100%;}
+/* ---- nebula + dawn + haze, cross-fading by build ---- */
+.film-neb{opacity:calc(0.25 + 0.75*clamp(0, calc((var(--build,0) - 0.3) / 0.45), 1));transform-origin:center;animation:filmNeb 70s ease-in-out infinite alternate;}
+@keyframes filmNeb{0%{transform:rotate(-14deg) scale(1);}100%{transform:rotate(-11deg) scale(1.05);}}
+.film-dawn{opacity:clamp(0, calc((0.62 - var(--build,0)) / 0.5), 1);}
+.film-haze{opacity:calc(.3 + .5*var(--build,0));}
+/* ---- starfield, three parallax depths ---- */
+.film-stars circle{fill:#fff7e0;opacity:var(--o,.5);animation-name:filmTwinkle;animation-timing-function:ease-in-out;animation-iteration-count:infinite;}
+.sl-deep{opacity:calc(.6 + .4*var(--build,0));transform:translate(calc(var(--px,0)*6px), calc(var(--ov,0)*-10px + var(--py,0)*6px));}
+.sl-mid{opacity:calc(.55 + .45*var(--build,0));transform:translate(calc(var(--px,0)*12px), calc(var(--ov,0)*-20px + var(--py,0)*12px));}
+.sl-bright{opacity:calc(.5 + .5*var(--build,0));transform:translate(calc(var(--px,0)*20px), calc(var(--ov,0)*-32px + var(--py,0)*20px));}
+@keyframes filmTwinkle{0%,100%{opacity:calc(var(--o,.5)*.32);}50%{opacity:var(--o,.5);}}
+.film-anchors circle{fill:#fff3cf;opacity:calc(.3 + .7*var(--build,0));animation:filmTwinkle 4s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(255,243,207,.8));}
+/* ---- shooting stars ---- */
+.film-shoots{opacity:calc(.2 + .8*var(--build,0));}
+.film-shoot{opacity:0;animation-name:filmShoot;animation-timing-function:ease-in;animation-iteration-count:infinite;}
+@keyframes filmShoot{0%{opacity:0;transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--ang,20deg)) translateX(0);}
+  4%{opacity:1;}14%{opacity:1;transform:translate(var(--tx,0),var(--ty,0)) rotate(var(--ang,20deg)) translateX(280px) translateY(64px);}
+  16%,100%{opacity:0;}}
+/* ---- moon ---- */
+.film-moon{opacity:clamp(0, calc((0.72 - var(--build,0)) / 0.42), 1);transform:translateY(calc(var(--ov,0)*-26px));}
+.moon-halo{animation:filmPulse 7s ease-in-out infinite;}
+/* ---- mountains (ink-wash recession) ---- */
+.film-mountains{opacity:clamp(0, calc((0.92 - var(--build,0)) / 0.5), 1);}
+.film-mt{opacity:var(--mo,1);}
+.film-mt.l1{transform:translateY(calc(var(--ov,0)*6px + var(--px,0)*-3px));}
+.film-mt.l2{transform:translateY(calc(var(--ov,0)*12px + var(--px,0)*-5px));}
+.film-mt.l3{transform:translateY(calc(var(--ov,0)*20px + var(--px,0)*-8px));filter:drop-shadow(0 -3px 30px rgba(227,192,105,.12));}
+.film-mt.l4{transform:translateY(calc(var(--ov,0)*30px + var(--px,0)*-12px));}
+.film-mt.l5{transform:translateY(calc(var(--ov,0)*44px + var(--px,0)*-16px));}
+.film-rim{stroke:rgba(227,192,105,.16);stroke-width:1;}
+.film-reflection{opacity:clamp(0, calc((0.8 - var(--build,0)) / 0.5), 1);}
+.water-shimmer ellipse{animation:filmShimmer 9s ease-in-out infinite;}
+@keyframes filmShimmer{0%,100%{opacity:.5;transform:scaleX(1);}50%{opacity:1;transform:scaleX(1.04);}}
+/* ---- valley mist ---- */
+.mist{fill:rgba(150,175,210,.06);}
+.mist.mA{animation:filmDriftA 50s ease-in-out infinite alternate;}
+.mist.mB{animation:filmDriftB 64s ease-in-out infinite alternate;}
+.mist.mC{animation:filmDriftA 78s ease-in-out infinite alternate;opacity:.7;}
+@keyframes filmDriftA{0%{transform:translateX(-44px);}100%{transform:translateX(44px);}}
+@keyframes filmDriftB{0%{transform:translateX(40px);}100%{transform:translateX(-40px);}}
+.film-mist{opacity:clamp(0, calc((0.86 - var(--build,0)) / 0.55), .9);}
+/* ---- rising 氣 motes ---- */
+.film-motes circle{fill:rgba(227,192,105,.72);opacity:0;animation-name:filmMote;animation-timing-function:linear;animation-iteration-count:infinite;}
+@keyframes filmMote{0%{transform:translate(0,0);opacity:0;}12%{opacity:.7;}88%{opacity:.4;}100%{transform:translate(var(--dx,0),-560px);opacity:0;}}
+/* ---- peak sparks rising into hubs ---- */
+.film-spark{fill:#fff3cf;filter:drop-shadow(0 0 5px rgba(255,243,207,.9));
+  opacity:calc(clamp(0, calc((var(--build,0) - 0.28) / 0.22), 1) * clamp(0, calc((0.82 - var(--build,0)) / 0.22), 1));
+  transform:translate(calc(var(--dx,0)*var(--build,0)), calc(var(--dy,0)*var(--build,0)));}
+/* ---- constellation ---- */
+.film-constel{transform-box:view-box;transform-origin:500px 440px;animation:filmSway 54s ease-in-out infinite alternate;
+  transform:translate(calc(var(--px,0)*-10px), calc(var(--py,0)*-10px));}
+@keyframes filmSway{0%{rotate:-1.1deg;}100%{rotate:1.1deg;}}
+.film-constel .clink{stroke:rgba(227,192,105,.30);stroke-width:1;stroke-dasharray:var(--len,600);
+  --rl:clamp(0, calc((var(--build,0) - var(--s,0)) / 0.16), 1);
+  stroke-dashoffset:calc(var(--len,600) * (1 - var(--rl)));opacity:calc(var(--rl)*.85);}
+.film-constel .clink.spine{stroke:rgba(227,192,105,.5);stroke-width:1.4;}
+.film-constel .clink.tri{stroke:rgba(87,179,160,.34);stroke-width:1;stroke-dasharray:4 6;}
+.cpulse{stroke:#fff7e0;stroke-width:2.4;stroke-linecap:round;stroke-dasharray:5 999;
+  opacity:clamp(0, calc((var(--build,0) - 0.9) / 0.1), 1);
+  animation:filmFlow 3.4s linear infinite;filter:drop-shadow(0 0 4px rgba(255,247,224,.9));}
+@keyframes filmFlow{0%{stroke-dashoffset:var(--len,600);}100%{stroke-dashoffset:0;}}
+.chub,.csat,.ccentre{--r:clamp(0, calc((var(--build,0) - var(--s,0)) / 0.16), 1);
+  opacity:var(--r);transform:scale(calc(0.25 + 0.75*var(--r)));transform-box:fill-box;transform-origin:center;pointer-events:none;outline:none;}
+.chub-core{fill:rgba(227,192,105,.18);stroke:var(--gold);stroke-width:1.6;transition:fill .3s;}
+.chub-halo{fill:rgba(227,192,105,.05);animation:filmPulse 4.6s ease-in-out infinite;}
+.chub-ring{fill:none;stroke:rgba(227,192,105,.3);stroke-width:1;stroke-dasharray:3 7;transform-box:fill-box;transform-origin:center;animation:filmSpin 30s linear infinite;}
+.chub-zh{font-family:var(--type-chinese);font-size:30px;fill:#fff3cf;text-anchor:middle;}
+.chub-hit,.csat-hit,.cc-hit{fill:transparent;}
+.csat-dot{fill:rgba(87,179,160,.6);stroke:rgba(120,210,190,.9);stroke-width:1;transition:fill .3s;}
+.csat-glow{fill:rgba(87,179,160,.1);animation:filmPulse 5.4s ease-in-out infinite;}
+.csat-label{font-family:var(--type-chinese);font-size:14.5px;fill:var(--jade-pale);text-anchor:middle;
+  opacity:clamp(0, calc((var(--build,0) - 0.8) / 0.16), 1);}
+.cc-glow{fill:rgba(227,192,105,.05);animation:filmPulse 5s ease-in-out infinite;}
+.cc-spin{fill:none;stroke:rgba(227,192,105,.22);stroke-width:1;stroke-dasharray:2 9;transform-box:fill-box;transform-origin:center;animation:filmSpin 44s linear infinite reverse;}
+.cc-ring{fill:none;stroke:rgba(227,192,105,.46);stroke-width:1.1;}
+.cc-ring2{fill:rgba(7,13,23,.6);stroke:rgba(227,192,105,.74);stroke-width:1.5;}
+.cc-zh{font-family:var(--type-chinese);font-size:20px;fill:var(--ink-ivory);text-anchor:middle;}
+@keyframes filmSpin{to{transform:rotate(360deg);}}
+@keyframes filmPulse{0%,100%{opacity:.28;}50%{opacity:.62;}}
+/* interactive: enabled only when the map is fully formed (JS adds .live) */
+.film-overture.live .chub,.film-overture.live .csat,.film-overture.live .ccentre{pointer-events:auto;cursor:pointer;}
+.film-overture.live .chub:hover .chub-core,.film-overture.live .chub:focus-visible .chub-core{fill:rgba(227,192,105,.42);}
+.film-overture.live .csat:hover .csat-dot,.film-overture.live .csat:focus-visible .csat-dot{fill:rgba(120,210,190,.95);}
+.film-overture.live .chub:focus-visible .chub-ring,.film-overture.live .ccentre:focus-visible .cc-ring,.film-overture.live .csat:focus-visible .csat-glow{stroke:var(--gold);stroke-width:2;}
+.film-grain{pointer-events:none;mix-blend-mode:overlay;}
+.film-vignette{pointer-events:none;}
+/* ---- titles ---- */
+.film-titles{position:relative;z-index:3;text-align:center;padding:0 24px;pointer-events:none;}
+.film-seal{font-family:var(--type-chinese);font-size:clamp(2.8rem,9.5vw,5.2rem);line-height:1;
+  background:linear-gradient(166deg,#fff6d8,var(--gold) 58%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 4px 42px rgba(227,192,105,.46));
+  opacity:clamp(0, calc((0.34 - var(--build,0)) / 0.2), 1);
+  transform:scale(calc(0.9 + 0.1*(1 - var(--build,0))));}
+.film-maintitle{font-family:var(--type-display);font-weight:600;font-size:clamp(1.55rem,4.8vw,3rem);color:var(--ink-ivory);
+  margin:.32em 0 0;line-height:1.14;letter-spacing:.01em;opacity:clamp(0, calc((0.3 - var(--build,0)) / 0.22), 1);}
+.film-sub{font-family:var(--type-display);font-style:italic;color:var(--gold-pale);font-size:clamp(1rem,2.4vw,1.34rem);margin-top:14px;opacity:0;transition:opacity .6s;}
+.film-stage[data-phase="1"] .film-sub1{opacity:1;}
+.film-stage[data-phase="2"] .film-sub2,.film-stage[data-phase="3"] .film-sub2{opacity:1;}
+.film-coda .film-sub1{opacity:0;}
+.film-coda .film-stage[data-phase="0"] .film-sub1,.film-coda .film-stage[data-phase="1"] .film-sub1{opacity:1;}
+.film-fin{font-family:var(--type-display);font-style:italic;color:var(--ink-ivory);font-size:clamp(1rem,2.6vw,1.46rem);margin-top:16px;
+  opacity:clamp(0, calc((0.26 - var(--build,0)) / 0.18), 1);}
+.film-enter,.film-replay{position:absolute;left:50%;transform:translateX(-50%);bottom:-34vh;pointer-events:auto;cursor:pointer;
+  font-family:var(--type-mono);font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-dim);
+  background:rgba(10,18,30,.55);border:1px solid rgba(227,192,105,.34);border-radius:999px;padding:11px 24px;text-decoration:none;
+  opacity:0;transition:opacity .6s,background .3s,color .3s;}
+.film-enter span{margin-left:6px;display:inline-block;animation:filmNudge 1.8s ease-in-out infinite;}
+@keyframes filmNudge{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
+.film-stage[data-phase="3"] .film-enter,.film-stage[data-phase="3"] .film-replay{opacity:1;}
+.film-enter:hover,.film-replay:hover{background:rgba(227,192,105,.16);color:var(--gold-pale);}
+/* star-map hint */
+.film-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:8%;z-index:4;pointer-events:none;
+  font-family:var(--type-mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-pale);
+  opacity:clamp(0, calc((var(--build,0) - 0.86) / 0.12), .85);transition:opacity .4s;}
+/* floating tooltip for star-map */
+.film-tip{position:absolute;z-index:6;min-width:150px;max-width:240px;padding:12px 15px;border-radius:12px;
+  background:rgba(9,16,28,.94);border:1px solid rgba(227,192,105,.32);box-shadow:0 14px 40px rgba(0,0,0,.5);
+  opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .22s,transform .22s,visibility .22s;pointer-events:none;text-align:left;}
+.film-tip.show{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;}
+.film-tip .ft-zh{font-family:var(--type-chinese);font-size:1.5rem;color:var(--gold-pale);line-height:1;}
+.film-tip .ft-py{font-family:var(--type-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--jade-pale);margin-top:5px;}
+.film-tip .ft-gloss{font-family:var(--type-body);font-size:.86rem;color:var(--ink-pearl);margin-top:8px;line-height:1.45;}
+.film-tip .ft-go{font-family:var(--type-mono);font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:10px;cursor:pointer;}
+/* progress rail */
+.film-rail{position:absolute;left:0;bottom:0;width:100%;height:2px;background:rgba(227,192,105,.12);z-index:4;}
+.film-rail-fill{height:100%;width:100%;transform-origin:left;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--gold),var(--jade));box-shadow:0 0 10px rgba(227,192,105,.5);}
+.rail-tick{position:absolute;top:-2px;width:1px;height:6px;background:rgba(227,192,105,.4);}
+.film-skip{position:absolute;right:18px;top:18px;z-index:5;pointer-events:auto;cursor:pointer;
+  font-family:var(--type-mono);font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-dim);
+  background:rgba(10,18,30,.55);border:1px solid rgba(227,192,105,.2);border-radius:999px;padding:7px 14px;
+  opacity:clamp(0, calc((0.55 - var(--build,0)) / 0.3), .9);transition:color .3s,border-color .3s;}
+.film-skip:hover{color:var(--gold-pale);border-color:var(--gold);}
+@media (max-width:560px){
+  .chub-zh{font-size:27px;} .csat-label{font-size:13px;} .cc-zh{font-size:18px;}
+  .film-hint{bottom:6%;}
+}
+@media (prefers-reduced-motion:reduce){
+  .film-stars circle,.mist,.film-motes circle,.chub-halo,.csat-glow,.cc-glow,.moon-halo,
+  .film-shoot,.cpulse,.chub-ring,.cc-spin,.film-neb,.film-constel,.water-shimmer ellipse,.film-anchors circle,.film-enter span{animation:none !important;}
+  .film-scene{height:34vh;}
+}
+@media print{ .film{display:none !important;} }
+</style>
 <style id="flux-layer">
 /* koan — bilingual reflective/reflexive aphorism panels */
 .koan{max-width:768px;margin:24px auto;padding:26px 28px;border-radius:14px;border:1px solid rgba(227,192,105,.2);
@@ -1734,6 +1841,18 @@ body.swing-on .margin-note{display:block;max-width:768px;margin:0 auto;padding:8
 .koan-turn{font-family:var(--type-body);color:var(--ink-pearl);font-size:.99rem;line-height:1.62;padding:9px 0 9px 16px;border-left:2px solid;margin-top:8px;}
 .koan-turn.k-reflect{border-color:var(--jade);}
 .koan-turn.k-reflexive{border-color:var(--gold);}
+/* commentary — scholarly explainer / deepening box */
+.commentary{max-width:768px;margin:24px auto;padding:22px 28px;border-radius:14px;
+  background:linear-gradient(162deg,rgba(87,179,160,.07),rgba(15,27,43,.32));
+  border:1px solid rgba(87,179,160,.22);border-left:3px solid var(--jade);}
+.commentary .cm-label{font-family:var(--type-mono);font-size:.6rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--jade-pale);display:block;margin-bottom:10px;}
+.commentary h5{font-family:var(--type-display);font-weight:600;font-size:1.12rem;color:var(--ink-ivory);
+  line-height:1.3;margin:0 0 10px;}
+.commentary p{font-family:var(--type-body);color:var(--ink-pearl);font-size:1rem;line-height:1.66;margin:0 0 .7em;}
+.commentary p:last-child{margin-bottom:0;}
+.commentary .zh,.commentary .p-zh{color:var(--gold-pale);}
+@media (max-width:560px){ .commentary{padding:18px 20px;} .commentary h5{font-size:1.04rem;} }
 .koan-turn .kt{display:inline-block;font-family:var(--type-mono);font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;margin-right:10px;white-space:nowrap;}
 .koan-turn.k-reflect .kt{color:var(--jade-pale);}
 .koan-turn.k-reflexive .kt{color:var(--gold);}
@@ -1777,77 +1896,89 @@ body.cadence-on .beat-bar{opacity:.9;animation:beatGrow 0.8333s linear infinite;
   mix-blend-mode:soft-light;}
 body[data-valence="warm"] .valence-wash{opacity:.5;background:radial-gradient(ellipse at 50% 30%,rgba(227,160,80,.16),transparent 70%);}
 body[data-valence="cool"] .valence-wash{opacity:.5;background:radial-gradient(ellipse at 50% 40%,rgba(70,150,150,.14),transparent 70%);}
-/* ---------- the coda closing film ---------- */
-.coda-film{position:relative;background:#0a1322;}
-.cf-stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.cf-scenes{position:relative;}
-.cf-scene{height:92vh;}
-.cf-svg{position:absolute;inset:0;width:100%;height:100%;}
-.cf-ridge{fill:#0e1d31;stroke:rgba(227,192,105,.5);stroke-width:1.5;opacity:.16;transition:opacity 1s;}
-.cf-ridge.far{fill:#0c1828;stroke:rgba(227,192,105,.28);opacity:.08;}
-.cf-stage[data-phase="2"] .cf-ridge,.cf-stage[data-phase="3"] .cf-ridge{opacity:.9;}
-.cf-stage[data-phase="2"] .cf-ridge.far,.cf-stage[data-phase="3"] .cf-ridge.far{opacity:.5;}
-.cf-constel{opacity:1;transition:opacity 1s;}
-.cf-stage[data-phase="2"] .cf-constel,.cf-stage[data-phase="3"] .cf-constel{opacity:0;}
-.cf-link{stroke:rgba(227,192,105,.32);stroke-width:1;}
-.cf-node circle{fill:rgba(227,192,105,.12);stroke:var(--gold);stroke-width:1.6;}
-.cf-node,.cf-centre{transition:transform 1s, opacity 1s;transform-origin:center;transform-box:fill-box;}
-.cf-stage[data-phase="1"] .cf-node{transform:translateY(60px) scale(.7);}
-.cf-stage[data-phase="2"] .cf-node,.cf-stage[data-phase="3"] .cf-node{transform:translateY(150px) scale(.2);opacity:0;}
-.cf-ring{fill:rgba(10,19,34,.6);stroke:rgba(227,192,105,.6);stroke-width:1.4;}
-.cf-zh{font-family:var(--type-chinese);font-size:26px;fill:var(--gold-pale);text-anchor:middle;}
-.cf-centre-zh{font-size:19px;fill:var(--ink-ivory);}
-.cf-titles{position:relative;text-align:center;z-index:2;padding:0 24px;pointer-events:none;}
-.cf-sub{font-family:var(--type-display);font-style:italic;color:var(--gold-pale);font-size:clamp(1rem,2.4vw,1.3rem);transition:opacity .6s;opacity:0;}
-.cf-stage[data-phase="1"] .cf-sub1{opacity:1;}
-.cf-stage[data-phase="2"] .cf-sub2{opacity:1;}
-.cf-seal{font-family:var(--type-chinese);font-size:clamp(2.6rem,9vw,4.6rem);margin-top:18px;
-  background:linear-gradient(166deg,#fff3cf,var(--gold) 60%,var(--gold-deep));-webkit-background-clip:text;background-clip:text;color:transparent;
-  filter:drop-shadow(0 4px 36px rgba(227,192,105,.4));opacity:0;transform:scale(.9);transition:opacity 1.2s,transform 1.2s;}
-.cf-stage[data-phase="3"] .cf-seal{opacity:1;transform:scale(1);}
-.cf-fin{font-family:var(--type-display);font-style:italic;color:var(--ink-ivory);font-size:clamp(1rem,2.6vw,1.4rem);margin-top:14px;opacity:0;transition:opacity 1s .4s;}
-.cf-stage[data-phase="3"] .cf-fin{opacity:1;}
+/* ---------- coda closing film now provided by the shared film engine (filmkit) ---------- */
 /* hide chrome during overture OR coda film */
 body.in-coda .sitenav,body.in-coda .siteprog,body.in-coda .nav-search-btn,body.in-coda #searchBar,
 body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;pointer-events:none !important;}
 @media (max-width:560px){ .cadence-toggle{right:96px;bottom:12px;padding:8px 12px;} }
 @media (prefers-reduced-motion:reduce){
-  .cf-ridge{opacity:.9 !important;} .cf-constel{opacity:0 !important;} .cf-seal{opacity:1 !important;transform:none !important;}
-  .cf-node{opacity:0 !important;} .peng-svg{opacity:1 !important;transform:none !important;}
+  .peng-svg{opacity:1 !important;transform:none !important;}
   body.cadence-on .beat-bar{animation:none;width:100%;opacity:.4;}
 }
 @media print{ .coda-film,.cadence-toggle,.beat-bar,.valence-wash,.peng-flight,.oracle-cast{display:none !important;} }
 </style></head>
-<body><section aria-label="Overture" class="overture" id="overture"><div class="ov-stage" data-phase="0"><svg aria-hidden="true" class="ov-svg" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 620">
+<body><section aria-label="Overture" class="film film-overture" id="overture"><div class="film-stage" data-phase="0"><svg aria-hidden="true" class="film-svg" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 640">
 <defs>
-<lineargradient id="ovSky" x1="0" x2="0" y1="0" y2="1">
-<stop offset="0" stop-color="#0a1322"></stop><stop offset="0.6" stop-color="#0c1626"></stop><stop offset="1" stop-color="#0e1b2e"></stop>
+<lineargradient id="ovsky" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="#060b15"></stop><stop offset="0.4" stop-color="#0a1322"></stop><stop offset="0.72" stop-color="#0e1c30"></stop><stop offset="1" stop-color="#0a1827"></stop>
 </lineargradient>
-<radialgradient cx="0.5" cy="0.42" id="ovGlow" r="0.6">
-<stop offset="0" stop-color="rgba(227,192,105,0.18)"></stop><stop offset="1" stop-color="rgba(227,192,105,0)"></stop>
+<lineargradient id="ovdawn" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="rgba(227,192,105,0)"></stop><stop offset="0.62" stop-color="rgba(214,150,92,0.05)"></stop><stop offset="0.86" stop-color="rgba(227,170,110,0.20)"></stop><stop offset="1" stop-color="rgba(150,120,150,0.10)"></stop>
+</lineargradient>
+<radialgradient cx="0.5" cy="0.42" id="ovneb" r="0.62">
+<stop offset="0" stop-color="rgba(150,130,210,0.22)"></stop><stop offset="0.45" stop-color="rgba(120,150,200,0.10)"></stop><stop offset="1" stop-color="rgba(120,150,200,0)"></stop>
 </radialgradient>
+<radialgradient cx="0.5" cy="0.34" id="ovglow" r="0.55">
+<stop offset="0" stop-color="rgba(227,192,105,0.20)"></stop><stop offset="1" stop-color="rgba(227,192,105,0)"></stop>
+</radialgradient>
+<radialgradient cx="0.42" cy="0.4" id="ovmoon" r="0.62">
+<stop offset="0" stop-color="#fff8e6"></stop><stop offset="0.7" stop-color="#f3e4c0"></stop><stop offset="1" stop-color="#caa86e"></stop>
+</radialgradient>
+<radialgradient cx="0.5" cy="0.5" id="ovmoonh" r="0.5">
+<stop offset="0" stop-color="rgba(255,244,214,0.34)"></stop><stop offset="1" stop-color="rgba(255,244,214,0)"></stop>
+</radialgradient>
+<lineargradient id="ovcomet" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0" stop-color="rgba(255,247,224,0)"></stop><stop offset="1" stop-color="rgba(255,247,224,0.9)"></stop>
+</lineargradient>
+<lineargradient id="ovwater" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="rgba(8,16,28,0.1)"></stop><stop offset="1" stop-color="rgba(6,12,22,0.96)"></stop>
+</lineargradient>
+<radialgradient cx="0.5" cy="0.44" id="ovvig" r="0.78">
+<stop offset="0.52" stop-color="rgba(0,0,0,0)"></stop><stop offset="1" stop-color="rgba(0,0,0,0.64)"></stop>
+</radialgradient>
+<filter height="240%" id="ovbloom" width="240%" x="-70%" y="-70%">
+<fegaussianblur result="b" stddeviation="3.4"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+<filter height="160%" id="ovsoft" width="160%" x="-30%" y="-30%"><fegaussianblur stddeviation="6"></fegaussianblur></filter>
+<filter id="ovgrain"><feturbulence basefrequency="0.9" numoctaves="2" stitchtiles="stitch" type="fractalNoise"></feturbulence><fecolormatrix type="saturate" values="0"></fecolormatrix></filter>
+<clippath id="ovwclip"><rect height="178" width="1000" x="0" y="462"></rect></clippath>
 </defs>
-<rect class="ov-sky" fill="url(#ovSky)" height="620" width="1000" x="0" y="0"></rect>
-<circle class="ov-haze" cx="500" cy="250" fill="url(#ovGlow)" r="380"></circle>
-<!-- far ridge -->
-<path class="ov-ridge far" d="M0 430 L150 360 L300 410 L460 320 L640 400 L820 340 L1000 410 L1000 620 L0 620 Z"></path>
-<!-- near ridge with three peaks -->
-<path class="ov-ridge near" d="M0 470 L250 300 L430 420 L520 250 L640 420 L780 330 L1000 470 L1000 620 L0 620 Z"></path>
-<!-- constellation that lights at the peaks -->
-<g class="ov-constel">
-<line class="ov-link" x1="500" x2="250" y1="470" y2="300"></line>
-<line class="ov-link" x1="500" x2="520" y1="470" y2="250"></line>
-<line class="ov-link" x1="500" x2="780" y1="470" y2="330"></line>
-<g class="ov-node hub" style="--d:0"><circle cx="250" cy="300" r="30"></circle><text class="ov-zh" x="250" y="309">道</text></g>
-<g class="ov-node hub" style="--d:.15"><circle cx="520" cy="250" r="30"></circle><text class="ov-zh" x="520" y="259">禮</text></g>
-<g class="ov-node hub" style="--d:.3"><circle cx="780" cy="330" r="30"></circle><text class="ov-zh" x="780" y="339">仁</text></g>
-<g class="ov-node sat" style="--d:.45"><circle cx="160" cy="250" r="13"></circle></g>
-<g class="ov-node sat" style="--d:.5"><circle cx="360" cy="225" r="13"></circle></g>
-<g class="ov-node sat" style="--d:.55"><circle cx="640" cy="200" r="13"></circle></g>
-<g class="ov-node sat" style="--d:.6"><circle cx="880" cy="270" r="13"></circle></g>
-<g class="ov-centre" style="--d:.2"><circle class="ov-ring" cx="500" cy="470" r="40"></circle><text class="ov-zh ov-centre-zh" x="500" y="478">環中</text></g>
+<rect class="film-sky" fill="url(#ovsky)" height="640" width="1000" x="0" y="0"></rect>
+<ellipse class="film-neb" cx="500" cy="250" fill="url(#ovneb)" rx="640" ry="220" transform="rotate(-14 500 250)"></ellipse>
+<g class="film-stars sl-deep"><circle cx="438.4" cy="395.4" r="0.41" style="--o:0.41;animation-duration:5.4s;animation-delay:1.3s"></circle><circle cx="470.0" cy="367.7" r="0.69" style="--o:0.4;animation-duration:5.0s;animation-delay:3.6s"></circle><circle cx="892.2" cy="83.0" r="0.68" style="--o:0.13;animation-duration:5.7s;animation-delay:5.6s"></circle><circle cx="39.9" cy="214.8" r="0.67" style="--o:0.14;animation-duration:6.8s;animation-delay:0.0s"></circle><circle cx="698.5" cy="428.1" r="0.64" style="--o:0.11;animation-duration:6.5s;animation-delay:4.3s"></circle><circle cx="245.9" cy="257.9" r="0.75" style="--o:0.4;animation-duration:6.3s;animation-delay:1.1s"></circle><circle cx="693.7" cy="168.7" r="0.79" style="--o:0.14;animation-duration:3.3s;animation-delay:0.4s"></circle><circle cx="411.1" cy="137.6" r="0.44" style="--o:0.12;animation-duration:6.4s;animation-delay:1.1s"></circle><circle cx="900.1" cy="329.6" r="0.47" style="--o:0.25;animation-duration:3.7s;animation-delay:4.9s"></circle><circle cx="518.3" cy="403.3" r="0.57" style="--o:0.21;animation-duration:2.9s;animation-delay:5.9s"></circle><circle cx="734.0" cy="375.7" r="0.66" style="--o:0.14;animation-duration:5.9s;animation-delay:4.5s"></circle><circle cx="311.5" cy="32.1" r="0.5" style="--o:0.38;animation-duration:4.1s;animation-delay:6.5s"></circle><circle cx="374.6" cy="249.4" r="0.56" style="--o:0.2;animation-duration:6.8s;animation-delay:2.2s"></circle><circle cx="624.5" cy="293.6" r="0.78" style="--o:0.15;animation-duration:4.1s;animation-delay:4.9s"></circle><circle cx="506.3" cy="303.5" r="0.55" style="--o:0.32;animation-duration:5.3s;animation-delay:4.4s"></circle><circle cx="283.7" cy="352.4" r="0.44" style="--o:0.21;animation-duration:6.9s;animation-delay:5.6s"></circle><circle cx="413.2" cy="88.9" r="0.68" style="--o:0.3;animation-duration:5.4s;animation-delay:2.2s"></circle><circle cx="996.0" cy="335.0" r="0.76" style="--o:0.35;animation-duration:4.9s;animation-delay:6.6s"></circle><circle cx="129.7" cy="14.3" r="0.63" style="--o:0.22;animation-duration:6.0s;animation-delay:1.4s"></circle><circle cx="965.1" cy="336.7" r="0.51" style="--o:0.19;animation-duration:2.8s;animation-delay:6.1s"></circle><circle cx="905.8" cy="400.5" r="0.63" style="--o:0.28;animation-duration:4.7s;animation-delay:2.9s"></circle><circle cx="120.5" cy="118.7" r="0.44" style="--o:0.38;animation-duration:4.7s;animation-delay:2.9s"></circle><circle cx="498.7" cy="388.2" r="0.67" style="--o:0.3;animation-duration:2.5s;animation-delay:6.4s"></circle><circle cx="556.8" cy="165.9" r="0.53" style="--o:0.3;animation-duration:2.7s;animation-delay:1.9s"></circle><circle cx="693.6" cy="256.9" r="0.38" style="--o:0.36;animation-duration:4.4s;animation-delay:4.9s"></circle><circle cx="318.1" cy="282.4" r="0.42" style="--o:0.39;animation-duration:4.7s;animation-delay:2.7s"></circle><circle cx="287.8" cy="184.4" r="0.58" style="--o:0.32;animation-duration:2.6s;animation-delay:0.9s"></circle><circle cx="764.1" cy="127.4" r="0.62" style="--o:0.26;animation-duration:6.0s;animation-delay:5.0s"></circle><circle cx="384.3" cy="175.0" r="0.79" style="--o:0.35;animation-duration:3.9s;animation-delay:5.3s"></circle><circle cx="157.2" cy="107.6" r="0.4" style="--o:0.25;animation-duration:5.4s;animation-delay:4.4s"></circle><circle cx="251.3" cy="327.6" r="0.38" style="--o:0.18;animation-duration:7.1s;animation-delay:0.6s"></circle><circle cx="135.9" cy="80.5" r="0.67" style="--o:0.2;animation-duration:4.3s;animation-delay:3.0s"></circle><circle cx="763.3" cy="149.2" r="0.66" style="--o:0.3;animation-duration:3.7s;animation-delay:1.6s"></circle><circle cx="654.8" cy="363.5" r="0.65" style="--o:0.16;animation-duration:6.1s;animation-delay:6.8s"></circle><circle cx="595.1" cy="306.2" r="0.65" style="--o:0.26;animation-duration:4.4s;animation-delay:5.9s"></circle><circle cx="307.9" cy="209.5" r="0.62" style="--o:0.19;animation-duration:3.7s;animation-delay:5.5s"></circle><circle cx="940.6" cy="40.1" r="0.38" style="--o:0.14;animation-duration:4.0s;animation-delay:1.2s"></circle><circle cx="219.8" cy="20.7" r="0.8" style="--o:0.13;animation-duration:3.9s;animation-delay:2.2s"></circle><circle cx="700.1" cy="74.7" r="0.7" style="--o:0.25;animation-duration:3.0s;animation-delay:1.0s"></circle><circle cx="742.8" cy="393.6" r="0.45" style="--o:0.42;animation-duration:2.9s;animation-delay:5.4s"></circle><circle cx="188.0" cy="349.6" r="0.72" style="--o:0.36;animation-duration:6.0s;animation-delay:4.6s"></circle><circle cx="112.9" cy="43.4" r="0.63" style="--o:0.28;animation-duration:3.9s;animation-delay:6.5s"></circle><circle cx="484.8" cy="264.5" r="0.71" style="--o:0.17;animation-duration:3.6s;animation-delay:2.6s"></circle><circle cx="159.4" cy="303.7" r="0.67" style="--o:0.39;animation-duration:5.0s;animation-delay:6.7s"></circle><circle cx="227.4" cy="166.8" r="0.44" style="--o:0.22;animation-duration:3.4s;animation-delay:1.5s"></circle><circle cx="447.7" cy="93.0" r="0.37" style="--o:0.28;animation-duration:4.3s;animation-delay:1.7s"></circle><circle cx="745.5" cy="384.3" r="0.44" style="--o:0.16;animation-duration:4.7s;animation-delay:1.7s"></circle><circle cx="694.7" cy="196.3" r="0.56" style="--o:0.23;animation-duration:2.7s;animation-delay:2.8s"></circle><circle cx="668.6" cy="319.0" r="0.56" style="--o:0.38;animation-duration:5.8s;animation-delay:2.1s"></circle><circle cx="957.5" cy="191.9" r="0.38" style="--o:0.28;animation-duration:5.3s;animation-delay:2.3s"></circle><circle cx="151.3" cy="241.7" r="0.38" style="--o:0.36;animation-duration:3.2s;animation-delay:4.3s"></circle><circle cx="181.2" cy="429.2" r="0.64" style="--o:0.24;animation-duration:2.8s;animation-delay:1.3s"></circle><circle cx="459.4" cy="113.3" r="0.54" style="--o:0.14;animation-duration:5.8s;animation-delay:5.7s"></circle><circle cx="371.6" cy="307.3" r="0.39" style="--o:0.11;animation-duration:3.0s;animation-delay:0.3s"></circle><circle cx="729.2" cy="183.2" r="0.71" style="--o:0.28;animation-duration:5.3s;animation-delay:5.4s"></circle><circle cx="933.0" cy="130.9" r="0.73" style="--o:0.21;animation-duration:2.8s;animation-delay:1.6s"></circle><circle cx="944.9" cy="217.8" r="0.79" style="--o:0.34;animation-duration:5.7s;animation-delay:3.7s"></circle><circle cx="931.0" cy="364.5" r="0.51" style="--o:0.33;animation-duration:5.7s;animation-delay:1.3s"></circle><circle cx="770.1" cy="380.5" r="0.57" style="--o:0.36;animation-duration:7.1s;animation-delay:1.3s"></circle><circle cx="412.2" cy="49.9" r="0.35" style="--o:0.19;animation-duration:5.7s;animation-delay:1.0s"></circle><circle cx="930.4" cy="166.4" r="0.67" style="--o:0.11;animation-duration:3.8s;animation-delay:6.4s"></circle><circle cx="765.3" cy="239.7" r="0.74" style="--o:0.33;animation-duration:3.4s;animation-delay:3.1s"></circle><circle cx="148.2" cy="260.4" r="0.62" style="--o:0.4;animation-duration:5.5s;animation-delay:1.3s"></circle><circle cx="465.2" cy="236.4" r="0.42" style="--o:0.13;animation-duration:3.9s;animation-delay:3.7s"></circle><circle cx="68.4" cy="30.5" r="0.57" style="--o:0.39;animation-duration:2.7s;animation-delay:0.9s"></circle><circle cx="138.2" cy="36.2" r="0.75" style="--o:0.16;animation-duration:4.1s;animation-delay:2.1s"></circle><circle cx="359.9" cy="282.9" r="0.41" style="--o:0.42;animation-duration:4.1s;animation-delay:2.2s"></circle><circle cx="759.7" cy="207.9" r="0.38" style="--o:0.17;animation-duration:6.2s;animation-delay:5.2s"></circle><circle cx="319.9" cy="416.5" r="0.44" style="--o:0.32;animation-duration:3.2s;animation-delay:3.5s"></circle><circle cx="65.4" cy="136.8" r="0.77" style="--o:0.36;animation-duration:2.7s;animation-delay:0.5s"></circle><circle cx="173.3" cy="319.7" r="0.52" style="--o:0.41;animation-duration:2.4s;animation-delay:1.0s"></circle><circle cx="511.0" cy="393.8" r="0.38" style="--o:0.25;animation-duration:5.3s;animation-delay:2.5s"></circle><circle cx="656.0" cy="428.5" r="0.65" style="--o:0.18;animation-duration:6.9s;animation-delay:2.8s"></circle><circle cx="837.5" cy="15.9" r="0.44" style="--o:0.21;animation-duration:4.7s;animation-delay:6.5s"></circle><circle cx="333.5" cy="176.7" r="0.46" style="--o:0.19;animation-duration:6.8s;animation-delay:3.1s"></circle><circle cx="427.4" cy="330.4" r="0.49" style="--o:0.11;animation-duration:4.8s;animation-delay:3.8s"></circle><circle cx="723.2" cy="252.7" r="0.48" style="--o:0.36;animation-duration:5.0s;animation-delay:0.3s"></circle><circle cx="953.6" cy="272.5" r="0.77" style="--o:0.14;animation-duration:6.8s;animation-delay:3.5s"></circle><circle cx="32.8" cy="43.0" r="0.46" style="--o:0.3;animation-duration:4.7s;animation-delay:5.6s"></circle><circle cx="690.1" cy="214.8" r="0.71" style="--o:0.12;animation-duration:3.7s;animation-delay:5.7s"></circle><circle cx="397.7" cy="203.2" r="0.54" style="--o:0.4;animation-duration:5.4s;animation-delay:4.6s"></circle><circle cx="214.5" cy="204.7" r="0.49" style="--o:0.4;animation-duration:4.7s;animation-delay:0.4s"></circle><circle cx="997.3" cy="339.6" r="0.58" style="--o:0.38;animation-duration:6.6s;animation-delay:1.7s"></circle><circle cx="70.4" cy="95.0" r="0.76" style="--o:0.22;animation-duration:5.3s;animation-delay:4.6s"></circle><circle cx="883.4" cy="1.6" r="0.75" style="--o:0.32;animation-duration:4.0s;animation-delay:3.2s"></circle><circle cx="16.9" cy="219.3" r="0.69" style="--o:0.26;animation-duration:6.2s;animation-delay:6.9s"></circle><circle cx="706.1" cy="280.9" r="0.39" style="--o:0.3;animation-duration:4.5s;animation-delay:5.0s"></circle><circle cx="112.3" cy="407.8" r="0.8" style="--o:0.41;animation-duration:3.2s;animation-delay:1.6s"></circle><circle cx="382.6" cy="81.6" r="0.46" style="--o:0.1;animation-duration:5.6s;animation-delay:1.1s"></circle><circle cx="633.0" cy="429.1" r="0.39" style="--o:0.34;animation-duration:4.9s;animation-delay:0.9s"></circle></g>
+<g class="film-stars sl-mid"><circle cx="660.8" cy="101.7" r="1.16" style="--o:0.36;animation-duration:3.9s;animation-delay:3.0s"></circle><circle cx="730.6" cy="124.1" r="0.89" style="--o:0.39;animation-duration:7.1s;animation-delay:6.7s"></circle><circle cx="104.6" cy="165.5" r="0.99" style="--o:0.5;animation-duration:4.0s;animation-delay:0.7s"></circle><circle cx="393.3" cy="37.2" r="1.12" style="--o:0.55;animation-duration:6.6s;animation-delay:1.7s"></circle><circle cx="774.8" cy="12.7" r="0.77" style="--o:0.32;animation-duration:4.6s;animation-delay:6.0s"></circle><circle cx="890.6" cy="135.1" r="0.79" style="--o:0.31;animation-duration:7.1s;animation-delay:4.6s"></circle><circle cx="226.7" cy="399.1" r="1.06" style="--o:0.57;animation-duration:6.3s;animation-delay:1.8s"></circle><circle cx="693.8" cy="273.3" r="0.99" style="--o:0.56;animation-duration:6.9s;animation-delay:1.2s"></circle><circle cx="271.1" cy="392.1" r="0.91" style="--o:0.28;animation-duration:5.4s;animation-delay:6.0s"></circle><circle cx="915.1" cy="257.8" r="1.0" style="--o:0.37;animation-duration:5.6s;animation-delay:5.7s"></circle><circle cx="329.5" cy="235.0" r="0.84" style="--o:0.48;animation-duration:6.0s;animation-delay:0.5s"></circle><circle cx="810.2" cy="75.5" r="1.02" style="--o:0.57;animation-duration:5.4s;animation-delay:0.9s"></circle><circle cx="981.9" cy="114.0" r="0.95" style="--o:0.33;animation-duration:3.7s;animation-delay:4.7s"></circle><circle cx="309.3" cy="133.0" r="0.98" style="--o:0.57;animation-duration:4.5s;animation-delay:2.4s"></circle><circle cx="434.1" cy="88.2" r="0.81" style="--o:0.48;animation-duration:2.9s;animation-delay:0.2s"></circle><circle cx="921.0" cy="147.7" r="1.0" style="--o:0.39;animation-duration:4.0s;animation-delay:2.6s"></circle><circle cx="539.0" cy="377.7" r="1.01" style="--o:0.45;animation-duration:4.9s;animation-delay:5.4s"></circle><circle cx="954.7" cy="188.5" r="1.0" style="--o:0.45;animation-duration:4.1s;animation-delay:6.5s"></circle><circle cx="256.3" cy="217.0" r="0.92" style="--o:0.59;animation-duration:5.1s;animation-delay:1.0s"></circle><circle cx="681.6" cy="6.1" r="1.25" style="--o:0.56;animation-duration:5.3s;animation-delay:2.0s"></circle><circle cx="412.8" cy="99.7" r="1.05" style="--o:0.36;animation-duration:7.0s;animation-delay:3.8s"></circle><circle cx="24.1" cy="84.5" r="1.11" style="--o:0.37;animation-duration:4.4s;animation-delay:5.3s"></circle><circle cx="230.5" cy="84.6" r="1.15" style="--o:0.53;animation-duration:2.4s;animation-delay:1.9s"></circle><circle cx="985.5" cy="347.7" r="1.05" style="--o:0.57;animation-duration:3.7s;animation-delay:1.5s"></circle><circle cx="721.7" cy="81.6" r="0.77" style="--o:0.31;animation-duration:2.8s;animation-delay:0.4s"></circle><circle cx="941.3" cy="26.8" r="0.77" style="--o:0.55;animation-duration:7.2s;animation-delay:2.5s"></circle><circle cx="752.8" cy="42.8" r="0.75" style="--o:0.47;animation-duration:2.9s;animation-delay:5.2s"></circle><circle cx="469.4" cy="38.0" r="1.21" style="--o:0.42;animation-duration:5.8s;animation-delay:6.1s"></circle><circle cx="86.2" cy="21.1" r="0.81" style="--o:0.56;animation-duration:2.5s;animation-delay:4.7s"></circle><circle cx="760.3" cy="313.9" r="1.21" style="--o:0.59;animation-duration:3.8s;animation-delay:4.1s"></circle><circle cx="356.2" cy="72.5" r="1.19" style="--o:0.36;animation-duration:7.1s;animation-delay:4.9s"></circle><circle cx="792.0" cy="41.9" r="0.82" style="--o:0.52;animation-duration:6.7s;animation-delay:4.2s"></circle><circle cx="517.9" cy="77.6" r="0.8" style="--o:0.3;animation-duration:7.0s;animation-delay:4.1s"></circle><circle cx="570.8" cy="332.6" r="1.0" style="--o:0.29;animation-duration:6.2s;animation-delay:0.7s"></circle><circle cx="139.3" cy="195.2" r="1.1" style="--o:0.42;animation-duration:6.3s;animation-delay:6.4s"></circle><circle cx="37.1" cy="216.7" r="0.93" style="--o:0.51;animation-duration:4.7s;animation-delay:3.3s"></circle><circle cx="249.4" cy="238.4" r="0.86" style="--o:0.34;animation-duration:4.7s;animation-delay:1.5s"></circle><circle cx="576.6" cy="38.9" r="0.75" style="--o:0.31;animation-duration:6.1s;animation-delay:4.6s"></circle><circle cx="129.9" cy="308.7" r="0.92" style="--o:0.3;animation-duration:6.4s;animation-delay:3.9s"></circle><circle cx="103.3" cy="132.6" r="1.25" style="--o:0.41;animation-duration:5.8s;animation-delay:6.7s"></circle><circle cx="523.2" cy="326.0" r="1.21" style="--o:0.43;animation-duration:5.3s;animation-delay:4.2s"></circle><circle cx="108.5" cy="373.2" r="0.84" style="--o:0.38;animation-duration:5.4s;animation-delay:6.6s"></circle><circle cx="153.4" cy="371.7" r="0.77" style="--o:0.29;animation-duration:5.6s;animation-delay:0.7s"></circle><circle cx="902.8" cy="133.5" r="1.24" style="--o:0.34;animation-duration:5.4s;animation-delay:3.7s"></circle><circle cx="484.8" cy="84.9" r="0.9" style="--o:0.41;animation-duration:4.2s;animation-delay:1.5s"></circle><circle cx="520.8" cy="157.6" r="0.87" style="--o:0.28;animation-duration:2.7s;animation-delay:2.8s"></circle><circle cx="139.0" cy="38.0" r="1.02" style="--o:0.43;animation-duration:2.9s;animation-delay:6.4s"></circle><circle cx="767.0" cy="334.3" r="1.07" style="--o:0.53;animation-duration:2.7s;animation-delay:0.7s"></circle><circle cx="469.1" cy="300.3" r="1.2" style="--o:0.55;animation-duration:4.7s;animation-delay:0.1s"></circle><circle cx="314.3" cy="106.1" r="0.72" style="--o:0.55;animation-duration:5.3s;animation-delay:3.4s"></circle><circle cx="472.0" cy="47.9" r="0.79" style="--o:0.56;animation-duration:5.4s;animation-delay:4.6s"></circle><circle cx="558.9" cy="129.7" r="0.83" style="--o:0.53;animation-duration:5.5s;animation-delay:2.2s"></circle><circle cx="757.2" cy="70.1" r="0.91" style="--o:0.49;animation-duration:2.4s;animation-delay:3.6s"></circle><circle cx="619.9" cy="236.7" r="1.23" style="--o:0.46;animation-duration:4.9s;animation-delay:6.4s"></circle><circle cx="551.6" cy="374.1" r="0.99" style="--o:0.45;animation-duration:3.1s;animation-delay:3.0s"></circle><circle cx="720.0" cy="35.6" r="0.94" style="--o:0.57;animation-duration:4.5s;animation-delay:2.9s"></circle><circle cx="842.8" cy="340.5" r="0.97" style="--o:0.58;animation-duration:3.8s;animation-delay:0.8s"></circle><circle cx="639.9" cy="361.0" r="1.12" style="--o:0.36;animation-duration:6.6s;animation-delay:3.8s"></circle></g>
+<g class="film-stars sl-bright"><circle cx="64.6" cy="192.3" r="2.03" style="--o:0.83;animation-duration:2.5s;animation-delay:1.1s"></circle><circle cx="728.0" cy="348.0" r="1.7" style="--o:0.7;animation-duration:6.2s;animation-delay:4.7s"></circle><circle cx="746.8" cy="153.0" r="1.46" style="--o:0.54;animation-duration:6.4s;animation-delay:2.3s"></circle><circle cx="920.7" cy="360.3" r="1.7" style="--o:0.78;animation-duration:4.5s;animation-delay:0.1s"></circle><circle cx="462.5" cy="270.5" r="1.89" style="--o:0.69;animation-duration:4.3s;animation-delay:0.3s"></circle><circle cx="652.8" cy="292.4" r="1.73" style="--o:0.63;animation-duration:3.2s;animation-delay:2.6s"></circle><circle cx="637.2" cy="158.5" r="2.09" style="--o:0.91;animation-duration:5.1s;animation-delay:5.6s"></circle><circle cx="538.5" cy="338.9" r="1.51" style="--o:0.7;animation-duration:4.5s;animation-delay:2.2s"></circle><circle cx="886.7" cy="263.5" r="1.6" style="--o:0.85;animation-duration:6.2s;animation-delay:2.9s"></circle><circle cx="958.8" cy="372.1" r="2.16" style="--o:0.71;animation-duration:5.8s;animation-delay:1.8s"></circle><circle cx="640.5" cy="148.5" r="1.43" style="--o:0.57;animation-duration:4.2s;animation-delay:2.5s"></circle><circle cx="145.5" cy="163.1" r="1.65" style="--o:0.84;animation-duration:6.9s;animation-delay:0.9s"></circle><circle cx="190.1" cy="260.8" r="1.44" style="--o:0.71;animation-duration:4.6s;animation-delay:1.6s"></circle><circle cx="969.9" cy="40.1" r="1.42" style="--o:0.63;animation-duration:5.2s;animation-delay:5.8s"></circle><circle cx="258.5" cy="282.7" r="1.62" style="--o:0.81;animation-duration:5.6s;animation-delay:2.5s"></circle><circle cx="454.9" cy="140.4" r="1.47" style="--o:0.72;animation-duration:6.6s;animation-delay:2.4s"></circle><circle cx="805.6" cy="234.9" r="1.82" style="--o:0.84;animation-duration:2.7s;animation-delay:1.9s"></circle><circle cx="274.9" cy="214.7" r="2.03" style="--o:0.71;animation-duration:3.8s;animation-delay:6.3s"></circle><circle cx="280.4" cy="377.6" r="1.73" style="--o:0.53;animation-duration:5.7s;animation-delay:2.9s"></circle><circle cx="98.6" cy="71.1" r="2.12" style="--o:0.53;animation-duration:4.3s;animation-delay:2.5s"></circle><circle cx="105.8" cy="222.5" r="1.86" style="--o:0.81;animation-duration:5.6s;animation-delay:2.2s"></circle><circle cx="938.4" cy="393.1" r="1.54" style="--o:0.78;animation-duration:4.8s;animation-delay:4.1s"></circle></g>
+<g class="film-anchors"><circle class="film-anchor" cx="250" cy="352" r="2.0" style="animation-delay:0.0s"></circle><circle class="film-anchor" cx="500" cy="300" r="2.0" style="animation-delay:1.3s"></circle><circle class="film-anchor" cx="750" cy="352" r="2.0" style="animation-delay:2.6s"></circle></g>
+<g class="film-shoots"><g class="film-shoot s0" style="--tx:120px;--ty:70px;--ang:18deg;animation-duration:7.5s;animation-delay:2s"><line stroke="url(#ovcomet)" stroke-width="1.6" x1="0" x2="-86" y1="0" y2="0"></line><circle cx="0" cy="0" fill="#fff7e0" r="1.7"></circle></g><g class="film-shoot s1" style="--tx:840px;--ty:120px;--ang:-12deg;animation-duration:9s;animation-delay:11s"><line stroke="url(#ovcomet)" stroke-width="1.6" x1="0" x2="-86" y1="0" y2="0"></line><circle cx="0" cy="0" fill="#fff7e0" r="1.7"></circle></g><g class="film-shoot s2" style="--tx:420px;--ty:50px;--ang:24deg;animation-duration:8.2s;animation-delay:19s"><line stroke="url(#ovcomet)" stroke-width="1.6" x1="0" x2="-86" y1="0" y2="0"></line><circle cx="0" cy="0" fill="#fff7e0" r="1.7"></circle></g></g>
+<g class="film-moon">
+<circle class="moon-halo" cx="788" cy="128" fill="url(#ovmoonh)" r="92"></circle>
+<circle class="moon-disc" cx="788" cy="128" fill="url(#ovmoon)" r="46"></circle>
+<circle class="moon-crater" cx="775" cy="116" fill="rgba(150,120,80,0.18)" r="7"></circle>
+<circle class="moon-crater" cx="800" cy="140" fill="rgba(150,120,80,0.14)" r="10"></circle>
+<circle class="moon-crater" cx="804" cy="112" fill="rgba(150,120,80,0.16)" r="5"></circle>
 </g>
-</svg><div class="ov-titles"><div class="ov-line ov-seal">南山</div><h1 class="ov-title">The Architecture of the Held Space</h1><div class="ov-sub ov-sub1">a mountain that holds without grasping —</div><div class="ov-sub ov-sub2">— becomes a constellation of the ways we hold</div><a class="ov-enter" href="#proem">Enter <span>↓</span></a></div></div><div class="ov-scenes"><div class="ov-scene"></div><div class="ov-scene"></div><div class="ov-scene"></div><div class="ov-scene"></div></div></section>
+<rect class="film-dawn" fill="url(#ovdawn)" height="640" width="1000" x="0" y="0"></rect>
+<circle class="film-haze" cx="500" cy="240" fill="url(#ovglow)" r="430"></circle>
+<g class="film-mountains"><path class="film-mt l1 film-rim" d="M0 402 L130 360 L250 326 L350 364 L460 330 L560 308 L660 346 L770 320 L880 360 L1000 336 L1000 470 L0 470 Z" fill="#16273c" style="--mo:0.55"></path><path class="film-mt l2 film-rim" d="M0 430 L120 396 L250 352 L360 388 L470 350 L540 332 L640 372 L740 346 L860 392 L1000 364 L1000 480 L0 480 Z" fill="#122134" style="--mo:0.8"></path><path class="film-mt l3" d="M0 462 L140 414 L250 360 L350 398 L440 332 L500 306 L590 346 L700 376 L780 352 L880 410 L1000 378 L1000 500 L0 500 Z" fill="#0d1a2b" style="--mo:1"></path><path class="film-mt l4" d="M0 486 L150 452 L300 486 L420 446 L520 410 L640 452 L760 420 L880 460 L1000 432 L1000 520 L0 520 Z" fill="#0a1525" style="--mo:1"></path><path class="film-mt l5" d="M0 520 L180 496 L360 522 L520 494 L680 520 L840 500 L1000 522 L1000 560 L0 560 Z" fill="#07101d" style="--mo:1"></path></g>
+<g class="film-reflection" clip-path="url(#ovwclip)">
+<g filter="url(#ovsoft)" transform="translate(0,924) scale(1,-1)"><path d="M0 430 L120 396 L250 352 L360 388 L470 350 L540 332 L640 372 L740 346 L860 392 L1000 364 L1000 480 L0 480 Z" fill="#122134"></path><path d="M0 462 L140 414 L250 360 L350 398 L440 332 L500 306 L590 346 L700 376 L780 352 L880 410 L1000 378 L1000 500 L0 500 Z" fill="#0d1a2b"></path><path d="M0 486 L150 452 L300 486 L420 446 L520 410 L640 452 L760 420 L880 460 L1000 432 L1000 520 L0 520 Z" fill="#0a1525"></path></g>
+<rect fill="url(#ovwater)" height="178" width="1000" x="0" y="462"></rect>
+<g class="water-shimmer">
+<ellipse cx="500" cy="540" fill="rgba(227,192,105,0.10)" rx="360" ry="5"></ellipse>
+<ellipse cx="500" cy="572" fill="rgba(227,192,105,0.06)" rx="280" ry="4"></ellipse>
+</g>
+</g>
+<g class="film-mist">
+<ellipse class="mist mA" cx="380" cy="452" rx="540" ry="40"></ellipse>
+<ellipse class="mist mB" cx="640" cy="486" rx="480" ry="34"></ellipse>
+<ellipse class="mist mC" cx="500" cy="430" rx="620" ry="30"></ellipse>
+</g>
+<g class="film-motes"><circle cx="156.4" cy="590" r="1.9" style="--dx:-1.5px;animation-duration:16.4s;animation-delay:0.2s"></circle><circle cx="562.2" cy="590" r="2.5" style="--dx:28.5px;animation-duration:18.7s;animation-delay:13.6s"></circle><circle cx="364.5" cy="590" r="0.9" style="--dx:21.6px;animation-duration:16.4s;animation-delay:13.7s"></circle><circle cx="496.2" cy="590" r="1.3" style="--dx:17.0px;animation-duration:16.1s;animation-delay:1.2s"></circle><circle cx="690.1" cy="590" r="1.0" style="--dx:-22.6px;animation-duration:15.3s;animation-delay:15.5s"></circle><circle cx="378.1" cy="590" r="2.0" style="--dx:17.3px;animation-duration:14.4s;animation-delay:8.5s"></circle><circle cx="658.6" cy="590" r="2.3" style="--dx:9.9px;animation-duration:13.9s;animation-delay:8.3s"></circle><circle cx="833.2" cy="590" r="1.5" style="--dx:4.6px;animation-duration:19.7s;animation-delay:9.2s"></circle><circle cx="160.5" cy="590" r="2.3" style="--dx:-12.0px;animation-duration:14.2s;animation-delay:14.8s"></circle><circle cx="302.9" cy="590" r="1.5" style="--dx:11.5px;animation-duration:19.9s;animation-delay:2.8s"></circle><circle cx="925.7" cy="590" r="2.3" style="--dx:-25.1px;animation-duration:18.8s;animation-delay:13.7s"></circle><circle cx="301.5" cy="590" r="2.5" style="--dx:-4.3px;animation-duration:18.7s;animation-delay:17.1s"></circle><circle cx="552.0" cy="590" r="1.9" style="--dx:-24.9px;animation-duration:19.7s;animation-delay:0.3s"></circle><circle cx="848.2" cy="590" r="2.5" style="--dx:18.8px;animation-duration:18.5s;animation-delay:17.3s"></circle><circle cx="436.4" cy="590" r="1.4" style="--dx:-8.5px;animation-duration:16.1s;animation-delay:5.6s"></circle><circle cx="140.2" cy="590" r="1.8" style="--dx:-8.9px;animation-duration:13.6s;animation-delay:16.3s"></circle><circle cx="875.1" cy="590" r="2.1" style="--dx:-6.0px;animation-duration:20.8s;animation-delay:9.0s"></circle><circle cx="87.7" cy="590" r="1.3" style="--dx:-29.5px;animation-duration:21.6s;animation-delay:7.4s"></circle><circle cx="688.3" cy="590" r="1.7" style="--dx:-1.7px;animation-duration:16.8s;animation-delay:17.8s"></circle><circle cx="813.8" cy="590" r="1.9" style="--dx:-10.7px;animation-duration:21.7s;animation-delay:10.1s"></circle></g>
+<g class="film-sparks"><circle class="film-spark" cx="250" cy="352" r="2.4" style="--dx:0px;--dy:-120px"></circle><circle class="film-spark" cx="500" cy="300" r="2.4" style="--dx:0px;--dy:-134px"></circle><circle class="film-spark" cx="750" cy="352" r="2.4" style="--dx:0px;--dy:-110px"></circle></g>
+<g class="film-constel"><line class="clink tri" style="--s:0.62;--len:259" x1="250" x2="500" y1="232" y2="166"></line><line class="clink tri" style="--s:0.62;--len:261" x1="500" x2="750" y1="166" y2="242"></line><line class="clink tri" style="--s:0.62;--len:500" x1="750" x2="250" y1="242" y2="232"></line><line class="clink spine" style="--s:0.16;--len:325" x1="500" x2="250" y1="440" y2="232"></line><line class="clink" style="--s:0.3;--len:106" x1="250" x2="149.8" y1="232" y2="266.5"></line><line class="clink" style="--s:0.328;--len:106" x1="250" x2="145.7" y1="232" y2="212.9"></line><line class="clink" style="--s:0.356;--len:106" x1="250" x2="168.5" y1="232" y2="164.2"></line><line class="clink" style="--s:0.384;--len:106" x1="250" x2="212.2" y1="232" y2="133.0"></line><line class="clink" style="--s:0.412;--len:106" x1="250" x2="265.6" y1="232" y2="127.2"></line><line class="clink spine" style="--s:0.16;--len:274" x1="500" x2="500" y1="440" y2="166"></line><line class="clink" style="--s:0.32;--len:106" x1="500" x2="409.4" y1="166" y2="111.0"></line><line class="clink" style="--s:0.348;--len:106" x1="500" x2="448.0" y1="166" y2="73.6"></line><line class="clink" style="--s:0.376;--len:106" x1="500" x2="500.0" y1="166" y2="60.0"></line><line class="clink" style="--s:0.404;--len:106" x1="500" x2="552.0" y1="166" y2="73.6"></line><line class="clink" style="--s:0.432;--len:106" x1="500" x2="590.6" y1="166" y2="111.0"></line><line class="clink spine" style="--s:0.16;--len:319" x1="500" x2="750" y1="440" y2="242"></line><line class="clink" style="--s:0.34;--len:106" x1="750" x2="736.9" y1="242" y2="136.8"></line><line class="clink" style="--s:0.368;--len:106" x1="750" x2="790.1" y1="242" y2="143.9"></line><line class="clink" style="--s:0.396;--len:106" x1="750" x2="833.1" y1="242" y2="176.2"></line><line class="clink" style="--s:0.424;--len:106" x1="750" x2="854.7" y1="242" y2="225.4"></line><line class="clink" style="--s:0.452;--len:106" x1="750" x2="849.4" y1="242" y2="278.9"></line><line class="cpulse" style="--len:325;animation-delay:0.0s" x1="500" x2="250" y1="440" y2="232"></line><line class="cpulse" style="--len:274;animation-delay:1.5s" x1="500" x2="500" y1="440" y2="166"></line><line class="cpulse" style="--len:319;animation-delay:3.0s" x1="500" x2="750" y1="440" y2="242"></line><g aria-label="自然 zìrán — self-so; the spontaneous own-nature of things; enter" class="csat" data-gloss="self-so; the spontaneous own-nature of things" data-jump="#dao" data-py="zìrán" data-zh="自然" role="button" style="--s:0.34" tabindex="0"><circle class="csat-glow" cx="149.8" cy="266.5" r="13"></circle><circle class="csat-dot" cx="149.8" cy="266.5" r="5.5"></circle><circle class="csat-hit" cx="149.8" cy="266.5" r="20"></circle><text class="csat-label" x="149.8" y="286.5">自然</text></g><g aria-label="無為 wúwéi — non-coercive action; leading by not-forcing; enter" class="csat" data-gloss="non-coercive action; leading by not-forcing" data-jump="#dao" data-py="wúwéi" data-zh="無為" role="button" style="--s:0.368" tabindex="0"><circle class="csat-glow" cx="145.7" cy="212.9" r="13"></circle><circle class="csat-dot" cx="145.7" cy="212.9" r="5.5"></circle><circle class="csat-hit" cx="145.7" cy="212.9" r="20"></circle><text class="csat-label" x="145.7" y="199.9">無為</text></g><g aria-label="不召自來 bù zhào zì lái — it comes unbidden, uncalled; enter" class="csat" data-gloss="it comes unbidden, uncalled" data-jump="#dao" data-py="bù zhào zì lái" data-zh="不召自來" role="button" style="--s:0.396" tabindex="0"><circle class="csat-glow" cx="168.5" cy="164.2" r="13"></circle><circle class="csat-dot" cx="168.5" cy="164.2" r="5.5"></circle><circle class="csat-hit" cx="168.5" cy="164.2" r="20"></circle><text class="csat-label" x="168.5" y="151.2">不召自來</text></g><g aria-label="因是 yīn shì — going by what is; following the grain; enter" class="csat" data-gloss="going by what is; following the grain" data-jump="#dao" data-py="yīn shì" data-zh="因是" role="button" style="--s:0.424" tabindex="0"><circle class="csat-glow" cx="212.2" cy="133.0" r="13"></circle><circle class="csat-dot" cx="212.2" cy="133.0" r="5.5"></circle><circle class="csat-hit" cx="212.2" cy="133.0" r="20"></circle><text class="csat-label" x="212.2" y="120.0">因是</text></g><g aria-label="反 fǎn — return; reversal as the motion of the Way; enter" class="csat" data-gloss="return; reversal as the motion of the Way" data-jump="#dao" data-py="fǎn" data-zh="反" role="button" style="--s:0.452" tabindex="0"><circle class="csat-glow" cx="265.6" cy="127.2" r="13"></circle><circle class="csat-dot" cx="265.6" cy="127.2" r="5.5"></circle><circle class="csat-hit" cx="265.6" cy="127.2" r="20"></circle><text class="csat-label" x="265.6" y="114.2">反</text></g><g aria-label="觀 guān — contemplative seeing; beholding without grasping; enter" class="csat" data-gloss="contemplative seeing; beholding without grasping" data-jump="#confucius" data-py="guān" data-zh="觀" role="button" style="--s:0.36" tabindex="0"><circle class="csat-glow" cx="409.4" cy="111.0" r="13"></circle><circle class="csat-dot" cx="409.4" cy="111.0" r="5.5"></circle><circle class="csat-hit" cx="409.4" cy="111.0" r="20"></circle><text class="csat-label" x="409.4" y="98.0">觀</text></g><g aria-label="無 wú — the fertile void; the use of emptiness; enter" class="csat" data-gloss="the fertile void; the use of emptiness" data-jump="#confucius" data-py="wú" data-zh="無" role="button" style="--s:0.388" tabindex="0"><circle class="csat-glow" cx="448.0" cy="73.6" r="13"></circle><circle class="csat-dot" cx="448.0" cy="73.6" r="5.5"></circle><circle class="csat-hit" cx="448.0" cy="73.6" r="20"></circle><text class="csat-label" x="448.0" y="60.6">無</text></g><g aria-label="生 shēng — generativity; life giving rise to life; enter" class="csat" data-gloss="generativity; life giving rise to life" data-jump="#confucius" data-py="shēng" data-zh="生" role="button" style="--s:0.416" tabindex="0"><circle class="csat-glow" cx="500.0" cy="60.0" r="13"></circle><circle class="csat-dot" cx="500.0" cy="60.0" r="5.5"></circle><circle class="csat-hit" cx="500.0" cy="60.0" r="20"></circle><text class="csat-label" x="500.0" y="47.0">生</text></g><g aria-label="幾 jī — the incipient; the first faint stir of what comes; enter" class="csat" data-gloss="the incipient; the first faint stir of what comes" data-jump="#confucius" data-py="jī" data-zh="幾" role="button" style="--s:0.444" tabindex="0"><circle class="csat-glow" cx="552.0" cy="73.6" r="13"></circle><circle class="csat-dot" cx="552.0" cy="73.6" r="5.5"></circle><circle class="csat-hit" cx="552.0" cy="73.6" r="20"></circle><text class="csat-label" x="552.0" y="60.6">幾</text></g><g aria-label="和 hé — harmony that is not sameness; enter" class="csat" data-gloss="harmony that is not sameness" data-jump="#confucius" data-py="hé" data-zh="和" role="button" style="--s:0.472" tabindex="0"><circle class="csat-glow" cx="590.6" cy="111.0" r="13"></circle><circle class="csat-dot" cx="590.6" cy="111.0" r="5.5"></circle><circle class="csat-hit" cx="590.6" cy="111.0" r="20"></circle><text class="csat-label" x="590.6" y="98.0">和</text></g><g aria-label="誠 chéng — sincerity; the integrity of the real; enter" class="csat" data-gloss="sincerity; the integrity of the real" data-jump="#harmony" data-py="chéng" data-zh="誠" role="button" style="--s:0.38" tabindex="0"><circle class="csat-glow" cx="736.9" cy="136.8" r="13"></circle><circle class="csat-dot" cx="736.9" cy="136.8" r="5.5"></circle><circle class="csat-hit" cx="736.9" cy="136.8" r="20"></circle><text class="csat-label" x="736.9" y="123.8">誠</text></g><g aria-label="恕 shù — reciprocity; the like-hearted measure; enter" class="csat" data-gloss="reciprocity; the like-hearted measure" data-jump="#harmony" data-py="shù" data-zh="恕" role="button" style="--s:0.408" tabindex="0"><circle class="csat-glow" cx="790.1" cy="143.9" r="13"></circle><circle class="csat-dot" cx="790.1" cy="143.9" r="5.5"></circle><circle class="csat-hit" cx="790.1" cy="143.9" r="20"></circle><text class="csat-label" x="790.1" y="130.9">恕</text></g><g aria-label="感 gǎn — resonance; being moved and moving; enter" class="csat" data-gloss="resonance; being moved and moving" data-jump="#harmony" data-py="gǎn" data-zh="感" role="button" style="--s:0.436" tabindex="0"><circle class="csat-glow" cx="833.1" cy="176.2" r="13"></circle><circle class="csat-dot" cx="833.1" cy="176.2" r="5.5"></circle><circle class="csat-hit" cx="833.1" cy="176.2" r="20"></circle><text class="csat-label" x="833.1" y="163.2">感</text></g><g aria-label="知音 zhīyīn — the one who knows the tune; enter" class="csat" data-gloss="the one who knows the tune" data-jump="#harmony" data-py="zhīyīn" data-zh="知音" role="button" style="--s:0.464" tabindex="0"><circle class="csat-glow" cx="854.7" cy="225.4" r="13"></circle><circle class="csat-dot" cx="854.7" cy="225.4" r="5.5"></circle><circle class="csat-hit" cx="854.7" cy="225.4" r="20"></circle><text class="csat-label" x="854.7" y="212.4">知音</text></g><g aria-label="推恩 tuī ēn — extending kindness outward, ring by ring; enter" class="csat" data-gloss="extending kindness outward, ring by ring" data-jump="#harmony" data-py="tuī ēn" data-zh="推恩" role="button" style="--s:0.492" tabindex="0"><circle class="csat-glow" cx="849.4" cy="278.9" r="13"></circle><circle class="csat-dot" cx="849.4" cy="278.9" r="5.5"></circle><circle class="csat-hit" cx="849.4" cy="278.9" r="20"></circle><text class="csat-label" x="849.4" y="298.9">推恩</text></g><g aria-label="道 dào — the Way — the generative course of things; enter" class="chub" data-gloss="the Way — the generative course of things" data-jump="#dao" data-py="dào" data-school="dao" data-zh="道" role="button" style="--s:0.05" tabindex="0"><circle class="chub-ring" cx="250" cy="232" r="38"></circle><circle class="chub-halo" cx="250" cy="232" r="40"></circle><circle class="chub-core" cx="250" cy="232" filter="url(#ovbloom)" r="30"></circle><circle class="chub-hit" cx="250" cy="232" r="44"></circle><text class="chub-zh" x="250" y="242">道</text></g><g aria-label="禮 lǐ — ritual — the form that carries relation; enter" class="chub" data-gloss="ritual — the form that carries relation" data-jump="#confucius" data-py="lǐ" data-school="li" data-zh="禮" role="button" style="--s:0.1" tabindex="0"><circle class="chub-ring" cx="500" cy="166" r="38"></circle><circle class="chub-halo" cx="500" cy="166" r="40"></circle><circle class="chub-core" cx="500" cy="166" filter="url(#ovbloom)" r="30"></circle><circle class="chub-hit" cx="500" cy="166" r="44"></circle><text class="chub-zh" x="500" y="176">禮</text></g><g aria-label="仁 rén — benevolence — the two-person fact of being human; enter" class="chub" data-gloss="benevolence — the two-person fact of being human" data-jump="#harmony" data-py="rén" data-school="ren" data-zh="仁" role="button" style="--s:0.15" tabindex="0"><circle class="chub-ring" cx="750" cy="242" r="38"></circle><circle class="chub-halo" cx="750" cy="242" r="40"></circle><circle class="chub-core" cx="750" cy="242" filter="url(#ovbloom)" r="30"></circle><circle class="chub-hit" cx="750" cy="242" r="44"></circle><text class="chub-zh" x="750" y="252">仁</text></g><g aria-label="環中 huán zhōng — the hinge within the ring — the still centre that meets endless change; enter" class="ccentre" data-gloss="the hinge within the ring — the still centre that meets endless change" data-jump="#three-schools" data-py="huán zhōng" data-zh="環中" role="button" style="--s:0.10" tabindex="0"><circle class="cc-glow" cx="500" cy="440" r="66"></circle><circle class="cc-spin" cx="500" cy="440" r="52"></circle><circle class="cc-ring" cx="500" cy="440" r="44"></circle><circle class="cc-ring2" cx="500" cy="440" filter="url(#ovbloom)" r="31"></circle><circle class="cc-hit" cx="500" cy="440" r="60"></circle><text class="cc-zh" x="500" y="448">環中</text></g></g>
+<rect class="film-grain" filter="url(#ovgrain)" height="640" opacity="0.035" width="1000" x="0" y="0"></rect>
+<rect class="film-vignette" fill="url(#ovvig)" height="640" width="1000" x="0" y="0"></rect>
+</svg><div class="film-titles"><div class="film-seal">南山</div><h1 class="film-maintitle">The Architecture of the Held Space</h1><div class="film-sub film-sub1">a mountain that holds without grasping —</div><div class="film-sub film-sub2">— rises into the constellation of the ways we hold</div><a class="film-enter" href="#proem">Enter the book <span>↓</span></a></div><div class="film-hint">✦ tap any star to enter that path</div><div aria-live="polite" class="film-tip"><div class="ft-zh"></div><div class="ft-py"></div><div class="ft-gloss"></div><div class="ft-go">enter ↗</div></div><div class="film-rail"><div class="film-rail-fill"></div><span class="rail-tick" style="left:14%"></span><span class="rail-tick" style="left:50%"></span><span class="rail-tick" style="left:82%"></span></div><button class="film-skip" data-skip="#proem" type="button">skip ↓</button></div><div class="film-scenes"><div class="film-scene"></div><div class="film-scene"></div><div class="film-scene"></div><div class="film-scene"></div><div class="film-scene"></div></div></section>
 <div class="siteprog" id="siteprog"></div>
 <nav class="sitenav" id="sitenav">
 <span class="brand">南山</span><span aria-hidden="true" class="pulse-dot"></span>
@@ -2527,7 +2658,31 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <span class="visionary-label">Closing the Movement</span>
 <p>Yunmen Shan gives this treatise its third load-bearing principle, arrived at by an unusually direct route: a monument built to flatter a prince's vanity taught, by the simple disproportion of its own scale, a humility its architects never intended — and a conference designed with a year of careful planning was outperformed by the coffee breaks no one had designed at all. Both lessons converge on the same discipline: the host's task is not to manufacture the room's most valuable moment through superior design, but to build conditions spacious enough — a cliff face large enough to dwarf any single ego standing beneath it, a marketplace open enough to let genuine passion self-select into the right conversation — that something neither the architect of the carving nor the architect of the conference could have planned is given room to occur. Owen names this self-organisation and, at his most expansive, claims for it a cosmic warrant this treatise has declined to grant in full; the more modest and more defensible version of his claim, recovered through the Daoist vocabulary of <em>qì</em>, is simply this: remove the obstruction, and see — without promising in advance — what wants, of its own accord, to circulate.</p>
 </div>
-<div class="reflect-host"><div class="reflect" id="reflect-bk1-11"><div class="reflect-label">Reflective Practice</div><h4>Trusting Self-Organisation</h4><ol><li>Where does your team self-organise well — and what conditions let that breath move?</li><li>When you feel the urge to intervene, what would happen if you trusted the system to find its own form?</li><li>Which of Open Space’s conditions do you most resist — and why?</li><li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Not what you did — what in <em>you</em>, your formation and habitus, made you see it that way? <span class="zh">反身而誠</span>.</li></ol></div></div></div>
+<div class="reflect-host">
+<div class="section-break">⸻ 山 ⸻</div>
+<h2>9.4 <span class="zh">自組織</span> — Self-Organisation, and the Three Schools Owen Needs</h2>
+<p>Owen's central faith is self-organisation: open the space, withdraw the agenda, and order arises of itself. This is <span class="zh">道家</span> — Daoism — to its marrow, the working form of <span class="zh">無為而無不為</span>, "do nothing, and nothing is left undone." Yet Open Space is not formless, and Owen knew it. It rests on a structure he states at the irreducible minimum: one Law (the Law of Two Feet), four Principles, a circle, a marketplace, a bulletin wall. Read against the three classical schools of Chinese leadership, Open Space is revealed not as pure Daoism but as a precise balance of all three — and Owen's genius was to find exactly where each belongs.</p>
+<div class="table-scroll"><table class="comparison-table">
+<thead><tr><th>School</th><th>What it contributes to Open Space</th><th>The character</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">道家</span> · Daoist</td><td>the trust in emergence; the withdrawal of the convenor; order arising un-directed</td><td><span class="zh">無為 · 自然</span></td></tr>
+<tr><td><span class="zh">儒家</span> · Confucian</td><td>the one Law and the posted Principles — the minimal <em>form</em> that frees rather than cages</td><td><span class="zh">禮</span></td></tr>
+<tr><td><span class="zh">法家</span> · Legalist</td><td>the counter-voice: the warning that <em>no</em> form relocates power to the loudest. Owen answers it not with more law but with the least</td><td><span class="zh">法</span> (refused, all but one)</td></tr>
+</tbody>
+</table></div>
+<p>Han Fei, the great Legalist, dreamed of a state governed by <span class="zh">法</span> alone — explicit law sufficient to dispense with the ruler's judgment entirely. Owen's Open Space is the living refutation and the partial vindication at once: it keeps a single law, transparent and posted, precisely so that it can trust everything else to <span class="zh">道</span>. The deepest lesson of the marketplace wall is the one the Legalist could not learn — that the right quantity of <span class="zh">禮</span> is the <em>least</em> that will hold, and that more form would strangle the very life it was raised to serve.</p>
+<h2>9.5 <span class="zh">不召自來</span> — Whoever Comes Is the Right People</h2>
+<p>Owen's first principle — "whoever comes is the right people" — is usually heard as a facilitator's reassurance. Read against the tradition it becomes a cosmology. The <em>Daodejing</em>'s seventy-third chapter describes the Way of Heaven itself in four characters Owen could have posted on his wall: <span class="zh">不召而自來</span> — "it does not summon, yet all things come of themselves." The convenor who trusts this is the sage-ruler of the seventeenth chapter, who governs so lightly that the people barely know he is there — and whose work, once done, they claim entirely as their own.</p>
+<div class="poem-block">
+<p class="poem-title">道德經 · 十七 / 七十三 · The Ruler Barely Known</p>
+<p class="poem-chinese">太上，下知有之。……<br/>功成事遂，百姓皆謂我自然。<br/>天之道，不爭而善勝，不召而自來。</p>
+<p class="poem-trans">Of the best ruler, the people only know that he exists. …<br/>When the work is done and the task accomplished, the people all say: <em>we did this ourselves.</em><br/>The Way of Heaven does not contend, yet excels at prevailing; does not summon, yet all things come of themselves.</p>
+<p class="poem-poet">Laozi 老子, ch. 17 &amp; 73. Owen's facilitator is this sage transposed into a conference hall: the one who <span class="zh">不召</span> — does not summon the agenda — and so lets the right people, and the right questions, <span class="zh">自來</span>, arrive of themselves.</p>
+</div>
+<h2>9.6 <span class="zh">勢</span> and <span class="zh">幾</span> — Reading the Propensity of the Open Room</h2>
+<p>If the facilitator does not push, what does the facilitator <em>do</em>? The Chinese answer is exact: he reads <span class="zh">勢</span> — the propensity, the latent configuration of force a situation already contains — and he feels <span class="zh">幾</span>, the incipient, the first faint stir of where the energy wants to go. The Open Space marketplace does not arrange itself at random; it self-organises along lines of force already present in the room, the questions that were live before anyone spoke them. To convene Open Space well is to make room for the <span class="zh">勢</span> already there, and to honour the <span class="zh">幾</span> before it has hardened into a form — the same art by which the sage acts "while things are still easy," <span class="zh">為之於未有，治之於未亂</span>, doing it before it exists, ordering it before it falls into disorder. Owen's spirit — the <span class="zh">氣</span> he watches gather and disperse in a room — is <span class="zh">勢</span> felt as energy and <span class="zh">幾</span> caught as timing.</p>
+<div class="xref"><span class="xref-mark">→ Book Two</span> Owen takes his place as the <span class="zh">道</span> of the synthesis — Laozi's self-organising sovereign, the leader barely known — in <a href="#dao">the Laozi movement</a> and at the centre of <a href="#three-schools">§7.10 道 · 仁 · 禮</a>.</div>
+<div class="reflect" id="reflect-bk1-11"><div class="reflect-label">Reflective Practice</div><h4>Trusting Self-Organisation</h4><ol><li>Where does your team self-organise well — and what conditions let that breath move?</li><li>When you feel the urge to intervene, what would happen if you trusted the system to find its own form?</li><li>Which of Open Space’s conditions do you most resist — and why?</li><li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Not what you did — what in <em>you</em>, your formation and habitus, made you see it that way? <span class="zh">反身而誠</span>.</li></ol></div></div></div>
 </article>
 <!-- ═══════════════════════════════════════════════════════ PART SIX DIVIDER -->
 <div class="part-divider" id="m-part-6">
@@ -2625,6 +2780,49 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <p class="poem-poet">Yijing 易經. <span class="zh">感而遂通</span> names the host's whole art: the unmoved centre that, precisely by staying still, feels the room and connects it.</p>
 </div>
 <div class="xref"><span class="xref-mark">→ Book Two</span> Congruence, regard, and resonance are gathered into the Confucian wing of the synthesis — Rogers as a Mencian — in <a href="#three-schools">§7.10 道 · 仁 · 禮</a>; the seabird's warning returns as a failure-drill in the Practice Companion.</div>
+<div class="section-break">⸻ 山 ⸻</div>
+<h2>10.9 <span class="zh">良知</span> — The Organismic Valuing Process as the Innate Knowing</h2>
+<p>Rogers' deepest and most contested claim is the <em>actualizing tendency</em>: that the organism, given the right conditions, already knows its own direction toward growth — an "organismic valuing process" that needs no external authority installed, only the obstructions to its free functioning removed. Set this beside Mencius and Wang Yangming and it ceases to be a twentieth-century optimism and becomes a two-thousand-year-old doctrine: <span class="zh">良知</span>, the innate knowing. <span class="zh">不慮而知者，良知也</span> — "what is known without pondering is the innate knowing." Rogers' organismic valuing <em>is</em> <span class="zh">良知</span> in a clinician's vocabulary: a pre-verbal, unerring sense of what is life-giving, prior to every argument.</p>
+<div class="poem-block">
+<p class="poem-title">孟子 · 盡心上 · The Innate Knowing</p>
+<p class="poem-chinese">人之所不學而能者，其良能也；<br/>所不慮而知者，其良知也。</p>
+<p class="poem-trans">What a person can do without having learned it — that is the innate ability;<br/>what a person knows without having pondered it — that is the innate knowing.</p>
+<p class="poem-poet">Mencius 孟子. Rogers' actualizing tendency is <span class="zh">良能</span>; his organismic valuing is <span class="zh">良知</span>. Neither is installed; both are uncovered.</p>
+</div>
+<p>And the diagnosis matches as exactly as the cure. Rogers traced human suffering to <em>conditions of worth</em> — the internalised sense, instilled by parents and institutions, that one is acceptable only on certain terms, so that a person learns to mute their own organismic experience to meet a standard imposed from outside. The tradition calls this the burying of <span class="zh">良知</span> beneath <span class="zh">私</span>, the partial self, and <span class="zh">人欲</span>, acquired craving. Rogers' therapy is therefore, almost to the word, Wang Yangming's <span class="zh">致良知</span> — "extending the innate knowing": not the installation of a better compass but the clearing of silt from the one that was always there. The actualizing tendency is <span class="zh">自然</span> made psychological — <span class="zh">道法自然</span>, the Way follows its own-so — and the person-centred therapist is the gardener of Mencius' four sprouts <span class="zh">四端</span>, who neither yanks the shoots upward to hurry them (the anxious Legalist's error, the man of Song who pulled his seedlings and killed them) nor neglects them, but tends the conditions and trusts the growth.</p>
+<h2>10.10 <span class="zh">不言之教</span> — The Non-Directive Servant</h2>
+<p>Rogers' non-directiveness — his refusal to lead the client, interpret over them, or substitute the therapist's frame for theirs — is not a mere technique of restraint. It is the Daoist <span class="zh">不言之教</span>, the "teaching without words," and it makes the therapist a <em>servant</em> rather than a sovereign: one who leads by descending. The <em>Daodejing</em> gives the figure its permanent emblem — water, which benefits all things and contends with none, and which holds its power precisely by seeking the low places everyone else disdains.</p>
+<div class="poem-block">
+<p class="poem-title">道德經 · 八 / 二 · The Highest Good Is Like Water</p>
+<p class="poem-chinese">上善若水。水善利萬物而不爭，<br/>處眾人之所惡，故幾於道。<br/>……是以聖人……行不言之教。</p>
+<p class="poem-trans">The highest good is like water. Water benefits the ten thousand things and does not contend;<br/>it dwells in the places all others disdain — and so it comes near to the Way.<br/>… Thus the sage … practises the teaching that is without words.</p>
+<p class="poem-poet">Laozi 老子, ch. 8 &amp; 2. The person-centred facilitator is the servant-leader <span class="zh">聖</span> of this book's second study: lowest, and therefore the sea into which all streams run.</p>
+</div>
+<p>Where the sovereign commands and the sage models, the servant simply makes the conditions and withdraws — and the client, like Laozi's people under the ruler barely known, claims the movement as their own: <span class="zh">我自然</span>. This is the precise hinge on which Owen and Rogers turn out to be one motion: Owen withdraws the agenda so the <em>group</em> may self-organise; Rogers withdraws the diagnosis so the <em>person</em> may. Both are <span class="zh">無為</span> — non-coercive action — practised as a discipline of descent.</p>
+<h2>10.11 <span class="zh">法</span> — Where Rogers' Trust Meets Its Limit</h2>
+<p>But the tradition that grants Rogers his warrant also hands him the warning his optimistic century could not quite hear. Rogers trusted the actualizing tendency so completely that he underweighted what happens when the held form fails. An encounter group without sufficient structure does not reliably free the organismic self; it can collapse into the rule of the most fluent, the most wounded, or the most aggressive — the "tyranny of structurelessness" Jo Freeman named in 1970, and which Han Fei, the arch-Legalist, had seen two and a half millennia before her. <span class="zh">法家</span> is the counter-voice Rogers needed — not because warmth is wrong, but because warmth without a transparent minimum of form, <span class="zh">禮</span>, simply relocates power to the undeclared.</p>
+<p>The mature reading keeps both halves and collapses neither. It holds Rogers' faith in <span class="zh">良知</span> together with the Legalist's sober knowledge that <span class="zh">良知</span> needs a held container in order to ripen — that the organismic self the warmth would free can only stand up inside a structure it is able to trust. So the host offers Rogers' six conditions <em>and</em> Owen's one Law: the warmth of <span class="zh">仁</span> inside the form of <span class="zh">禮</span>, with the Legalist standing at the wall as a reminder of what is lost when either is dropped. This is why the encounter circle in this book is run <em>inside</em> an Art of Hosting frame, and never as raw, unbounded encounter. <span class="zh">仁</span> without <span class="zh">禮</span> is sentimentality that the strong will exploit; <span class="zh">禮</span> without <span class="zh">仁</span> is the cold cage Han Fei mistook for order. The held space is the marriage neither school alone could perform.</p>
+<h2>10.12 <span class="zh">反身而誠</span> — Congruence as the Return to the Self</h2>
+<p>The first condition, congruence, has one depth still to give. To be congruent is <span class="zh">表裡如一</span> — inside and outside as one — but the tradition also names the <em>act</em> by which one reaches it. It is Mencius' <span class="zh">反身而誠</span>: to turn back upon oneself and find sincerity. Congruence, read this way, is not first a transparency offered to the client; it is first a return the host makes to themselves, and only then a gift the room can feel. And Mencius adds the line Rogers' careful clinical prose never quite reached for — that this return is the seat of the greatest joy a person can know.</p>
+<div class="poem-block">
+<p class="poem-title">孟子 · 盡心上 · Turning Back, and Finding Sincerity</p>
+<p class="poem-chinese">萬物皆備於我矣。<br/>反身而誠，樂莫大焉。</p>
+<p class="poem-trans">All the ten thousand things are complete within me.<br/>Turn back upon myself and find sincerity — and no joy is greater than this.</p>
+<p class="poem-poet">Mencius 孟子. <span class="zh">誠</span> is the Way of Heaven; <span class="zh">反身而誠</span> is the door. The congruent host is not merely without a front; they are at home in themselves — and that being-at-home is felt across a room before a single word is said.</p>
+</div>
+<h2>10.13 <span class="zh">道 · 仁 · 禮 · 法</span> — The Four Characters of the Held Space</h2>
+<p>Set Owen and Rogers in the full company of the tradition and the held space resolves into four characters, each supplied by a different teacher, none sufficient alone.</p>
+<div class="table-scroll"><table class="comparison-table">
+<thead><tr><th>Character</th><th>Teacher</th><th>What it gives the held space</th></tr></thead>
+<tbody>
+<tr><td><span class="zh">道</span> · the Way</td><td>Owen · Laozi</td><td>trust in emergence; self-organisation; the withdrawal that lets order arise — <span class="zh">無為</span></td></tr>
+<tr><td><span class="zh">仁</span> · benevolence</td><td>Rogers · Mencius</td><td>the warmth, the regard that asks nothing, the felt contact — <span class="zh">誠 · 恕 · 感</span></td></tr>
+<tr><td><span class="zh">禮</span> · form</td><td>the Art of Hosting · Confucius</td><td>circle, café, Open Space, four-fold — the forms that <em>free</em> rather than cage</td></tr>
+<tr><td><span class="zh">法</span> · law</td><td>Han Fei</td><td>the transparent minimum of structure, and the warning of what the loudest do when it is absent</td></tr>
+</tbody>
+</table></div>
+<p>Owen gives the held space its <span class="zh">道</span>; Rogers gives it its <span class="zh">仁</span>; the Art of Hosting gives it its <span class="zh">禮</span>; and Han Fei stands at the wall as <span class="zh">法</span>, the cold reminder that form, kept minimal and transparent, is what lets the other three survive their contact with power. The sage <span class="zh">聖</span> this whole book has been building is the one in whom all four meet and are exceeded: trusting like Owen, receiving like Rogers, forming like the host, bounding like the sovereign who knows exactly where holding ends. Not <span class="zh">道家</span> nor <span class="zh">儒家</span> nor <span class="zh">法家</span> alone — but the host in whom the three schools are reconciled, and a fourth thing, nameless, is born.</p>
+<div class="xref"><span class="xref-mark">→ Book Two</span> Rogers enters the synthesis as a Mencian — the <span class="zh">仁</span> wing, the regard that asks nothing — in <a href="#confucius">the Confucius movement</a> and at <a href="#three-schools">§7.10 道 · 仁 · 禮</a>; the four-character reading is the seed of the whole second study.</div>
 <div class="reflect" id="reflect-bk1-12"><div class="reflect-label">Reflective Practice</div><h4>The Conditions You Offer</h4><ol><li>Which of Rogers’ conditions — congruence, unconditional regard, empathy — do you offer most easily, and least?</li><li>Where is there a gap between what you feel and what you show in role?</li><li>When did you last feel truly received by someone? What did they do?</li><li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Not what you did — what in <em>you</em>, your formation and habitus, made you see it that way? <span class="zh">反身而誠</span>.</li></ol></div></div></div>
 </article>
 <!-- ═══════════════════════════════════════════════════════ THREE CONTAINERS COMPARED -->
@@ -4307,6 +4505,35 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="poem-gloss"><span class="tag">無之以為用 — the rest is the note</span>Miles Davis taught a generation to play what is <em>not</em> there; Basie led the most powerful band in the world by leaving notes out. The Daodejing wrote the liner notes two and a half thousand years early.</div>
 </div>
 </div>
+<!-- 8.1b · the remaining six homologies (deepening) -->
+<div class="wrap">
+<section class="prose reveal" id="bandstand-homologies-more">
+<h4>Swing is <span class="p-zh">時中</span></h4>
+<p>Swing is the one thing in jazz that cannot be notated, and for the same reason that <span class="p-zh">時中</span> — the timely centre — cannot be put in a manual. Swing is the microscopic lateness between the written beat and the played one: the note placed a hair behind where the metronome insists it should fall, so that the time <em>leans</em> and the body wants to move. No clock supplies it; it is felt, agreed, and continuously re-found. The host's timing is that same faculty exactly — the half-second of restraint before an intervention, the deliberate beat of silence left after a hard truth so the room can metabolise it. <span class="p-zh">幾</span>, the incipient, is swing as perception: the art of feeling the not-yet-sounded beat and placing yourself against it. To rush the room is to play on top of the beat; to abandon it is to drag; to host is to swing — to keep a time no instrument is marking.</p>
+<h4>The blue note is <span class="p-zh">陰陽不測</span></h4>
+<p>The blue note is the pitch that lives <em>between</em> the keys of the tempered scale — neither the major third nor the minor, but the bent, ambiguous third that carries all the feeling. It is unnotatable because the notation has no symbol for the space between its own symbols. The <em>Yijing</em> named precisely this: <span class="p-zh">陰陽不測之謂神</span> — "what cannot be fathomed in terms of yin and yang is called <span class="p-zh">神</span>, spirit." The blue note is <span class="p-zh">神</span> made audible: the third thing that is neither of the two terms the system offers, and which is therefore where the life is. The host learns to play the room's blue notes — the feeling that fits no agenda item, the truth that is neither the stated position nor its opposite — and to hold the ambiguous pitch long enough that the room hears it too.</p>
+<h4>Trading fours is <span class="p-zh">和而不同</span></h4>
+<p>To trade fours is for two players to alternate four-bar phrases — each answering the other, each sharpening difference rather than dissolving it, neither winning. It is conflict rendered as music: <span class="p-zh">和而不同</span>, harmony that refuses sameness, made into a form you can dance to. The Western default treats disagreement as a problem to be resolved into consensus; the bandstand treats it as the <em>engine</em> — the soloists do not converge, they answer, and the answering is the art. The host who can run a room as a trading of fours — protecting the alternation, refusing the premature blend — has found the musical form of the soup that is <span class="p-zh">和</span> and never <span class="p-zh">同</span>.</p>
+<h4>Woodshedding is <span class="p-zh">工夫</span> → <span class="p-zh">得意忘言</span></h4>
+<p>Before the freedom of the stand comes the unglamorous labour of the woodshed: the player alone for years with the changes, drilling scales and voicings until the hands no longer need the mind. <span class="p-zh">工夫</span> — gōngfu, sustained deliberate effort — is the woodshed named, and its end is <span class="p-zh">得意忘言</span>: grasp the meaning, forget the words. The whole point of mastering the changes is to <em>leave</em> them — to have so absorbed the form that you can play as if there were none, freely, because the discipline has gone below the waterline of attention. There is no shortcut. The player who skips the woodshed and improvises does not sound free; he sounds lost. The host's woodshed is every hard room survived, every method drilled until it became invisible.</p>
+<h4>The rhythm section is <span class="p-zh">禮</span></h4>
+<p>The deepest homology is the one the leadership literature is least equipped to see: the rhythm section is <span class="p-zh">禮</span> — ritual form — and form is what <em>frees</em> the soloist. Bass and drums and comping piano lay down a structure so reliable that the soloist can fly without once looking down, because the floor is guaranteed. Strip the rhythm section away and the soloist does not become freer; he becomes anxious, tentative, earthbound. This is the whole Confucian case against the romance of formlessness: <span class="p-zh">禮</span> is not the cage of spontaneity but its precondition. The host who holds the form invisibly — the timing, the turn-taking, the kept agreements no one has to think about — is the rhythm section, and the room solos because someone is keeping the floor.</p>
+<h4>Playing what's not there is <span class="p-zh">無之以為用</span></h4>
+<p>Miles Davis taught a generation the hardest discipline in the music: to play what is <em>not</em> there — to leave the note out, to let the rest carry the phrase, to trust the silence to say what sound would only crowd. <span class="p-zh">無之以為用</span> — it is the emptiness that makes a thing useful, Laozi's teaching that the use of the wheel is in the hollow of the hub, the use of the room in the space it encloses. The host's most advanced move is the same: the question not asked, the summary withheld, the silence left unfilled, the intervention declined. The amateur fills every bar; the master knows the unsounded note is doing the work, and that to play it would be to break it.</p>
+</section>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">因是已</span><span class="koan-py">yīn shì yǐ · just go by this</span></div>
+<div class="koan-aph"><span class="p-zh">因是已。已而不知其然，謂之道。</span></div>
+<div class="koan-en">"Just go by this. To go by it without knowing how — that is called the Way." — Zhuangzi</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Recall the last "wrong note" in a room you led. Did you flinch and correct it — or bend the next phrase until it had never been wrong?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> What in your formation taught you that error is failure rather than material? Whose disapproval are you still playing not to provoke?</div>
+</div>
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · the woodshed and the stand</span>
+<h5>Why freedom is the far side of discipline, not the near side</h5>
+<p>The bandstand's deepest lesson contradicts the romantic theory of creativity the West has half-believed since the eighteenth century: that spontaneity is what you possess <em>before</em> training spoils it. Jazz proves the reverse. The freedom of the great improviser is not the freedom of the beginner who knows no rules; it is the freedom of the master for whom the rules have become a second nature so complete that obeying them and departing from them are the same act. <span class="p-zh">自然</span> — the self-so, the spontaneous — is not the starting condition. It is the <em>achievement</em>: what <span class="p-zh">工夫</span> becomes once it has been so thoroughly absorbed that it no longer feels like effort. The host who longs to facilitate "naturally," without method, has the sequence backwards. First the woodshed; then, and only then, the stand.</p>
+</div>
+</div>
 <!-- 8.2 the two theses -->
 <div class="wrap">
 <section class="prose reveal" id="bandstand-theses">
@@ -4546,6 +4773,21 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Which "difficult" person did your discernment quietly turn into a category? What in you needed them to be one? <span class="p-zh">唯嫌揀擇</span>.</div>
 </div>
 </div>
+<!-- 11.1b discernment deepening -->
+<div class="wrap">
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · cutting at the joints</span>
+<h5>Discernment that follows the grain, and discernment that forces it</h5>
+<p>Zhuangzi gave discernment its most exact image and its most exact warning in the same book. Cook Ding carves the ox <span class="p-zh">依乎天理</span> — "following the heaven-given grain" — his blade finding the natural gaps the structure already contains, so that after nineteen years it is as sharp as the day it left the whetstone. That is discernment at its ripest: not the violent imposition of a category but the patient reading of joints that are already there. And the counter-image stands a few chapters away: the emperors of North and South, meaning only kindness, bore seven holes into <span class="p-zh">渾沌</span> — Chaos, the faceless centre — one a day, to give him the senses other beings have; and on the seventh day Chaos died. Discernment that cuts <em>against</em> the grain, that drills its own distinctions into a living wholeness, kills the thing it meant to clarify. The host discerns like the cook, never like the emperors: reading the room's real seams, refusing to carve in the ones the method prefers.</p>
+</div>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">依乎天理</span><span class="koan-py">yī hū tiān lǐ · following the grain of heaven</span></div>
+<div class="koan-aph"><span class="p-zh">依乎天理，批大郤，導大窾，因其固然。</span></div>
+<div class="koan-en">"He follows the natural grain, slips into the great gaps, guides the blade through the great hollows — going by what is already so." — Zhuangzi, Cook Ding</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> In your last hard room, where did you find the seam that was already there — and where did you force a distinction the situation did not contain?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Which of your favourite categories is a hole you keep boring into living rooms because it makes you feel like an expert? <span class="p-zh">渾沌</span> died of being improved.</div>
+</div>
+</div>
 <!-- 11.2 phronesis -->
 <div class="wrap">
 <section class="prose reveal" id="faculty-phronesis">
@@ -4559,6 +4801,21 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="koan-en">"To pull your drowning sister-in-law out by the hand — that is the weighing." — Mencius</div>
 <div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Name a moment you broke your own facilitation rule, and it was right. What did you weigh in the half-second before?</div>
 <div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Where do you reach for <span class="p-zh">法</span> — for the protocol — because trusting your <span class="p-zh">權</span> feels too exposed? Whose burned hands are you flinching from?</div>
+</div>
+</div>
+<!-- 11.2b phronesis deepening -->
+<div class="wrap">
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · 經 and 權</span>
+<h5>The constant standard, and the wisdom to depart from it</h5>
+<p>Chinese ethics built an entire vocabulary around the one thing rules cannot do: tell you when not to follow them. <span class="p-zh">經</span> is the constant — the warp-thread, the standing norm, the protocol you can teach. <span class="p-zh">權</span> is the weighing — the sliding bronze weight on the steelyard that finds the balance no fixed mark could. The tradition's most dangerous and most necessary phrase is <span class="p-zh">反經合道</span>: to depart from the standard in order to meet the Way. Not every departure is wisdom; most are mere licence, the rule broken because it was inconvenient. <span class="p-zh">權</span> is the rare capacity to break it <em>rightly</em> — and the tradition guards the distinction fiercely, because the counterfeit looks identical from outside. Aristotle drew the same line: the <em>phronimos</em>, the person of practical wisdom, is himself the standard, the living measure against which the rightness of an exception is read. There is no rule for when to break the rule. There is only the ripened person — and the room can usually tell the difference between the host who weighs and the host who merely wants out of the constraint.</p>
+</div>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">可與權</span><span class="koan-py">kě yǔ quán · fit to weigh the moment</span></div>
+<div class="koan-aph"><span class="p-zh">可與共學，未可與適道；可與適道，未可與立；可與立，未可與權。</span></div>
+<div class="koan-en">"You may study with someone, yet not walk the Way with them; walk the Way, yet not stand firm with them; stand firm, yet still not be fit to weigh the moment with them." — Confucius</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Name someone you would trust to stand firm — and someone you would trust to <em>weigh</em>. What is the difference between them?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> When you reach for the protocol, is it the moment's need — or your own wish not to be the one who decided? <span class="p-zh">權</span> is exposure; <span class="p-zh">法</span> is cover.</div>
 </div>
 </div>
 <!-- 11.3 intuition -->
@@ -4576,6 +4833,21 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> What taught you to override that knowing — to wait for permission from a reason? Whose voice was the reason in?</div>
 </div>
 </div>
+<!-- 11.3b intuition deepening -->
+<div class="wrap">
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · below the waterline</span>
+<h5>Tacit knowing, and the cruelty of asking the expert to explain</h5>
+<p>Michael Polanyi found the structure of intuition in a single sentence: <em>we know more than we can tell.</em> All skilled knowing has a <em>from–to</em> shape — we attend <em>from</em> a thousand particulars we could never list <em>to</em> the meaning they compose, the way we read a face from features we never inventory. The Dreyfus brothers mapped the ascent that builds it: the novice clings to context-free rules; the competent performer juggles them anxiously; and the expert has so absorbed the rules that they have dissolved into immediate perception — she no longer <em>decides</em>, she <em>sees</em>. And here is the buried warning the host must heed: to demand that the expert articulate her reasons — to make her consult the rulebook she has transcended — is to <em>deskill</em> her, to drag the knowing back above the waterline where it moves slower and worse. <span class="p-zh">得意忘言</span>: having grasped the meaning, she has rightly forgotten the words. The mature host trusts the <span class="p-zh">良知</span> that arrives before its justification, and does not insult it by waiting for a reason to catch up.</p>
+</div>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">應而不藏</span><span class="koan-py">yìng ér bù cáng · respond, and store nothing</span></div>
+<div class="koan-aph"><span class="p-zh">至人之用心若鏡，不將不迎，應而不藏。</span></div>
+<div class="koan-en">"The perfect person uses the mind like a mirror — not seeing off, not welcoming; it responds and does not store." — Zhuangzi</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Recall a moment you responded to a room cleanly, with nothing held over from the last one. What made the mirror clear?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> What does your mirror still store — the grievance, the rehearsed self, the last room's fear — and cloud this room with? <span class="p-zh">不將不迎</span>.</div>
+</div>
+</div>
 <!-- 11.4 wisdom -->
 <div class="wrap">
 <section class="prose reveal" id="faculty-wisdom">
@@ -4589,6 +4861,21 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="koan-en">"From clarity to sincerity — this is called teaching." — Zhongyong (the student's road up)</div>
 <div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Where has a technique you once performed become simply how you are? When did you stop noticing you were doing it?</div>
 <div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Where are you still <em>performing</em> wisdom you have not yet become — and is the gap honest labour, or hidden fear?</div>
+</div>
+</div>
+<!-- 11.4b wisdom deepening -->
+<div class="wrap">
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · the two roads up</span>
+<h5><span class="p-zh">自誠明</span> and <span class="p-zh">自明誠</span> — the saint's road and the student's</h5>
+<p>The <em>Zhongyong</em> states the developmental law that governs this whole movement, and it states it as a fork with two roads to one summit. <span class="p-zh">自誠明，謂之性</span> — "from sincerity to clarity is called nature": the saint is whole first, and his understanding flows out of his wholeness. <span class="p-zh">自明誠，謂之教</span> — "from clarity to sincerity is called teaching": the student understands first, and his wholeness is built, painstakingly, out of his understanding. Almost no one is the saint. Almost everyone who becomes wise does it the student's way — clarity first, laboured for; sincerity second, ripening slowly out of the labour until the two become one and the technique is no longer technique but character. The point the text insists upon, against every disciple's despair, is that the second road <em>arrives at the same place</em>. <span class="p-zh">及其成功一也</span> — when they reach it, it is one. The host need not have been born whole. The host need only walk the long road of clarity far enough that it turns, at last, into being.</p>
+</div>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">誠者天之道</span><span class="koan-py">chéng zhě tiān zhī dào · sincerity is the way of heaven</span></div>
+<div class="koan-aph"><span class="p-zh">誠者，天之道也；誠之者，人之道也。</span></div>
+<div class="koan-en">"Sincerity is the Way of Heaven; to make oneself sincere is the Way of a human being." — Zhongyong</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Where in your hosting has long-laboured clarity quietly turned into something you simply <em>are</em> now?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Where do you despair of wisdom because you were not born whole — and so refuse the student's road that actually arrives?</div>
 </div>
 </div>
 <!-- 11.5 noesis -->
@@ -4613,6 +4900,21 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="poem-gloss"><span class="tag">noesis 見獨 ↔ Plotinus' henōsis</span>The same summit, reported twice. The held space is one of the last rooms where a group can climb to it together — and then call the view their own.</div>
 </div>
 </div>
+<!-- 11.5b noesis deepening -->
+<div class="wrap">
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · the room that sees itself</span>
+<h5>Why the collective <em>aha</em> is noesis, and why the host cannot manufacture it</h5>
+<p>Plotinus called the summit <em>the flight of the alone to the Alone</em> — <span class="p-zh">見獨</span>, the seeing of the One that stands alone, reported in almost the same words by a Chinese mystic who never heard his name. It sounds like the most private experience imaginable, and the most irrelevant to a working room. It is neither. The collective <span class="p-zh">悟</span> — the moment a group stops arguing and <em>sees together</em>, when the whole tangled problem reconfigures at once and every person in the room feels its floor shift beneath them — is noesis made social. It cannot be willed, scheduled, or facilitated into being; the harder a host pushes for it, the more certainly it flees, because pushing is exactly the discursive striving it lies beyond. <span class="p-zh">滌除玄覽</span> — cleanse the dark mirror until it is without flaw — is the only instruction, and it is an instruction in <em>subtraction</em>: clear the room of the host's agenda, the host's cleverness, the host's need to be seen to have caused the insight, until the surface is clean enough to show the group its own face. And when the seeing comes, the room does not thank the host. The room says <span class="p-zh">我自然</span>.</p>
+</div>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">滌除玄覽</span><span class="koan-py">dí chú xuán lǎn · cleanse the dark mirror</span></div>
+<div class="koan-aph"><span class="p-zh">滌除玄覽，能無疵乎？</span></div>
+<div class="koan-en">"Can you cleanse the dark mirror until it is without flaw?" — Laozi 10</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Recall a room that saw itself. What had you stopped doing, in the moments before, that let the mirror clear?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> What flaw on your mirror is your own need to be the cause of the insight? Could you let them say <span class="p-zh">我自然</span> and mean it?</div>
+</div>
+</div>
 <!-- 11.6 how it develops -->
 <div class="wrap">
 <section class="prose reveal" id="faculty-development">
@@ -4627,6 +4929,19 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Where in your hosting have you been waiting for the breakthrough without doing the unglamorous discursive labour that earns it?</div>
 <div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Which rung are you trying to skip because the climbing offends your sense of how gifted you are? <span class="p-zh">頓悟漸修</span> — even the awakened wash the dishes.</div>
 </div>
+<!-- 11.6b development deepening -->
+<div class="commentary reveal">
+<span class="cm-label">Commentary 解 · 頓悟漸修</span>
+<h5>Sudden awakening, gradual cultivation — and why both halves are non-negotiable</h5>
+<p>Chan Buddhism split, in the eighth century, over precisely the question this movement turns on. The Northern school of Shenxiu taught <span class="p-zh">漸修</span>, gradual cultivation: polish the mirror daily, lest the dust settle. The Southern school of Huineng answered with <span class="p-zh">頓悟</span>, sudden awakening: there is no mirror and no dust, and the seeing falls in an instant or not at all. The tradition's mature settlement kept <em>both</em> in one phrase — <span class="p-zh">頓悟漸修</span>, sudden awakening followed by gradual cultivation — because each without the other is a lie. Awakening without cultivation is a flash that changes nothing; the one who has "seen" and then behaves no differently has not seen. Cultivation without awakening is the endless polishing of a surface that never catches the light. The held space lives by the same law: the collective breakthrough is sudden and real, and then the group must go back down the mountain and do the patient, unglamorous work of living what it saw. <span class="p-zh">頓悟漸修</span> — even the awakened wash the dishes.</p>
+</div>
+<div class="koan reveal">
+<div class="koan-head"><span class="koan-zh">反身而誠</span><span class="koan-py">fǎn shēn ér chéng · turn back, and find sincerity</span></div>
+<div class="koan-aph"><span class="p-zh">萬物皆備於我矣。反身而誠，樂莫大焉。</span></div>
+<div class="koan-en">"All things are complete in me. Turn back upon myself and find sincerity — and no joy is greater." — Mencius</div>
+<div class="koan-turn k-reflect"><span class="kt">Reflective 觀</span> Reflection turns you to the act; reflexion turns you to the actor. When did the turning-back last open into something wider than either?</div>
+<div class="koan-turn k-reflexive"><span class="kt">Reflexive 反</span> Is your reflexive practice a discipline of joy — <span class="p-zh">樂莫大焉</span> — or a tribunal you hold against yourself? The spiral rises only when the turning is glad.</div>
+</div>
 <div class="crosswalk reveal">
 <span class="crosswalk-label">Cross-Walk · the five faculties and their ascent</span>
 <h4>From telling-apart to seeing the One</h4>
@@ -4640,6 +4955,7 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 </div>
 </div>
 </div>
+<!-- DEEPEN2-APPLIED -->
 <!-- ═══════════════ CONCLUSION ═══════════════ -->
 <div class="wrap reflect-host"><div class="reflect" id="reflect-bk2-faculties"><div class="reflect-label">Reflective Practice</div><h4>The Ripening of Your Own Knowing</h4><ol><li>Of the five faculties — discernment, phronesis, intuition, wisdom, noesis — which is most ripe in you as a host, and which most green?</li><li>Where are you trying to act from a faculty you have not yet done the discursive labour to earn?</li><li>When have you felt a room “see itself” — and what had you done, or stopped doing, to let it?</li><li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Not what you did — what in <em>you</em>, your formation and habitus, made you see it that way? <span class="zh">反身而誠</span>.</li></ol></div></div><aside class="margin-note"><span class="mn-mark">♪</span>when it is over, it is over — and the fire goes on.</aside><div class="wrap">
 <div class="movement" id="conclusion">
@@ -4724,7 +5040,7 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <p class="bm-lead">The surest sign that the two books are one argument is that the same characters carry weight in both. The table traces the principal shared terms and counts their occurrences in each book — a quantitative shadow of the single vocabulary the whole work is built from.</p>
 <div class="table-scroll"><table class="ctable concord">
 <thead><tr><th>Character</th><th>Pinyin</th><th>Sense in this work</th><th>Book One</th><th>Book Two</th></tr></thead>
-<tbody><tr><td><span class="zh">道</span></td><td>dào</td><td>the Way; the generative course of things</td><td>3</td><td>56</td></tr><tr><td><span class="zh">德</span></td><td>dé</td><td>virtue as field-effect; the pull of alignment</td><td>1</td><td>25</td></tr><tr><td><span class="zh">氣</span></td><td>qì</td><td>vital current; the field between people</td><td>12</td><td>25</td></tr><tr><td><span class="zh">無為</span></td><td>wúwéi</td><td>non-coercive action; leading by not-forcing</td><td>1</td><td>20</td></tr><tr><td><span class="zh">自然</span></td><td>zìrán</td><td>self-so; the spontaneous own-nature of things</td><td>0</td><td>21</td></tr><tr><td><span class="zh">勢</span></td><td>shì</td><td>propensity / positional power — two readings</td><td>15</td><td>24</td></tr><tr><td><span class="zh">心</span></td><td>xīn</td><td>heart-mind; thought and feeling as one</td><td>13</td><td>20</td></tr><tr><td><span class="zh">仁</span></td><td>rén</td><td>benevolence; the two-person fact of being human</td><td>1</td><td>25</td></tr><tr><td><span class="zh">禮</span></td><td>lǐ</td><td>ritual; the form that carries relation</td><td>2</td><td>18</td></tr><tr><td><span class="zh">法</span></td><td>fǎ</td><td>law; standing, impersonal structure</td><td>9</td><td>24</td></tr><tr><td><span class="zh">和</span></td><td>hé</td><td>harmony that is not sameness</td><td>21</td><td>34</td></tr><tr><td><span class="zh">南山</span></td><td>nánshān</td><td>South Mountain; the figure of what holds</td><td>50</td><td>4</td></tr></tbody>
+<tbody><tr><td><span class="zh">道</span></td><td>dào</td><td>the Way; the generative course of things</td><td>3</td><td>63</td></tr><tr><td><span class="zh">德</span></td><td>dé</td><td>virtue as field-effect; the pull of alignment</td><td>1</td><td>25</td></tr><tr><td><span class="zh">氣</span></td><td>qì</td><td>vital current; the field between people</td><td>12</td><td>25</td></tr><tr><td><span class="zh">無為</span></td><td>wúwéi</td><td>non-coercive action; leading by not-forcing</td><td>1</td><td>20</td></tr><tr><td><span class="zh">自然</span></td><td>zìrán</td><td>self-so; the spontaneous own-nature of things</td><td>0</td><td>24</td></tr><tr><td><span class="zh">勢</span></td><td>shì</td><td>propensity / positional power — two readings</td><td>15</td><td>24</td></tr><tr><td><span class="zh">心</span></td><td>xīn</td><td>heart-mind; thought and feeling as one</td><td>13</td><td>21</td></tr><tr><td><span class="zh">仁</span></td><td>rén</td><td>benevolence; the two-person fact of being human</td><td>1</td><td>25</td></tr><tr><td><span class="zh">禮</span></td><td>lǐ</td><td>ritual; the form that carries relation</td><td>2</td><td>21</td></tr><tr><td><span class="zh">法</span></td><td>fǎ</td><td>law; standing, impersonal structure</td><td>9</td><td>25</td></tr><tr><td><span class="zh">和</span></td><td>hé</td><td>harmony that is not sameness</td><td>21</td><td>37</td></tr><tr><td><span class="zh">南山</span></td><td>nánshān</td><td>South Mountain; the figure of what holds</td><td>50</td><td>4</td></tr></tbody>
 </table></div>
 <p class="conc-note">Counts include every occurrence in body text, panels, and apparatus; a high count in one book and a low one in the other marks where a character is <em>introduced</em> in one study and <em>inherited</em> by the other.</p>
 </div><div class="bm-section" id="threads"><div class="bm-eyebrow">Reading · 五緒</div><h2 class="bm-title">Five Threads Through the Work</h2><div class="bm-rule"></div><p class="bm-lead">Five master images run the length of both books. Tap a thread to light every place it surfaces, and follow one figure across the whole weave.</p><div class="threads"><button class="thread-chip" data-terms="環中,虛室,環中也">環中 · the empty centre</button><button class="thread-chip" data-terms="和羹,和如羹,羹">和羹 · the soup</button><button class="thread-chip" data-terms="薪盡火傳,火傳">薪盡火傳 · the fire passed on</button><button class="thread-chip" data-terms="反者道之動,反者">反 · the turn &amp; return</button><button class="thread-chip" data-terms="南山">南山 · the holding mountain</button><button class="thread-chip clear" data-terms="">clear</button></div><p class="conc-note" id="threadCount"></p></div><div class="bm-section" id="tradefours"><div class="bm-eyebrow">Play · 對奏</div><h2 class="bm-title">Trade Fours</h2><div class="bm-rule"></div><p class="bm-lead">The bandstand and the mountain, four bars each. Tap to trade — a jazz maxim, then the Chinese line that was already playing it.</p><div class="trade-widget" id="tradeWidget"><div class="tw-card tw-call" id="twCall"></div><div class="tw-card tw-resp" id="twResp"></div><button class="tw-go" id="twGo">Trade fours ↻</button></div><script>window.__TRADE=[["Don't play what's there — play what's not there.", "attributed to Miles Davis", "當其無，有室之用。", "In its emptiness lies the room's use. — Laozi 11"], ["The leader you can hear soloing is the one the band agreed to carry.", "the bandstand", "太上，下知有之。", "Of the best, the people merely know it is there. — Daodejing 17"], ["Master the changes completely — then leave them.", "the woodshed", "得意而忘言。", "Grasp the meaning, forget the words. — Zhuangzi"], ["There are no wrong notes — only notes not yet resolved.", "the bandstand", "因是已。", "Just go by this. — Zhuangzi"], ["Keep the time no one is stating, and the freedom stays music.", "on the groove", "致中和，天地位焉。", "Realise centred-harmony, and all things take their place. — Zhongyong"]];</script></div><div class="bm-section" id="oracle"><div class="bm-eyebrow">Chance · 問</div><h2 class="bm-title">Cast a Line</h2><div class="bm-rule"></div><p class="bm-lead">The work quotes the Book of Changes throughout; let it answer in kind. Cast, and be thrown one line of the held space — a character, a charge, a door. Read it as today’s instruction, and walk through it if it calls.</p><div class="oracle" id="oracleWidget"><div class="oracle-face" id="oracleFace"><span class="oracle-zh">易</span><span class="oracle-line">Tap below, and let chance choose your door.</span></div><button class="oracle-cast" id="oracleCast">☰ Cast a line</button></div><script>window.__ORACLE=[["環中", "Stand at the empty axis — central, and empty.", "#radical"], ["損", "Subtract before you add. What you remove was the blockage.", "#radical"], ["因是", "Whatever happens is the only thing that could have. Go by this.", "#sec-yunmen"], ["反者道之動", "Reversal is the movement of the Way. What is ending here?", "#sec-twoloops"], ["和而不同", "Refuse sameness to reach harmony. Protect the difference.", "#radical"], ["幾", "Catch the seed before it has form. See, and move.", "#working-characters"], ["心齋", "Empty the heart-mind. Host from the room that remains.", "#three-schools"], ["渾沌", "Do not drill holes in a room that is already alive.", "#sec-yunmen"], ["應而不藏", "Mind like a mirror: respond, and keep nothing.", "#kinetic-charges"], ["摶扶搖而上者九萬里", "Trust the great wind enough to leave the ground.", "#kinetic-peng"], ["致中和", "Realise centred-harmony, and all things take their place.", "#working-characters"], ["大音希聲", "The great sound is faint. Lead by leaving notes out.", "#bandstand"], ["知止", "Know the stopping-point. When it is over, it is over.", "#sec-yunmen"], ["我自然", "Lead so lightly they say: we did this ourselves.", "#confluence"]];</script></div>
@@ -4758,6 +5074,72 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <div class="pc-card"><div class="pc-head"><h4>The Hundun Check <span class="zh">渾沌</span></h4><a class="pc-jump" href="#sec-yunmen">Ch. VIII ↗</a></div><ol>
 <li>Before any intervention, ask: is this room already alive in its formlessness?</li>
 <li>Am I about to thank it by drilling a hole in it? If unsure, <span class="zh">烹小鮮</span> — do not turn the fish.</li>
+</ol></div>
+</div>
+<div class="pc-book"><h3 class="pc-bk">Carl Rogers · <span class="zh">仁</span> · The Regard That Asks Nothing</h3>
+<div class="pc-card"><div class="pc-head"><h4>Knowing the Tone <span class="zh">知音</span></h4><a class="pc-jump" href="#sec-rogers">§10 ↗</a></div><ol>
+<li><span class="zh">知音</span> <em>zhī yīn</em> — "the one who knows the tone." Rogers' sixth condition: the regard must be <em>perceived</em> or it does not, therapeutically, exist. After your next session, ask not whether you offered empathy but whether it landed.</li>
+<li>Bo Ya broke his qin when Zhong Ziqi died, <span class="zh">世無足復為鼓琴者</span> — "no one left worth playing for." Whose music are you playing to no one, assuming it is heard?</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Where do you perform understanding for your own comfort rather than confirm it reached the other? <span class="zh">以己養養鳥</span> — are you feeding the bird as <em>you</em> would be fed?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Resonance Before Words <span class="zh">感而遂通</span></h4><a class="pc-jump" href="#sec-rogers">§10 ↗</a></div><ol>
+<li><span class="zh">寂然不動，感而遂通</span> — "still and unmoving, it feels, and thereupon connects." Before the first word of your next gathering, attend only to whether contact <span class="zh">感</span> exists.</li>
+<li>Let the stillness <em>be</em> the connection. Resonance, not assertion, is the first condition — <span class="zh">咸</span>, the hexagram of mutual influence.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> What in you needs to <em>do</em> something to feel you are helping, when bare contact was already the help?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Regard for the One You Resist <span class="zh">報怨以德</span></h4><a class="pc-jump" href="#sec-rogers">§10 ↗</a></div><ol>
+<li><span class="zh">報怨以德</span> <em>bào yuàn yǐ dé</em> — "repay enmity with virtue." Name the participant you least want in the room, and offer them regard returned for their resistance.</li>
+<li><span class="zh">天無私覆</span> — "heaven shelters all without preference." Let your welcome fall on the difficult participant and the easy one alike: unconditional positive regard as the impartiality of weather.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Where is your warmth conditional — and who in the room can already feel the condition? What does your need to be liked by the easy people cost the difficult one?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Bright, But Not Dazzling <span class="zh">光而不耀</span></h4><a class="pc-jump" href="#sec-rogers">§10 ↗</a></div><ol>
+<li><span class="zh">光而不耀</span> <em>guāng ér bù yào</em> — "luminous, but not dazzling" (DDJ 58). Congruence is presence, not performance: where is your authenticity itself a thing you <em>perform</em>?</li>
+<li>Drop one piece of professional front this week — <span class="zh">表裡如一</span>, inside and outside as one — and notice what the room does in response.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Whose gaze are you still performing your congruence <em>for</em>? Where do inside and outside quietly diverge inside the role?</li>
+</ol></div>
+</div>
+<div class="pc-book"><h3 class="pc-bk">Harrison Owen · <span class="zh">道</span> · Trusting the Self-Organising Room</h3>
+<div class="pc-card"><div class="pc-head"><h4>Leave No Track <span class="zh">善行無轍跡</span></h4><a class="pc-jump" href="#sec-owen">§9 ↗</a></div><ol>
+<li><span class="zh">善行無轍跡</span> <em>shàn xíng wú zhé jì</em> — "good travelling leaves no wheel-ruts" (DDJ 27). After your next session, ask: what trace of <em>me</em> did I leave that the group now depends on?</li>
+<li><span class="zh">善閉無關楗而不可開</span> — "good closing needs no bolt, yet cannot be opened." Where did you intervene <em>visibly</em> when an invisible adjustment would have served?</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> What in you wants the track to be seen — wants the holding credited to you?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Act Before It Exists <span class="zh">為之於未有</span></h4><a class="pc-jump" href="#sec-owen">§9 ↗</a></div><ol>
+<li><span class="zh">為之於未有，治之於未亂</span> — "act on it before it exists; order it before it falls into disorder" (DDJ 64). What in your next gathering can you tend <em>now</em>, while it is still easy?</li>
+<li>The marketplace self-organises along lines of force already latent — <span class="zh">勢</span>, the propensity. What is already live in the room before you convene it?</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> The <span class="zh">幾</span> — the first faint stir — was visible weeks ago. What makes you postpone the easy early move: comfort, or the wish to be needed at the crisis?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>The Great Carving Does Not Cut <span class="zh">大制不割</span></h4><a class="pc-jump" href="#sec-owen">§9 ↗</a></div><ol>
+<li><span class="zh">大制不割</span> <em>dà zhì bù gē</em> — "the greatest shaping does not cut apart" (DDJ 28). What is the <em>least</em> structure your next session needs in order to hold?</li>
+<li>List your rules; cut one; watch whether the life increases. The one Law that frees a room is worth more than ten that manage it.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Where does your love of good process drill holes into a room already alive — <span class="zh">渾沌</span>, Chaos killed by kindness? Does the structure serve the room, or your need to feel in control of it?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>The Convenor Barely Known <span class="zh">下知有之</span></h4><a class="pc-jump" href="#sec-owen">§9 ↗</a></div><ol>
+<li><span class="zh">太上，下知有之</span> — "of the best, the people only know that he exists" (DDJ 17). Where could you be <em>less</em> visible in your next gathering and serve it more?</li>
+<li>Aim for the close where they say <span class="zh">我自然</span> — "we did this ourselves." What would you have to stop doing for the group to claim the result entirely?</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Where does your identity depend on being <em>seen</em> to lead, even when leading less would plainly serve more?</li>
+</ol></div>
+</div>
+<div class="pc-book"><h3 class="pc-bk">The Art of Hosting · <span class="zh">禮</span> · The Forms That Free</h3>
+<div class="pc-card"><div class="pc-head"><h4>Borrowed Scenery <span class="zh">借景</span></h4><a class="pc-jump" href="#three-schools">§7.10 ↗</a></div><ol>
+<li><span class="zh">借景</span> <em>jiè jǐng</em> — "borrowed scenery": the garden composes the distant mountain into its own frame without owning it. What lies beyond your container — partners, context, larger purpose — that you could borrow into the room?</li>
+<li>Design one element of your next gathering that points <em>past</em> the room — that holds the wider field inside the small one.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> What boundary do you defend because owning the whole view flatters you? Where have you hosted as if your container were the entire landscape?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Follow the Grain <span class="zh">依乎天理</span></h4><a class="pc-jump" href="#three-schools">§7.10 ↗</a></div><ol>
+<li><span class="zh">依乎天理</span> <em>yī hū tiān lǐ</em> — Cook Ding "follows the heaven-given grain," slipping the blade into gaps the ox already contains. Where is the natural seam in your next hard conversation — the joint the situation itself provides?</li>
+<li>Find the gap, <span class="zh">批大郤</span> — "strike into the great hollow" — rather than forcing the blade. Facilitate <em>with</em> the room's structure, never against it.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Which of your methods is a blade you force because you are proud of it — and where did cutting against the grain last blunt you?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Know the Stopping Point <span class="zh">知止</span></h4><a class="pc-jump" href="#three-schools">§7.10 ↗</a></div><ol>
+<li><span class="zh">知止不殆</span> <em>zhī zhǐ bù dài</em> — "know where to stop, and meet no danger" (DDJ 44). At the close of your next session, end it cleanly when it is <em>done</em>, not when the clock permits.</li>
+<li>The harvest is <span class="zh">薪盡火傳</span> — "the firewood is spent, but the fire passes on." What travels onward when the gathering ends, and how will you tend it?</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> What fear of the silence <em>after</em> makes you keep a room open past its life? Where do you over-run a session that had already given its gift?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Life Gives Rise to Life <span class="zh">生生</span></h4><a class="pc-jump" href="#three-schools">§7.10 ↗</a></div><ol>
+<li><span class="zh">生生之謂易</span> — "life giving rise to life is what we call the Changes." Co-creation is midwifery, not authorship: where do you author the outcome when you could let the room generate it?</li>
+<li>Name one result you quietly claimed that the group actually produced. Hand it back, in your own mind, to its real makers.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> What in you needs the outcome to bear your signature — and what would it cost you to let it be theirs?</li>
 </ol></div>
 </div>
 <div class="pc-book"><h3 class="pc-bk">The Phrasebook of the Held Space · <span class="zh">語</span> · What a Host Can Actually Say</h3>
@@ -4841,6 +5223,23 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 <li>Do the discursive labour first — the unglamorous investigation. Then stop, and cleanse the mirror of the room: <span class="zh">滌除玄覽</span>.</li>
 <li>When the group sees itself, say nothing and claim nothing. Let them keep the view: <span class="zh">我自然</span>.</li>
 <li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> Which rung are you trying to skip because climbing it offends your sense of how gifted you are? <span class="zh">頓悟漸修</span>.</li>
+</ol></div>
+</div>
+<div class="pc-book"><h3 class="pc-bk">The Bandstand · <span class="zh">樂</span> · Swing, Error, and the Unsounded Note</h3>
+<div class="pc-card"><div class="pc-head"><h4>Hosting the Groove <span class="zh">時中</span></h4><a class="pc-jump" href="#bandstand-homologies-more">§8.1 ↕</a></div><ol>
+<li>This week, place one intervention a half-beat <em>late</em> — leave the silence a moment longer than is comfortable, and watch the room lean into it. That lateness is swing.</li>
+<li>Find the groove your team is already in and protect it rather than redirect it; <span class="zh">致中和</span> — realise the centred-harmony, and let the rest take its place.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> When you rush a room, whose impatience is moving your hands — the room's, or your own need to be seen to be working?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>The Wrong Note Made Right <span class="zh">因是</span></h4><a class="pc-jump" href="#bandstand-homologies-more">§8.1 ↕</a></div><ol>
+<li>Take the next "mistake" in a room — yours or another's — and instead of correcting it, bend the next move until the error becomes the material. There are no wrong notes, only notes not yet resolved.</li>
+<li>Practise <span class="zh">應而不藏</span> — respond to what is, and store nothing: meet this room without the residue of the last.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> What in your formation taught you that error is shameful rather than generative? Whose disapproval are you still playing not to provoke?</li>
+</ol></div>
+<div class="pc-card"><div class="pc-head"><h4>Playing What Is Not There <span class="zh">無之以為用</span></h4><a class="pc-jump" href="#bandstand-homologies-more">§8.1 ↕</a></div><ol>
+<li>In your next session, choose one question you will <em>not</em> ask, one summary you will <em>not</em> give. Let the unsounded note do the work.</li>
+<li>Be the rhythm section, not the soloist: hold the form so reliably that the room can fly without looking down. <span class="zh">禮</span> is what frees.</li>
+<li class="reflexive-li"><span class="rx-mark">Reflexive turn</span> When you fill every silence, what are you defending against — the room's discomfort, or your own?</li>
 </ol></div>
 </div></div><div class="bm-section" id="tenstages"><div class="bm-eyebrow">The Path · 十牛圖</div><h2 class="bm-title">The Ten Stages — A Path for the Host</h2><div class="bm-rule"></div><p class="bm-lead">The work has named the architecture and the practices; this is the <em>maturation</em>. Borrowed from the Chan ten ox-herding pictures, it traces the host's own development — from the first restless search to the final return, hands open, to the marketplace where servant-leadership begins.</p><div class="gloss-grid ox-grid"><div class="gloss-entry"><span class="gloss-zh">尋牛</span><span class="gloss-py">i · xún niú</span><span class="gloss-lit">Searching for the Ox</span><p class="gloss-sense">You sense something missing in how you lead, and set out after the held space without yet knowing its name.</p></div><div class="gloss-entry"><span class="gloss-zh">見跡</span><span class="gloss-py">ii · jiàn jì</span><span class="gloss-lit">Seeing the Tracks</span><p class="gloss-sense">You find the frameworks and the literature — the traces of what you seek, but not yet the thing itself.</p></div><div class="gloss-entry"><span class="gloss-zh">見牛</span><span class="gloss-py">iii · jiàn niú</span><span class="gloss-lit">Seeing the Ox</span><p class="gloss-sense">In a real room, for a moment, it appears: the field holds, the people open. You have seen it now.</p></div><div class="gloss-entry"><span class="gloss-zh">得牛</span><span class="gloss-py">iv · dé niú</span><span class="gloss-lit">Catching the Ox</span><p class="gloss-sense">You can sometimes make it happen — but only by gripping hard. The holding still costs you strain.</p></div><div class="gloss-entry"><span class="gloss-zh">牧牛</span><span class="gloss-py">v · mù niú</span><span class="gloss-lit">Herding the Ox</span><p class="gloss-sense">Practice. The grip loosens into discipline; you learn to <em>tend</em> the field rather than force it.</p></div><div class="gloss-entry"><span class="gloss-zh">騎牛歸家</span><span class="gloss-py">vi · qí niú guī jiā</span><span class="gloss-lit">Riding Home</span><p class="gloss-sense">Ease arrives. You host without strain; the ox carries you home, flute in hand.</p></div><div class="gloss-entry"><span class="gloss-zh">忘牛存人</span><span class="gloss-py">vii · wàng niú cún rén</span><span class="gloss-lit">Ox Forgotten, Self Remains</span><p class="gloss-sense">The method falls away — <span class="zh">得意忘言</span>. You no longer think in frameworks, only in the room.</p></div><div class="gloss-entry"><span class="gloss-zh">人牛俱忘</span><span class="gloss-py">viii · rén niú jù wàng</span><span class="gloss-lit">Both Forgotten — the Empty Circle</span><p class="gloss-sense">No host, no technique, no self: only the held space, holding itself. <span class="zh">我自然</span>.</p></div><div class="gloss-entry"><span class="gloss-zh">返本還源</span><span class="gloss-py">ix · fǎn běn huán yuán</span><span class="gloss-lit">Returning to the Source</span><p class="gloss-sense">You see the mountain was always doing this. Nature held space before any of us named it — <span class="zh">自然</span>.</p></div><div class="gloss-entry"><span class="gloss-zh">入鄽垂手</span><span class="gloss-py">x · rù chán chuí shǒu</span><span class="gloss-lit">Entering the Marketplace, Hands Open</span><p class="gloss-sense">The realised host returns to the ordinary world, hands hanging open, to help whoever comes. Here servant-leadership begins.</p></div></div><p class="conc-note">The eighth picture is traditionally an empty circle — <span class="zh">人牛俱忘</span>, both ox and herder forgotten. It is the same empty centre this whole work has circled: <span class="zh">環中</span>, and <span class="zh">我自然</span>.</p></div><div class="bm-section" id="diagnostic"><div class="bm-eyebrow">Instrument · 三家</div><h2 class="bm-title">The Three-School Self-Audit</h2><div class="bm-rule"></div><p class="bm-lead">Which wing is strong in you, and which is starved? Tap every statement that is true for you, then read your result. <span class="zh">道</span> is the Daoist trust in self-organisation; <span class="zh">仁</span> the Confucian sincerity of the relationship; <span class="zh">禮</span> the ritual form of the container.</p><div class="diag" id="diagWidget"><div class="diag-stmts"><button class="diag-stmt" data-wing="dao">I would rather under-structure and let the room find its own way.</button><button class="diag-stmt" data-wing="li">I design the flow of a session carefully before it begins.</button><button class="diag-stmt" data-wing="ren">I track, moment to moment, how each person in the room is feeling.</button><button class="diag-stmt" data-wing="dao">I am comfortable with silence, and with not intervening.</button><button class="diag-stmt" data-wing="ren">I will slow the whole group to make sure one person is met.</button><button class="diag-stmt" data-wing="li">Clear structure and good process are what make me feel safe to host.</button><button class="diag-stmt" data-wing="dao">I trust self-organisation even when it looks messy.</button><button class="diag-stmt" data-wing="li">When a container is missing, I feel the lack and want to build one.</button><button class="diag-stmt" data-wing="ren">Warmth and sincerity matter to me more than keeping to the agenda.</button></div><button class="diag-go" id="diagGo">Show my wings</button><div class="diag-result" hidden="" id="diagResult"></div></div></div>
 <div class="bm-section" id="bibliography">
@@ -5005,7 +5404,7 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
   };
   for(var k in EXTRA){ if(!LOOK[k]) LOOK[k]=EXTRA[k]; }
   var tip=document.createElement('div'); tip.id='zhTip'; document.body.appendChild(tip);
-  var spans=document.querySelectorAll('.zh, .zh-lg');
+  var spans=document.querySelectorAll('.zh, .zh-lg, .p-zh');
   spans.forEach(function(sp){
     if(sp.closest('#glossary')) return;
     var t=sp.textContent.trim();
@@ -5098,25 +5497,6 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
 </script><button aria-pressed="false" class="swing-toggle" id="swingToggle" title="reveal the counter-melody">♪ swing</button>
 <script>
 (function(){
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  /* ---- overture scroll engine ---- */
-  var ov=document.getElementById('overture'), stage=ov?ov.querySelector('.ov-stage'):null;
-  if(ov&&stage){
-    if(reduce){stage.setAttribute('data-phase','3');stage.style.setProperty('--draw',1);stage.style.setProperty('--ov',0.0);}
-    function onScroll(){
-      var rect=ov.getBoundingClientRect();
-      var total=ov.offsetHeight-window.innerHeight;
-      var p=Math.min(1,Math.max(0,(-rect.top)/(total||1)));
-      stage.style.setProperty('--ov',p.toFixed(3));
-      stage.style.setProperty('--draw',Math.min(1,p/0.34).toFixed(3));
-      var phase=0; if(p>=0.12)phase=1; if(p>=0.46)phase=2; if(p>=0.8)phase=3;
-      if(stage.getAttribute('data-phase')!=String(phase)) stage.setAttribute('data-phase',String(phase));
-      document.body.classList.toggle('in-overture', p<0.985);
-    }
-    var tick=false;
-    window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){onScroll();tick=false;});}},{passive:true});
-    onScroll();
-  }
   /* ---- trade fours widget ---- */
   var pairs=window.__TRADE||[], idx=0;
   var call=document.getElementById('twCall'), resp=document.getElementById('twResp'), go=document.getElementById('twGo');
@@ -5134,25 +5514,170 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
     st.setAttribute('aria-pressed',on?'true':'false');
   });
 })();
-</script><section aria-label="Coda" class="coda-film" id="codafilm"><div class="cf-stage" data-phase="0"><svg aria-hidden="true" class="cf-svg" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 620">
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var sec=document.getElementById("overture"); if(!sec) return;
+  var stage=sec.querySelector('.film-stage'); var fill=sec.querySelector('.film-rail-fill');
+  var tip=sec.querySelector('.film-tip'); var mode="overture";
+  var live=false;
+  function frame(){
+    var rect=sec.getBoundingClientRect(); var total=sec.offsetHeight-window.innerHeight;
+    var ov=Math.min(1,Math.max(0,(-rect.top)/(total||1)));
+    var build=(mode==='coda')?(1-ov):ov;
+    if(reduce){ ov=(mode==='coda')?1:0; build=(mode==='coda')?0:1; }
+    stage.style.setProperty('--ov',ov.toFixed(3));
+    stage.style.setProperty('--build',build.toFixed(3));
+    var ph=ov<0.14?0:(ov<0.5?1:(ov<0.82?2:3));
+    if(stage.getAttribute('data-phase')!=String(ph)) stage.setAttribute('data-phase',String(ph));
+    if(fill) fill.style.transform='scaleX('+ov.toFixed(3)+')';
+    var inview=rect.top<=8 && rect.bottom>=window.innerHeight-8 && ov<0.99;
+    document.body.classList.toggle("in-overture", inview);
+    var shouldLive=(mode==='overture') && build>0.82 && inview;
+    if(shouldLive!==live){ live=shouldLive; sec.classList.toggle('live',live); if(!live) hideTip(); }
+  }
+  var tick=false;
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){frame();tick=false;});}},{passive:true});
+  window.addEventListener('resize',frame,{passive:true}); frame();
+  // gentle pointer parallax (desktop, motion allowed)
+  if(!reduce && window.matchMedia('(pointer:fine)').matches){
+    stage.addEventListener('mousemove',function(e){
+      var r=stage.getBoundingClientRect();
+      stage.style.setProperty('--px',(((e.clientX-r.left)/r.width)-0.5).toFixed(3));
+      stage.style.setProperty('--py',(((e.clientY-r.top)/r.height)-0.5).toFixed(3));
+    },{passive:true});
+    stage.addEventListener('mouseleave',function(){stage.style.setProperty('--px','0');stage.style.setProperty('--py','0');});
+  }
+  // ---- interactive star-map ----
+  var curJump=null;
+  function showTip(node){
+    if(!tip) return;
+    var sr=stage.getBoundingClientRect();
+    var b=node.getBoundingClientRect();
+    var cx=b.left+b.width/2-sr.left, cy=b.top+b.height/2-sr.top;
+    tip.querySelector('.ft-zh').textContent=node.getAttribute('data-zh')||'';
+    tip.querySelector('.ft-py').textContent=node.getAttribute('data-py')||'';
+    tip.querySelector('.ft-gloss').textContent=node.getAttribute('data-gloss')||'';
+    curJump=node.getAttribute('data-jump');
+    tip.classList.add('show');
+    var tw=tip.offsetWidth||190, th=tip.offsetHeight||120;
+    var x=cx+18, y=cy-th/2; if(x+tw>sr.width-8)x=cx-tw-18; if(x<8)x=8;
+    if(y<8)y=8; if(y+th>sr.height-8)y=sr.height-th-8;
+    tip.style.left=x+'px'; tip.style.top=y+'px';
+  }
+  function hideTip(){ if(tip){tip.classList.remove('show');curJump=null;} }
+  function scroller(){return document.scrollingElement||document.documentElement;}
+  function curY(){return window.pageYOffset||scroller().scrollTop||0;}
+  function clampY(y){var s=scroller();var max=s.scrollHeight-window.innerHeight;return Math.max(0,Math.min(y,max<0?0:max));}
+  /* This page sets body{overflow-x:clip; height:<full>} so element.scrollTop= is rejected;
+     only window.scrollTo moves it. And html{scroll-behavior:smooth} would hijack every call into a
+     competing smooth animation, stalling a per-frame tween. So we force scroll-behavior:auto for the
+     duration and drive our own eased window.scrollTo each frame, restoring behaviour at the end. */
+  function smoothTo(y,el){ y=clampY(y); var de=document.documentElement, prev=de.style.scrollBehavior; de.style.scrollBehavior='auto';
+    function settle(n){ /* after arrival, re-measure the target and correct for any reflow above it */
+      if(!el){ de.style.scrollBehavior=prev; return; }
+      var off=el.getBoundingClientRect().top-12;
+      if(Math.abs(off)>16 && n<6){ window.scrollTo(0,clampY(curY()+off)); requestAnimationFrame(function(){settle(n+1);}); }
+      else { de.style.scrollBehavior=prev; } }
+    if(reduce){ window.scrollTo(0,y); settle(0); return; }
+    var from=curY(),d=y-from,t0=null,dur=Math.min(1000,Math.max(380,Math.abs(d)*0.42));
+    function step(ts){ if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2; window.scrollTo(0,Math.round(from+d*e)); if(p<1){requestAnimationFrame(step);} else { window.scrollTo(0,y); settle(0); } }
+    requestAnimationFrame(step); }
+  function go(j){ var t=j&&document.querySelector(j); if(!t)return; hideTip();
+    var y1=t.getBoundingClientRect().top+curY()-12;
+    requestAnimationFrame(function(){ var y2=t.getBoundingClientRect().top+curY()-12; smoothTo(Math.abs(y2-y1)>4?y2:y1, t); }); }
+  if(mode==='overture'){
+    var nodes=sec.querySelectorAll('.chub,.csat,.ccentre');
+    nodes.forEach(function(n){
+      n.addEventListener('mouseenter',function(){if(live)showTip(n);});
+      n.addEventListener('mouseleave',function(){hideTip();});
+      n.addEventListener('focus',function(){if(live)showTip(n);});
+      n.addEventListener('blur',function(){hideTip();});
+      n.addEventListener('click',function(){go(n.getAttribute('data-jump'));});
+      n.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(n.getAttribute('data-jump'));}});
+    });
+    if(tip){ tip.querySelector('.ft-go').addEventListener('click',function(){go(curJump);});
+      tip.addEventListener('mouseleave',hideTip); }
+  }
+  // controls
+  var skip=sec.querySelector('.film-skip');
+  if(skip)skip.addEventListener('click',function(){go(skip.getAttribute('data-skip'));});
+  var replay=sec.querySelector('.film-replay');
+  if(replay)replay.addEventListener('click',function(){var y=sec.getBoundingClientRect().top+curY()-2;smoothTo(y,sec);});
+})();
+</script><section aria-label="Coda" class="film film-coda" id="codafilm"><div class="film-stage" data-phase="0"><svg aria-hidden="true" class="film-svg" preserveaspectratio="xMidYMid slice" viewbox="0 0 1000 640">
 <defs>
-<lineargradient id="cfSky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#0a1322"></stop><stop offset="1" stop-color="#0e1b2e"></stop></lineargradient>
-<radialgradient cx="0.5" cy="0.5" id="cfGlow" r="0.6"><stop offset="0" stop-color="rgba(227,192,105,0.16)"></stop><stop offset="1" stop-color="rgba(227,192,105,0)"></stop></radialgradient>
+<lineargradient id="cfsky" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="#060b15"></stop><stop offset="0.4" stop-color="#0a1322"></stop><stop offset="0.72" stop-color="#0e1c30"></stop><stop offset="1" stop-color="#0a1827"></stop>
+</lineargradient>
+<lineargradient id="cfdawn" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="rgba(227,192,105,0)"></stop><stop offset="0.62" stop-color="rgba(214,150,92,0.05)"></stop><stop offset="0.86" stop-color="rgba(227,170,110,0.20)"></stop><stop offset="1" stop-color="rgba(150,120,150,0.10)"></stop>
+</lineargradient>
+<radialgradient cx="0.5" cy="0.42" id="cfneb" r="0.62">
+<stop offset="0" stop-color="rgba(150,130,210,0.22)"></stop><stop offset="0.45" stop-color="rgba(120,150,200,0.10)"></stop><stop offset="1" stop-color="rgba(120,150,200,0)"></stop>
+</radialgradient>
+<radialgradient cx="0.5" cy="0.34" id="cfglow" r="0.55">
+<stop offset="0" stop-color="rgba(227,192,105,0.20)"></stop><stop offset="1" stop-color="rgba(227,192,105,0)"></stop>
+</radialgradient>
+<radialgradient cx="0.42" cy="0.4" id="cfmoon" r="0.62">
+<stop offset="0" stop-color="#fff8e6"></stop><stop offset="0.7" stop-color="#f3e4c0"></stop><stop offset="1" stop-color="#caa86e"></stop>
+</radialgradient>
+<radialgradient cx="0.5" cy="0.5" id="cfmoonh" r="0.5">
+<stop offset="0" stop-color="rgba(255,244,214,0.34)"></stop><stop offset="1" stop-color="rgba(255,244,214,0)"></stop>
+</radialgradient>
+<lineargradient id="cfcomet" x1="0" x2="1" y1="0" y2="0">
+<stop offset="0" stop-color="rgba(255,247,224,0)"></stop><stop offset="1" stop-color="rgba(255,247,224,0.9)"></stop>
+</lineargradient>
+<lineargradient id="cfwater" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0" stop-color="rgba(8,16,28,0.1)"></stop><stop offset="1" stop-color="rgba(6,12,22,0.96)"></stop>
+</lineargradient>
+<radialgradient cx="0.5" cy="0.44" id="cfvig" r="0.78">
+<stop offset="0.52" stop-color="rgba(0,0,0,0)"></stop><stop offset="1" stop-color="rgba(0,0,0,0.64)"></stop>
+</radialgradient>
+<filter height="240%" id="cfbloom" width="240%" x="-70%" y="-70%">
+<fegaussianblur result="b" stddeviation="3.4"></fegaussianblur><femerge><femergenode in="b"></femergenode><femergenode in="SourceGraphic"></femergenode></femerge>
+</filter>
+<filter height="160%" id="cfsoft" width="160%" x="-30%" y="-30%"><fegaussianblur stddeviation="6"></fegaussianblur></filter>
+<filter id="cfgrain"><feturbulence basefrequency="0.9" numoctaves="2" stitchtiles="stitch" type="fractalNoise"></feturbulence><fecolormatrix type="saturate" values="0"></fecolormatrix></filter>
+<clippath id="cfwclip"><rect height="178" width="1000" x="0" y="462"></rect></clippath>
 </defs>
-<rect fill="url(#cfSky)" height="620" width="1000" x="0" y="0"></rect>
-<circle class="cf-haze" cx="500" cy="320" fill="url(#cfGlow)" r="380"></circle>
-<path class="cf-ridge far" d="M0 430 L150 360 L300 410 L460 320 L640 400 L820 340 L1000 410 L1000 620 L0 620 Z"></path>
-<path class="cf-ridge near" d="M0 470 L250 300 L430 420 L520 250 L640 420 L780 330 L1000 470 L1000 620 L0 620 Z"></path>
-<g class="cf-constel">
-<line class="cf-link" x1="500" x2="250" y1="470" y2="300"></line>
-<line class="cf-link" x1="500" x2="520" y1="470" y2="250"></line>
-<line class="cf-link" x1="500" x2="780" y1="470" y2="330"></line>
-<g class="cf-node"><circle cx="250" cy="300" r="30"></circle><text class="cf-zh" x="250" y="309">道</text></g>
-<g class="cf-node"><circle cx="520" cy="250" r="30"></circle><text class="cf-zh" x="520" y="259">禮</text></g>
-<g class="cf-node"><circle cx="780" cy="330" r="30"></circle><text class="cf-zh" x="780" y="339">仁</text></g>
-<g class="cf-centre"><circle class="cf-ring" cx="500" cy="470" r="40"></circle><text class="cf-zh cf-centre-zh" x="500" y="478">環中</text></g>
+<rect class="film-sky" fill="url(#cfsky)" height="640" width="1000" x="0" y="0"></rect>
+<ellipse class="film-neb" cx="500" cy="250" fill="url(#cfneb)" rx="640" ry="220" transform="rotate(-14 500 250)"></ellipse>
+<g class="film-stars sl-deep"><circle cx="134.3" cy="81.0" r="0.5" style="--o:0.26;animation-duration:2.6s;animation-delay:6.6s"></circle><circle cx="898.3" cy="63.6" r="0.62" style="--o:0.26;animation-duration:6.4s;animation-delay:5.7s"></circle><circle cx="642.7" cy="333.8" r="0.67" style="--o:0.39;animation-duration:3.3s;animation-delay:2.1s"></circle><circle cx="838.6" cy="2.6" r="0.41" style="--o:0.38;animation-duration:3.0s;animation-delay:0.3s"></circle><circle cx="882.7" cy="379.3" r="0.38" style="--o:0.2;animation-duration:5.5s;animation-delay:5.7s"></circle><circle cx="511.9" cy="59.9" r="0.68" style="--o:0.36;animation-duration:4.9s;animation-delay:6.3s"></circle><circle cx="676.2" cy="271.5" r="0.65" style="--o:0.28;animation-duration:3.1s;animation-delay:6.0s"></circle><circle cx="812.3" cy="185.6" r="0.63" style="--o:0.24;animation-duration:4.3s;animation-delay:6.3s"></circle><circle cx="472.3" cy="172.6" r="0.53" style="--o:0.21;animation-duration:3.9s;animation-delay:6.1s"></circle><circle cx="810.1" cy="176.1" r="0.41" style="--o:0.33;animation-duration:4.4s;animation-delay:1.5s"></circle><circle cx="905.1" cy="374.7" r="0.72" style="--o:0.29;animation-duration:5.1s;animation-delay:6.5s"></circle><circle cx="827.7" cy="129.3" r="0.65" style="--o:0.3;animation-duration:4.2s;animation-delay:0.9s"></circle><circle cx="780.2" cy="7.2" r="0.77" style="--o:0.35;animation-duration:6.5s;animation-delay:1.4s"></circle><circle cx="801.4" cy="197.0" r="0.71" style="--o:0.19;animation-duration:2.9s;animation-delay:2.3s"></circle><circle cx="284.8" cy="12.5" r="0.5" style="--o:0.17;animation-duration:4.0s;animation-delay:4.9s"></circle><circle cx="904.5" cy="314.8" r="0.46" style="--o:0.39;animation-duration:4.1s;animation-delay:0.3s"></circle><circle cx="691.9" cy="372.3" r="0.71" style="--o:0.19;animation-duration:3.1s;animation-delay:1.9s"></circle><circle cx="822.6" cy="105.4" r="0.52" style="--o:0.37;animation-duration:3.1s;animation-delay:5.3s"></circle><circle cx="848.5" cy="266.6" r="0.77" style="--o:0.38;animation-duration:2.6s;animation-delay:2.8s"></circle><circle cx="614.7" cy="179.7" r="0.71" style="--o:0.26;animation-duration:2.6s;animation-delay:0.8s"></circle><circle cx="9.2" cy="312.2" r="0.49" style="--o:0.12;animation-duration:3.1s;animation-delay:4.5s"></circle><circle cx="834.6" cy="187.9" r="0.64" style="--o:0.18;animation-duration:7.0s;animation-delay:1.0s"></circle><circle cx="94.4" cy="268.3" r="0.73" style="--o:0.23;animation-duration:6.8s;animation-delay:0.7s"></circle><circle cx="582.2" cy="284.3" r="0.38" style="--o:0.41;animation-duration:5.5s;animation-delay:0.2s"></circle><circle cx="97.2" cy="183.6" r="0.78" style="--o:0.34;animation-duration:2.8s;animation-delay:4.0s"></circle><circle cx="829.4" cy="220.2" r="0.71" style="--o:0.14;animation-duration:4.3s;animation-delay:1.9s"></circle><circle cx="81.3" cy="330.4" r="0.52" style="--o:0.29;animation-duration:3.1s;animation-delay:1.5s"></circle><circle cx="68.5" cy="373.7" r="0.79" style="--o:0.14;animation-duration:4.7s;animation-delay:0.7s"></circle><circle cx="144.9" cy="190.7" r="0.56" style="--o:0.36;animation-duration:4.6s;animation-delay:2.2s"></circle><circle cx="216.0" cy="124.2" r="0.54" style="--o:0.12;animation-duration:2.8s;animation-delay:4.2s"></circle><circle cx="259.3" cy="71.1" r="0.68" style="--o:0.26;animation-duration:5.0s;animation-delay:3.0s"></circle><circle cx="907.5" cy="165.2" r="0.44" style="--o:0.32;animation-duration:3.8s;animation-delay:0.3s"></circle><circle cx="416.9" cy="103.6" r="0.45" style="--o:0.25;animation-duration:4.4s;animation-delay:4.4s"></circle><circle cx="522.9" cy="151.1" r="0.37" style="--o:0.16;animation-duration:3.1s;animation-delay:1.2s"></circle><circle cx="788.3" cy="66.0" r="0.64" style="--o:0.3;animation-duration:3.3s;animation-delay:3.3s"></circle><circle cx="521.9" cy="273.1" r="0.45" style="--o:0.29;animation-duration:4.2s;animation-delay:2.2s"></circle><circle cx="737.4" cy="128.6" r="0.48" style="--o:0.24;animation-duration:2.7s;animation-delay:4.9s"></circle><circle cx="642.0" cy="311.4" r="0.41" style="--o:0.34;animation-duration:4.3s;animation-delay:0.6s"></circle><circle cx="943.0" cy="303.7" r="0.5" style="--o:0.38;animation-duration:6.1s;animation-delay:0.1s"></circle><circle cx="960.6" cy="161.8" r="0.72" style="--o:0.29;animation-duration:4.8s;animation-delay:1.7s"></circle><circle cx="96.1" cy="58.3" r="0.79" style="--o:0.29;animation-duration:3.9s;animation-delay:0.8s"></circle><circle cx="140.1" cy="401.9" r="0.8" style="--o:0.39;animation-duration:5.8s;animation-delay:0.1s"></circle><circle cx="133.9" cy="426.1" r="0.56" style="--o:0.34;animation-duration:6.1s;animation-delay:4.1s"></circle><circle cx="811.6" cy="44.1" r="0.4" style="--o:0.22;animation-duration:5.7s;animation-delay:3.4s"></circle><circle cx="593.9" cy="194.7" r="0.51" style="--o:0.32;animation-duration:4.7s;animation-delay:2.9s"></circle><circle cx="145.5" cy="286.8" r="0.38" style="--o:0.33;animation-duration:4.4s;animation-delay:1.1s"></circle><circle cx="448.9" cy="67.0" r="0.8" style="--o:0.14;animation-duration:4.4s;animation-delay:5.7s"></circle><circle cx="531.7" cy="262.5" r="0.5" style="--o:0.38;animation-duration:6.1s;animation-delay:2.7s"></circle><circle cx="18.2" cy="405.0" r="0.74" style="--o:0.4;animation-duration:6.3s;animation-delay:0.6s"></circle><circle cx="421.5" cy="352.7" r="0.75" style="--o:0.27;animation-duration:4.8s;animation-delay:5.3s"></circle><circle cx="248.8" cy="105.6" r="0.79" style="--o:0.3;animation-duration:4.7s;animation-delay:4.5s"></circle><circle cx="446.4" cy="246.1" r="0.76" style="--o:0.39;animation-duration:6.5s;animation-delay:6.2s"></circle><circle cx="757.1" cy="107.2" r="0.44" style="--o:0.33;animation-duration:4.9s;animation-delay:5.7s"></circle><circle cx="348.0" cy="354.4" r="0.55" style="--o:0.33;animation-duration:5.1s;animation-delay:6.2s"></circle><circle cx="427.5" cy="10.4" r="0.69" style="--o:0.22;animation-duration:3.4s;animation-delay:4.9s"></circle><circle cx="584.9" cy="197.6" r="0.76" style="--o:0.32;animation-duration:4.5s;animation-delay:1.4s"></circle><circle cx="963.2" cy="145.4" r="0.44" style="--o:0.34;animation-duration:5.8s;animation-delay:2.0s"></circle><circle cx="938.5" cy="295.9" r="0.64" style="--o:0.38;animation-duration:5.4s;animation-delay:2.3s"></circle><circle cx="352.1" cy="306.4" r="0.49" style="--o:0.26;animation-duration:6.6s;animation-delay:6.6s"></circle><circle cx="167.0" cy="345.6" r="0.45" style="--o:0.25;animation-duration:3.8s;animation-delay:5.7s"></circle><circle cx="402.7" cy="424.1" r="0.52" style="--o:0.23;animation-duration:4.2s;animation-delay:2.6s"></circle><circle cx="659.5" cy="404.5" r="0.38" style="--o:0.2;animation-duration:4.9s;animation-delay:3.1s"></circle><circle cx="843.1" cy="115.1" r="0.67" style="--o:0.19;animation-duration:4.1s;animation-delay:5.3s"></circle><circle cx="622.6" cy="322.1" r="0.68" style="--o:0.2;animation-duration:4.3s;animation-delay:1.9s"></circle><circle cx="666.7" cy="173.7" r="0.63" style="--o:0.24;animation-duration:6.0s;animation-delay:2.2s"></circle><circle cx="196.9" cy="308.5" r="0.67" style="--o:0.15;animation-duration:5.8s;animation-delay:0.2s"></circle><circle cx="652.6" cy="89.9" r="0.76" style="--o:0.21;animation-duration:3.2s;animation-delay:5.1s"></circle><circle cx="19.5" cy="228.9" r="0.37" style="--o:0.13;animation-duration:7.1s;animation-delay:6.3s"></circle><circle cx="72.8" cy="152.1" r="0.68" style="--o:0.41;animation-duration:7.0s;animation-delay:1.0s"></circle><circle cx="34.8" cy="335.2" r="0.44" style="--o:0.24;animation-duration:6.7s;animation-delay:5.6s"></circle><circle cx="849.6" cy="274.7" r="0.74" style="--o:0.39;animation-duration:5.4s;animation-delay:4.2s"></circle><circle cx="621.3" cy="43.6" r="0.57" style="--o:0.32;animation-duration:4.5s;animation-delay:2.7s"></circle><circle cx="99.3" cy="283.2" r="0.58" style="--o:0.24;animation-duration:2.6s;animation-delay:1.8s"></circle><circle cx="946.8" cy="288.2" r="0.72" style="--o:0.3;animation-duration:7.1s;animation-delay:5.3s"></circle><circle cx="526.2" cy="421.4" r="0.36" style="--o:0.1;animation-duration:5.4s;animation-delay:3.4s"></circle><circle cx="856.7" cy="154.0" r="0.45" style="--o:0.16;animation-duration:6.7s;animation-delay:5.8s"></circle><circle cx="878.2" cy="199.4" r="0.38" style="--o:0.33;animation-duration:2.9s;animation-delay:4.6s"></circle><circle cx="870.0" cy="153.4" r="0.46" style="--o:0.37;animation-duration:4.8s;animation-delay:5.5s"></circle><circle cx="386.5" cy="384.2" r="0.37" style="--o:0.32;animation-duration:5.4s;animation-delay:1.3s"></circle><circle cx="47.3" cy="131.5" r="0.56" style="--o:0.16;animation-duration:6.4s;animation-delay:4.8s"></circle><circle cx="986.6" cy="86.1" r="0.53" style="--o:0.23;animation-duration:6.9s;animation-delay:6.0s"></circle><circle cx="881.2" cy="237.1" r="0.59" style="--o:0.4;animation-duration:2.9s;animation-delay:4.1s"></circle><circle cx="306.3" cy="96.2" r="0.57" style="--o:0.12;animation-duration:2.6s;animation-delay:1.5s"></circle><circle cx="978.9" cy="139.6" r="0.55" style="--o:0.23;animation-duration:5.6s;animation-delay:4.5s"></circle><circle cx="610.1" cy="338.8" r="0.35" style="--o:0.21;animation-duration:6.1s;animation-delay:1.8s"></circle><circle cx="783.9" cy="320.3" r="0.78" style="--o:0.13;animation-duration:2.9s;animation-delay:5.8s"></circle><circle cx="625.9" cy="275.0" r="0.56" style="--o:0.35;animation-duration:4.0s;animation-delay:1.3s"></circle><circle cx="32.8" cy="270.2" r="0.6" style="--o:0.37;animation-duration:6.1s;animation-delay:6.9s"></circle><circle cx="644.9" cy="104.6" r="0.65" style="--o:0.34;animation-duration:6.4s;animation-delay:0.7s"></circle><circle cx="656.8" cy="407.4" r="0.61" style="--o:0.3;animation-duration:2.4s;animation-delay:0.6s"></circle></g>
+<g class="film-stars sl-mid"><circle cx="101.8" cy="59.6" r="0.9" style="--o:0.45;animation-duration:3.8s;animation-delay:0.3s"></circle><circle cx="850.3" cy="143.1" r="0.89" style="--o:0.43;animation-duration:6.6s;animation-delay:4.2s"></circle><circle cx="548.0" cy="331.7" r="0.8" style="--o:0.27;animation-duration:4.5s;animation-delay:6.9s"></circle><circle cx="72.6" cy="176.8" r="0.88" style="--o:0.36;animation-duration:4.5s;animation-delay:2.1s"></circle><circle cx="613.7" cy="115.6" r="0.7" style="--o:0.44;animation-duration:3.4s;animation-delay:5.1s"></circle><circle cx="251.1" cy="40.7" r="0.99" style="--o:0.43;animation-duration:4.9s;animation-delay:3.1s"></circle><circle cx="189.4" cy="193.4" r="1.06" style="--o:0.45;animation-duration:3.8s;animation-delay:4.6s"></circle><circle cx="71.2" cy="383.4" r="0.97" style="--o:0.54;animation-duration:2.5s;animation-delay:3.7s"></circle><circle cx="764.2" cy="204.7" r="0.75" style="--o:0.54;animation-duration:4.7s;animation-delay:3.4s"></circle><circle cx="664.8" cy="256.7" r="0.75" style="--o:0.38;animation-duration:4.6s;animation-delay:2.3s"></circle><circle cx="313.5" cy="192.5" r="0.89" style="--o:0.42;animation-duration:3.7s;animation-delay:1.9s"></circle><circle cx="629.0" cy="43.5" r="0.8" style="--o:0.39;animation-duration:4.1s;animation-delay:1.3s"></circle><circle cx="34.1" cy="203.1" r="0.73" style="--o:0.55;animation-duration:2.4s;animation-delay:4.1s"></circle><circle cx="189.6" cy="73.5" r="0.98" style="--o:0.5;animation-duration:5.6s;animation-delay:2.6s"></circle><circle cx="852.8" cy="246.1" r="1.23" style="--o:0.45;animation-duration:6.6s;animation-delay:3.4s"></circle><circle cx="133.8" cy="213.1" r="1.08" style="--o:0.4;animation-duration:4.8s;animation-delay:6.0s"></circle><circle cx="139.9" cy="182.1" r="1.19" style="--o:0.48;animation-duration:4.1s;animation-delay:2.5s"></circle><circle cx="301.1" cy="343.0" r="0.82" style="--o:0.33;animation-duration:4.2s;animation-delay:5.3s"></circle><circle cx="900.2" cy="30.0" r="1.21" style="--o:0.27;animation-duration:6.7s;animation-delay:2.7s"></circle><circle cx="738.9" cy="227.6" r="1.12" style="--o:0.51;animation-duration:5.1s;animation-delay:2.4s"></circle><circle cx="988.9" cy="207.9" r="0.99" style="--o:0.33;animation-duration:3.5s;animation-delay:3.5s"></circle><circle cx="378.2" cy="203.9" r="0.95" style="--o:0.47;animation-duration:2.9s;animation-delay:2.3s"></circle><circle cx="252.9" cy="175.6" r="1.2" style="--o:0.27;animation-duration:3.9s;animation-delay:3.8s"></circle><circle cx="957.6" cy="337.4" r="1.01" style="--o:0.57;animation-duration:3.8s;animation-delay:5.0s"></circle><circle cx="89.2" cy="2.6" r="1.11" style="--o:0.59;animation-duration:5.4s;animation-delay:0.0s"></circle><circle cx="599.5" cy="367.2" r="1.1" style="--o:0.33;animation-duration:3.1s;animation-delay:2.9s"></circle><circle cx="921.4" cy="170.9" r="0.83" style="--o:0.49;animation-duration:5.7s;animation-delay:5.1s"></circle><circle cx="580.7" cy="191.8" r="1.15" style="--o:0.26;animation-duration:3.3s;animation-delay:1.1s"></circle><circle cx="134.0" cy="135.1" r="0.82" style="--o:0.47;animation-duration:4.6s;animation-delay:6.8s"></circle><circle cx="765.3" cy="269.3" r="1.22" style="--o:0.27;animation-duration:6.3s;animation-delay:2.8s"></circle><circle cx="220.4" cy="268.7" r="1.2" style="--o:0.57;animation-duration:2.6s;animation-delay:5.6s"></circle><circle cx="907.5" cy="91.6" r="1.22" style="--o:0.29;animation-duration:6.1s;animation-delay:3.4s"></circle><circle cx="82.1" cy="107.6" r="1.07" style="--o:0.4;animation-duration:3.2s;animation-delay:5.7s"></circle><circle cx="286.7" cy="208.2" r="1.04" style="--o:0.31;animation-duration:4.7s;animation-delay:0.6s"></circle><circle cx="8.4" cy="195.8" r="1.25" style="--o:0.54;animation-duration:5.5s;animation-delay:3.3s"></circle><circle cx="27.1" cy="306.5" r="0.81" style="--o:0.46;animation-duration:4.8s;animation-delay:3.7s"></circle><circle cx="153.3" cy="265.5" r="1.06" style="--o:0.41;animation-duration:4.3s;animation-delay:1.3s"></circle><circle cx="699.5" cy="386.8" r="0.96" style="--o:0.4;animation-duration:6.0s;animation-delay:2.0s"></circle><circle cx="806.1" cy="411.4" r="1.05" style="--o:0.31;animation-duration:6.1s;animation-delay:2.0s"></circle><circle cx="861.9" cy="181.5" r="0.99" style="--o:0.48;animation-duration:2.6s;animation-delay:5.7s"></circle><circle cx="536.2" cy="216.6" r="1.07" style="--o:0.5;animation-duration:6.5s;animation-delay:6.5s"></circle><circle cx="173.3" cy="258.2" r="0.8" style="--o:0.46;animation-duration:6.4s;animation-delay:4.8s"></circle><circle cx="265.8" cy="27.4" r="1.19" style="--o:0.48;animation-duration:4.5s;animation-delay:1.8s"></circle><circle cx="531.7" cy="146.3" r="0.91" style="--o:0.57;animation-duration:4.9s;animation-delay:5.0s"></circle><circle cx="321.4" cy="186.0" r="0.92" style="--o:0.47;animation-duration:4.2s;animation-delay:3.1s"></circle><circle cx="992.5" cy="243.5" r="0.76" style="--o:0.56;animation-duration:2.7s;animation-delay:4.7s"></circle><circle cx="459.2" cy="262.3" r="0.9" style="--o:0.37;animation-duration:6.5s;animation-delay:1.9s"></circle><circle cx="111.9" cy="313.5" r="1.25" style="--o:0.32;animation-duration:4.4s;animation-delay:5.2s"></circle><circle cx="873.9" cy="57.2" r="0.81" style="--o:0.33;animation-duration:2.6s;animation-delay:1.8s"></circle><circle cx="577.0" cy="247.3" r="0.81" style="--o:0.34;animation-duration:4.4s;animation-delay:3.5s"></circle><circle cx="380.8" cy="295.7" r="1.08" style="--o:0.44;animation-duration:5.8s;animation-delay:3.3s"></circle><circle cx="947.1" cy="334.8" r="0.9" style="--o:0.47;animation-duration:5.8s;animation-delay:0.7s"></circle><circle cx="602.2" cy="168.3" r="1.15" style="--o:0.4;animation-duration:4.5s;animation-delay:4.1s"></circle><circle cx="702.9" cy="129.2" r="0.89" style="--o:0.56;animation-duration:5.4s;animation-delay:6.8s"></circle><circle cx="193.0" cy="2.0" r="1.02" style="--o:0.33;animation-duration:6.9s;animation-delay:0.9s"></circle><circle cx="400.0" cy="379.2" r="0.98" style="--o:0.39;animation-duration:5.7s;animation-delay:5.8s"></circle><circle cx="511.5" cy="345.6" r="0.7" style="--o:0.34;animation-duration:4.5s;animation-delay:6.5s"></circle><circle cx="969.3" cy="249.4" r="0.81" style="--o:0.38;animation-duration:7.1s;animation-delay:6.4s"></circle></g>
+<g class="film-stars sl-bright"><circle cx="812.3" cy="253.8" r="1.32" style="--o:0.63;animation-duration:3.5s;animation-delay:6.9s"></circle><circle cx="897.2" cy="192.0" r="1.83" style="--o:0.86;animation-duration:5.3s;animation-delay:1.6s"></circle><circle cx="476.8" cy="377.5" r="2.2" style="--o:0.63;animation-duration:2.5s;animation-delay:2.6s"></circle><circle cx="897.6" cy="234.1" r="1.52" style="--o:0.65;animation-duration:3.8s;animation-delay:1.3s"></circle><circle cx="626.1" cy="119.2" r="1.33" style="--o:0.77;animation-duration:6.0s;animation-delay:2.6s"></circle><circle cx="690.2" cy="200.0" r="1.7" style="--o:0.71;animation-duration:3.4s;animation-delay:0.6s"></circle><circle cx="185.1" cy="290.8" r="1.42" style="--o:0.69;animation-duration:6.8s;animation-delay:5.4s"></circle><circle cx="638.1" cy="290.9" r="1.41" style="--o:0.66;animation-duration:2.9s;animation-delay:3.0s"></circle><circle cx="98.1" cy="132.7" r="1.49" style="--o:0.67;animation-duration:5.5s;animation-delay:5.8s"></circle><circle cx="335.6" cy="131.3" r="2.12" style="--o:0.78;animation-duration:5.5s;animation-delay:6.2s"></circle><circle cx="158.5" cy="33.4" r="2.17" style="--o:0.62;animation-duration:7.1s;animation-delay:4.8s"></circle><circle cx="2.0" cy="178.6" r="1.56" style="--o:0.55;animation-duration:4.8s;animation-delay:5.8s"></circle><circle cx="150.3" cy="189.1" r="1.95" style="--o:0.81;animation-duration:2.8s;animation-delay:1.2s"></circle><circle cx="651.0" cy="203.6" r="1.53" style="--o:0.9;animation-duration:4.8s;animation-delay:5.7s"></circle><circle cx="604.8" cy="334.0" r="1.73" style="--o:0.7;animation-duration:5.4s;animation-delay:2.8s"></circle><circle cx="779.8" cy="49.6" r="2.16" style="--o:0.86;animation-duration:5.8s;animation-delay:2.8s"></circle><circle cx="769.4" cy="143.7" r="2.04" style="--o:0.54;animation-duration:4.4s;animation-delay:5.1s"></circle><circle cx="280.5" cy="167.8" r="1.95" style="--o:0.8;animation-duration:4.7s;animation-delay:5.9s"></circle><circle cx="700.6" cy="301.3" r="1.48" style="--o:0.51;animation-duration:6.2s;animation-delay:4.2s"></circle><circle cx="141.4" cy="143.9" r="1.95" style="--o:0.64;animation-duration:6.5s;animation-delay:6.5s"></circle><circle cx="569.4" cy="141.1" r="2.11" style="--o:0.79;animation-duration:5.2s;animation-delay:6.7s"></circle><circle cx="750.1" cy="160.4" r="1.32" style="--o:0.66;animation-duration:2.8s;animation-delay:6.7s"></circle></g>
+<g class="film-anchors"><circle class="film-anchor" cx="250" cy="352" r="2.0" style="animation-delay:0.0s"></circle><circle class="film-anchor" cx="500" cy="300" r="2.0" style="animation-delay:1.3s"></circle><circle class="film-anchor" cx="750" cy="352" r="2.0" style="animation-delay:2.6s"></circle></g>
+<g class="film-shoots"><g class="film-shoot s0" style="--tx:120px;--ty:70px;--ang:18deg;animation-duration:7.5s;animation-delay:2s"><line stroke="url(#cfcomet)" stroke-width="1.6" x1="0" x2="-86" y1="0" y2="0"></line><circle cx="0" cy="0" fill="#fff7e0" r="1.7"></circle></g><g class="film-shoot s1" style="--tx:840px;--ty:120px;--ang:-12deg;animation-duration:9s;animation-delay:11s"><line stroke="url(#cfcomet)" stroke-width="1.6" x1="0" x2="-86" y1="0" y2="0"></line><circle cx="0" cy="0" fill="#fff7e0" r="1.7"></circle></g><g class="film-shoot s2" style="--tx:420px;--ty:50px;--ang:24deg;animation-duration:8.2s;animation-delay:19s"><line stroke="url(#cfcomet)" stroke-width="1.6" x1="0" x2="-86" y1="0" y2="0"></line><circle cx="0" cy="0" fill="#fff7e0" r="1.7"></circle></g></g>
+<g class="film-moon">
+<circle class="moon-halo" cx="788" cy="128" fill="url(#cfmoonh)" r="92"></circle>
+<circle class="moon-disc" cx="788" cy="128" fill="url(#cfmoon)" r="46"></circle>
+<circle class="moon-crater" cx="775" cy="116" fill="rgba(150,120,80,0.18)" r="7"></circle>
+<circle class="moon-crater" cx="800" cy="140" fill="rgba(150,120,80,0.14)" r="10"></circle>
+<circle class="moon-crater" cx="804" cy="112" fill="rgba(150,120,80,0.16)" r="5"></circle>
 </g>
-</svg><div class="cf-titles"><div class="cf-sub cf-sub1">the constellation settles —</div><div class="cf-sub cf-sub2">— back into the mountain</div><div class="cf-seal">我自然</div><div class="cf-fin">we did this ourselves</div></div></div><div class="cf-scenes"><div class="cf-scene"></div><div class="cf-scene"></div><div class="cf-scene"></div><div class="cf-scene"></div></div></section><button aria-pressed="false" class="cadence-toggle" id="cadenceToggle" title="cadence · 節">♪ 節</button><div aria-hidden="true" class="valence-wash"></div><div aria-hidden="true" class="beat-bar" id="beatBar"></div>
+<rect class="film-dawn" fill="url(#cfdawn)" height="640" width="1000" x="0" y="0"></rect>
+<circle class="film-haze" cx="500" cy="240" fill="url(#cfglow)" r="430"></circle>
+<g class="film-mountains"><path class="film-mt l1 film-rim" d="M0 402 L130 360 L250 326 L350 364 L460 330 L560 308 L660 346 L770 320 L880 360 L1000 336 L1000 470 L0 470 Z" fill="#16273c" style="--mo:0.55"></path><path class="film-mt l2 film-rim" d="M0 430 L120 396 L250 352 L360 388 L470 350 L540 332 L640 372 L740 346 L860 392 L1000 364 L1000 480 L0 480 Z" fill="#122134" style="--mo:0.8"></path><path class="film-mt l3" d="M0 462 L140 414 L250 360 L350 398 L440 332 L500 306 L590 346 L700 376 L780 352 L880 410 L1000 378 L1000 500 L0 500 Z" fill="#0d1a2b" style="--mo:1"></path><path class="film-mt l4" d="M0 486 L150 452 L300 486 L420 446 L520 410 L640 452 L760 420 L880 460 L1000 432 L1000 520 L0 520 Z" fill="#0a1525" style="--mo:1"></path><path class="film-mt l5" d="M0 520 L180 496 L360 522 L520 494 L680 520 L840 500 L1000 522 L1000 560 L0 560 Z" fill="#07101d" style="--mo:1"></path></g>
+<g class="film-reflection" clip-path="url(#cfwclip)">
+<g filter="url(#cfsoft)" transform="translate(0,924) scale(1,-1)"><path d="M0 430 L120 396 L250 352 L360 388 L470 350 L540 332 L640 372 L740 346 L860 392 L1000 364 L1000 480 L0 480 Z" fill="#122134"></path><path d="M0 462 L140 414 L250 360 L350 398 L440 332 L500 306 L590 346 L700 376 L780 352 L880 410 L1000 378 L1000 500 L0 500 Z" fill="#0d1a2b"></path><path d="M0 486 L150 452 L300 486 L420 446 L520 410 L640 452 L760 420 L880 460 L1000 432 L1000 520 L0 520 Z" fill="#0a1525"></path></g>
+<rect fill="url(#cfwater)" height="178" width="1000" x="0" y="462"></rect>
+<g class="water-shimmer">
+<ellipse cx="500" cy="540" fill="rgba(227,192,105,0.10)" rx="360" ry="5"></ellipse>
+<ellipse cx="500" cy="572" fill="rgba(227,192,105,0.06)" rx="280" ry="4"></ellipse>
+</g>
+</g>
+<g class="film-mist">
+<ellipse class="mist mA" cx="380" cy="452" rx="540" ry="40"></ellipse>
+<ellipse class="mist mB" cx="640" cy="486" rx="480" ry="34"></ellipse>
+<ellipse class="mist mC" cx="500" cy="430" rx="620" ry="30"></ellipse>
+</g>
+<g class="film-motes"><circle cx="602.0" cy="590" r="1.4" style="--dx:-16.7px;animation-duration:13.1s;animation-delay:16.9s"></circle><circle cx="172.3" cy="590" r="2.3" style="--dx:-18.2px;animation-duration:21.4s;animation-delay:11.6s"></circle><circle cx="403.8" cy="590" r="1.8" style="--dx:11.2px;animation-duration:15.5s;animation-delay:10.1s"></circle><circle cx="576.2" cy="590" r="1.0" style="--dx:-28.9px;animation-duration:20.7s;animation-delay:0.3s"></circle><circle cx="532.2" cy="590" r="1.4" style="--dx:-22.6px;animation-duration:16.7s;animation-delay:12.6s"></circle><circle cx="446.2" cy="590" r="1.3" style="--dx:1.9px;animation-duration:14.0s;animation-delay:8.7s"></circle><circle cx="243.6" cy="590" r="1.5" style="--dx:5.4px;animation-duration:17.6s;animation-delay:4.8s"></circle><circle cx="122.0" cy="590" r="1.1" style="--dx:6.6px;animation-duration:14.2s;animation-delay:8.5s"></circle><circle cx="124.6" cy="590" r="1.1" style="--dx:-4.3px;animation-duration:19.4s;animation-delay:3.8s"></circle><circle cx="187.5" cy="590" r="1.2" style="--dx:15.0px;animation-duration:15.8s;animation-delay:7.9s"></circle><circle cx="727.8" cy="590" r="2.1" style="--dx:2.9px;animation-duration:15.2s;animation-delay:11.7s"></circle><circle cx="234.5" cy="590" r="1.5" style="--dx:-11.8px;animation-duration:19.9s;animation-delay:1.7s"></circle><circle cx="835.6" cy="590" r="1.9" style="--dx:-18.2px;animation-duration:16.5s;animation-delay:8.6s"></circle><circle cx="135.5" cy="590" r="0.9" style="--dx:-27.2px;animation-duration:18.1s;animation-delay:8.3s"></circle><circle cx="361.1" cy="590" r="1.4" style="--dx:12.5px;animation-duration:14.4s;animation-delay:5.7s"></circle><circle cx="276.3" cy="590" r="1.1" style="--dx:-2.9px;animation-duration:12.6s;animation-delay:2.0s"></circle><circle cx="761.7" cy="590" r="1.4" style="--dx:27.7px;animation-duration:15.0s;animation-delay:2.0s"></circle><circle cx="488.5" cy="590" r="2.2" style="--dx:4.5px;animation-duration:15.0s;animation-delay:12.7s"></circle><circle cx="294.6" cy="590" r="2.2" style="--dx:-8.8px;animation-duration:21.8s;animation-delay:5.7s"></circle><circle cx="842.6" cy="590" r="2.1" style="--dx:-25.3px;animation-duration:12.4s;animation-delay:1.4s"></circle></g>
+<g class="film-sparks"><circle class="film-spark" cx="250" cy="352" r="2.4" style="--dx:0px;--dy:-120px"></circle><circle class="film-spark" cx="500" cy="300" r="2.4" style="--dx:0px;--dy:-134px"></circle><circle class="film-spark" cx="750" cy="352" r="2.4" style="--dx:0px;--dy:-110px"></circle></g>
+<g class="film-constel"><line class="clink tri" style="--s:0.62;--len:259" x1="250" x2="500" y1="232" y2="166"></line><line class="clink tri" style="--s:0.62;--len:261" x1="500" x2="750" y1="166" y2="242"></line><line class="clink tri" style="--s:0.62;--len:500" x1="750" x2="250" y1="242" y2="232"></line><line class="clink spine" style="--s:0.16;--len:325" x1="500" x2="250" y1="440" y2="232"></line><line class="clink" style="--s:0.3;--len:106" x1="250" x2="149.8" y1="232" y2="266.5"></line><line class="clink" style="--s:0.328;--len:106" x1="250" x2="145.7" y1="232" y2="212.9"></line><line class="clink" style="--s:0.356;--len:106" x1="250" x2="168.5" y1="232" y2="164.2"></line><line class="clink" style="--s:0.384;--len:106" x1="250" x2="212.2" y1="232" y2="133.0"></line><line class="clink" style="--s:0.412;--len:106" x1="250" x2="265.6" y1="232" y2="127.2"></line><line class="clink spine" style="--s:0.16;--len:274" x1="500" x2="500" y1="440" y2="166"></line><line class="clink" style="--s:0.32;--len:106" x1="500" x2="409.4" y1="166" y2="111.0"></line><line class="clink" style="--s:0.348;--len:106" x1="500" x2="448.0" y1="166" y2="73.6"></line><line class="clink" style="--s:0.376;--len:106" x1="500" x2="500.0" y1="166" y2="60.0"></line><line class="clink" style="--s:0.404;--len:106" x1="500" x2="552.0" y1="166" y2="73.6"></line><line class="clink" style="--s:0.432;--len:106" x1="500" x2="590.6" y1="166" y2="111.0"></line><line class="clink spine" style="--s:0.16;--len:319" x1="500" x2="750" y1="440" y2="242"></line><line class="clink" style="--s:0.34;--len:106" x1="750" x2="736.9" y1="242" y2="136.8"></line><line class="clink" style="--s:0.368;--len:106" x1="750" x2="790.1" y1="242" y2="143.9"></line><line class="clink" style="--s:0.396;--len:106" x1="750" x2="833.1" y1="242" y2="176.2"></line><line class="clink" style="--s:0.424;--len:106" x1="750" x2="854.7" y1="242" y2="225.4"></line><line class="clink" style="--s:0.452;--len:106" x1="750" x2="849.4" y1="242" y2="278.9"></line><line class="cpulse" style="--len:325;animation-delay:0.0s" x1="500" x2="250" y1="440" y2="232"></line><line class="cpulse" style="--len:274;animation-delay:1.5s" x1="500" x2="500" y1="440" y2="166"></line><line class="cpulse" style="--len:319;animation-delay:3.0s" x1="500" x2="750" y1="440" y2="242"></line><g aria-label="自然 zìrán — self-so; the spontaneous own-nature of things; enter" class="csat" data-gloss="self-so; the spontaneous own-nature of things" data-jump="#dao" data-py="zìrán" data-zh="自然" role="button" style="--s:0.34" tabindex="0"><circle class="csat-glow" cx="149.8" cy="266.5" r="13"></circle><circle class="csat-dot" cx="149.8" cy="266.5" r="5.5"></circle><circle class="csat-hit" cx="149.8" cy="266.5" r="20"></circle><text class="csat-label" x="149.8" y="286.5">自然</text></g><g aria-label="無為 wúwéi — non-coercive action; leading by not-forcing; enter" class="csat" data-gloss="non-coercive action; leading by not-forcing" data-jump="#dao" data-py="wúwéi" data-zh="無為" role="button" style="--s:0.368" tabindex="0"><circle class="csat-glow" cx="145.7" cy="212.9" r="13"></circle><circle class="csat-dot" cx="145.7" cy="212.9" r="5.5"></circle><circle class="csat-hit" cx="145.7" cy="212.9" r="20"></circle><text class="csat-label" x="145.7" y="199.9">無為</text></g><g aria-label="不召自來 bù zhào zì lái — it comes unbidden, uncalled; enter" class="csat" data-gloss="it comes unbidden, uncalled" data-jump="#dao" data-py="bù zhào zì lái" data-zh="不召自來" role="button" style="--s:0.396" tabindex="0"><circle class="csat-glow" cx="168.5" cy="164.2" r="13"></circle><circle class="csat-dot" cx="168.5" cy="164.2" r="5.5"></circle><circle class="csat-hit" cx="168.5" cy="164.2" r="20"></circle><text class="csat-label" x="168.5" y="151.2">不召自來</text></g><g aria-label="因是 yīn shì — going by what is; following the grain; enter" class="csat" data-gloss="going by what is; following the grain" data-jump="#dao" data-py="yīn shì" data-zh="因是" role="button" style="--s:0.424" tabindex="0"><circle class="csat-glow" cx="212.2" cy="133.0" r="13"></circle><circle class="csat-dot" cx="212.2" cy="133.0" r="5.5"></circle><circle class="csat-hit" cx="212.2" cy="133.0" r="20"></circle><text class="csat-label" x="212.2" y="120.0">因是</text></g><g aria-label="反 fǎn — return; reversal as the motion of the Way; enter" class="csat" data-gloss="return; reversal as the motion of the Way" data-jump="#dao" data-py="fǎn" data-zh="反" role="button" style="--s:0.452" tabindex="0"><circle class="csat-glow" cx="265.6" cy="127.2" r="13"></circle><circle class="csat-dot" cx="265.6" cy="127.2" r="5.5"></circle><circle class="csat-hit" cx="265.6" cy="127.2" r="20"></circle><text class="csat-label" x="265.6" y="114.2">反</text></g><g aria-label="觀 guān — contemplative seeing; beholding without grasping; enter" class="csat" data-gloss="contemplative seeing; beholding without grasping" data-jump="#confucius" data-py="guān" data-zh="觀" role="button" style="--s:0.36" tabindex="0"><circle class="csat-glow" cx="409.4" cy="111.0" r="13"></circle><circle class="csat-dot" cx="409.4" cy="111.0" r="5.5"></circle><circle class="csat-hit" cx="409.4" cy="111.0" r="20"></circle><text class="csat-label" x="409.4" y="98.0">觀</text></g><g aria-label="無 wú — the fertile void; the use of emptiness; enter" class="csat" data-gloss="the fertile void; the use of emptiness" data-jump="#confucius" data-py="wú" data-zh="無" role="button" style="--s:0.388" tabindex="0"><circle class="csat-glow" cx="448.0" cy="73.6" r="13"></circle><circle class="csat-dot" cx="448.0" cy="73.6" r="5.5"></circle><circle class="csat-hit" cx="448.0" cy="73.6" r="20"></circle><text class="csat-label" x="448.0" y="60.6">無</text></g><g aria-label="生 shēng — generativity; life giving rise to life; enter" class="csat" data-gloss="generativity; life giving rise to life" data-jump="#confucius" data-py="shēng" data-zh="生" role="button" style="--s:0.416" tabindex="0"><circle class="csat-glow" cx="500.0" cy="60.0" r="13"></circle><circle class="csat-dot" cx="500.0" cy="60.0" r="5.5"></circle><circle class="csat-hit" cx="500.0" cy="60.0" r="20"></circle><text class="csat-label" x="500.0" y="47.0">生</text></g><g aria-label="幾 jī — the incipient; the first faint stir of what comes; enter" class="csat" data-gloss="the incipient; the first faint stir of what comes" data-jump="#confucius" data-py="jī" data-zh="幾" role="button" style="--s:0.444" tabindex="0"><circle class="csat-glow" cx="552.0" cy="73.6" r="13"></circle><circle class="csat-dot" cx="552.0" cy="73.6" r="5.5"></circle><circle class="csat-hit" cx="552.0" cy="73.6" r="20"></circle><text class="csat-label" x="552.0" y="60.6">幾</text></g><g aria-label="和 hé — harmony that is not sameness; enter" class="csat" data-gloss="harmony that is not sameness" data-jump="#confucius" data-py="hé" data-zh="和" role="button" style="--s:0.472" tabindex="0"><circle class="csat-glow" cx="590.6" cy="111.0" r="13"></circle><circle class="csat-dot" cx="590.6" cy="111.0" r="5.5"></circle><circle class="csat-hit" cx="590.6" cy="111.0" r="20"></circle><text class="csat-label" x="590.6" y="98.0">和</text></g><g aria-label="誠 chéng — sincerity; the integrity of the real; enter" class="csat" data-gloss="sincerity; the integrity of the real" data-jump="#harmony" data-py="chéng" data-zh="誠" role="button" style="--s:0.38" tabindex="0"><circle class="csat-glow" cx="736.9" cy="136.8" r="13"></circle><circle class="csat-dot" cx="736.9" cy="136.8" r="5.5"></circle><circle class="csat-hit" cx="736.9" cy="136.8" r="20"></circle><text class="csat-label" x="736.9" y="123.8">誠</text></g><g aria-label="恕 shù — reciprocity; the like-hearted measure; enter" class="csat" data-gloss="reciprocity; the like-hearted measure" data-jump="#harmony" data-py="shù" data-zh="恕" role="button" style="--s:0.408" tabindex="0"><circle class="csat-glow" cx="790.1" cy="143.9" r="13"></circle><circle class="csat-dot" cx="790.1" cy="143.9" r="5.5"></circle><circle class="csat-hit" cx="790.1" cy="143.9" r="20"></circle><text class="csat-label" x="790.1" y="130.9">恕</text></g><g aria-label="感 gǎn — resonance; being moved and moving; enter" class="csat" data-gloss="resonance; being moved and moving" data-jump="#harmony" data-py="gǎn" data-zh="感" role="button" style="--s:0.436" tabindex="0"><circle class="csat-glow" cx="833.1" cy="176.2" r="13"></circle><circle class="csat-dot" cx="833.1" cy="176.2" r="5.5"></circle><circle class="csat-hit" cx="833.1" cy="176.2" r="20"></circle><text class="csat-label" x="833.1" y="163.2">感</text></g><g aria-label="知音 zhīyīn — the one who knows the tune; enter" class="csat" data-gloss="the one who knows the tune" data-jump="#harmony" data-py="zhīyīn" data-zh="知音" role="button" style="--s:0.464" tabindex="0"><circle class="csat-glow" cx="854.7" cy="225.4" r="13"></circle><circle class="csat-dot" cx="854.7" cy="225.4" r="5.5"></circle><circle class="csat-hit" cx="854.7" cy="225.4" r="20"></circle><text class="csat-label" x="854.7" y="212.4">知音</text></g><g aria-label="推恩 tuī ēn — extending kindness outward, ring by ring; enter" class="csat" data-gloss="extending kindness outward, ring by ring" data-jump="#harmony" data-py="tuī ēn" data-zh="推恩" role="button" style="--s:0.492" tabindex="0"><circle class="csat-glow" cx="849.4" cy="278.9" r="13"></circle><circle class="csat-dot" cx="849.4" cy="278.9" r="5.5"></circle><circle class="csat-hit" cx="849.4" cy="278.9" r="20"></circle><text class="csat-label" x="849.4" y="298.9">推恩</text></g><g aria-label="道 dào — the Way — the generative course of things; enter" class="chub" data-gloss="the Way — the generative course of things" data-jump="#dao" data-py="dào" data-school="dao" data-zh="道" role="button" style="--s:0.05" tabindex="0"><circle class="chub-ring" cx="250" cy="232" r="38"></circle><circle class="chub-halo" cx="250" cy="232" r="40"></circle><circle class="chub-core" cx="250" cy="232" filter="url(#cfbloom)" r="30"></circle><circle class="chub-hit" cx="250" cy="232" r="44"></circle><text class="chub-zh" x="250" y="242">道</text></g><g aria-label="禮 lǐ — ritual — the form that carries relation; enter" class="chub" data-gloss="ritual — the form that carries relation" data-jump="#confucius" data-py="lǐ" data-school="li" data-zh="禮" role="button" style="--s:0.1" tabindex="0"><circle class="chub-ring" cx="500" cy="166" r="38"></circle><circle class="chub-halo" cx="500" cy="166" r="40"></circle><circle class="chub-core" cx="500" cy="166" filter="url(#cfbloom)" r="30"></circle><circle class="chub-hit" cx="500" cy="166" r="44"></circle><text class="chub-zh" x="500" y="176">禮</text></g><g aria-label="仁 rén — benevolence — the two-person fact of being human; enter" class="chub" data-gloss="benevolence — the two-person fact of being human" data-jump="#harmony" data-py="rén" data-school="ren" data-zh="仁" role="button" style="--s:0.15" tabindex="0"><circle class="chub-ring" cx="750" cy="242" r="38"></circle><circle class="chub-halo" cx="750" cy="242" r="40"></circle><circle class="chub-core" cx="750" cy="242" filter="url(#cfbloom)" r="30"></circle><circle class="chub-hit" cx="750" cy="242" r="44"></circle><text class="chub-zh" x="750" y="252">仁</text></g><g aria-label="環中 huán zhōng — the hinge within the ring — the still centre that meets endless change; enter" class="ccentre" data-gloss="the hinge within the ring — the still centre that meets endless change" data-jump="#three-schools" data-py="huán zhōng" data-zh="環中" role="button" style="--s:0.10" tabindex="0"><circle class="cc-glow" cx="500" cy="440" r="66"></circle><circle class="cc-spin" cx="500" cy="440" r="52"></circle><circle class="cc-ring" cx="500" cy="440" r="44"></circle><circle class="cc-ring2" cx="500" cy="440" filter="url(#cfbloom)" r="31"></circle><circle class="cc-hit" cx="500" cy="440" r="60"></circle><text class="cc-zh" x="500" y="448">環中</text></g></g>
+<rect class="film-grain" filter="url(#cfgrain)" height="640" opacity="0.035" width="1000" x="0" y="0"></rect>
+<rect class="film-vignette" fill="url(#cfvig)" height="640" width="1000" x="0" y="0"></rect>
+</svg><div class="film-titles"><div class="film-sub film-sub1">the constellation settles —</div><div class="film-sub film-sub2">— and returns to the mountain</div><div class="film-seal">我自然</div><div class="film-fin">we did this ourselves</div><button class="film-replay" data-replay="codafilm" type="button">Replay the descent ↻</button></div><div aria-live="polite" class="film-tip"><div class="ft-zh"></div><div class="ft-py"></div><div class="ft-gloss"></div><div class="ft-go">enter ↗</div></div><div class="film-rail"><div class="film-rail-fill"></div><span class="rail-tick" style="left:14%"></span><span class="rail-tick" style="left:50%"></span><span class="rail-tick" style="left:82%"></span></div></div><div class="film-scenes"><div class="film-scene"></div><div class="film-scene"></div><div class="film-scene"></div><div class="film-scene"></div><div class="film-scene"></div></div></section><button aria-pressed="false" class="cadence-toggle" id="cadenceToggle" title="cadence · 節">♪ 節</button><div aria-hidden="true" class="valence-wash"></div><div aria-hidden="true" class="beat-bar" id="beatBar"></div>
 <script>
 (function(){
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -5166,18 +5691,8 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
     psvg.style.opacity=(0.2+0.8*p).toFixed(3);
     psvg.style.transform='translateY('+((1-p)*40).toFixed(0)+'px)';
   }
-  /* ---- coda film ---- */
-  var cf=document.getElementById('codafilm'), cstage=cf?cf.querySelector('.cf-stage'):null;
-  function codaScroll(){
-    if(!cf||!cstage)return;
-    var rect=cf.getBoundingClientRect(); var total=cf.offsetHeight-window.innerHeight;
-    var p=Math.min(1,Math.max(0,(-rect.top)/(total||1)));
-    var phase=0; if(p>=0.18)phase=1; if(p>=0.5)phase=2; if(p>=0.8)phase=3;
-    if(cstage.getAttribute('data-phase')!=String(phase)) cstage.setAttribute('data-phase',String(phase));
-    var inview=rect.top<window.innerHeight && rect.bottom>0 && p>0.02;
-    document.body.classList.toggle('in-coda', inview);
-  }
-  if(reduce&&cstage){cstage.setAttribute('data-phase','3');}
+  /* ---- coda film is handled by the shared film engine (filmkit) ---- */
+  function codaScroll(){}
   /* ---- valence palette (per Book Two movement in view) ---- */
   var VAL={dao:'cool',harmony:'cool',horizons:'cool',legalism:'neutral',culture:'neutral',confucius:'neutral',
            radical:'warm',bandstand:'warm',kinetic:'warm',conclusion:'warm'};
@@ -5221,6 +5736,98 @@ body.in-coda .swing-toggle,body.in-coda .cadence-toggle{opacity:0 !important;poi
       if(!reduce){ tickSound(); beatTimer=setInterval(tickSound,833); }
     } else { if(beatTimer){clearInterval(beatTimer);beatTimer=null;} }
   });
+})();
+</script>
+<script>
+(function(){
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var sec=document.getElementById("codafilm"); if(!sec) return;
+  var stage=sec.querySelector('.film-stage'); var fill=sec.querySelector('.film-rail-fill');
+  var tip=sec.querySelector('.film-tip'); var mode="coda";
+  var live=false;
+  function frame(){
+    var rect=sec.getBoundingClientRect(); var total=sec.offsetHeight-window.innerHeight;
+    var ov=Math.min(1,Math.max(0,(-rect.top)/(total||1)));
+    var build=(mode==='coda')?(1-ov):ov;
+    if(reduce){ ov=(mode==='coda')?1:0; build=(mode==='coda')?0:1; }
+    stage.style.setProperty('--ov',ov.toFixed(3));
+    stage.style.setProperty('--build',build.toFixed(3));
+    var ph=ov<0.14?0:(ov<0.5?1:(ov<0.82?2:3));
+    if(stage.getAttribute('data-phase')!=String(ph)) stage.setAttribute('data-phase',String(ph));
+    if(fill) fill.style.transform='scaleX('+ov.toFixed(3)+')';
+    var inview=rect.top<=8 && rect.bottom>=window.innerHeight-8 && ov<0.99;
+    document.body.classList.toggle("in-coda", inview);
+    var shouldLive=(mode==='overture') && build>0.82 && inview;
+    if(shouldLive!==live){ live=shouldLive; sec.classList.toggle('live',live); if(!live) hideTip(); }
+  }
+  var tick=false;
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(function(){frame();tick=false;});}},{passive:true});
+  window.addEventListener('resize',frame,{passive:true}); frame();
+  // gentle pointer parallax (desktop, motion allowed)
+  if(!reduce && window.matchMedia('(pointer:fine)').matches){
+    stage.addEventListener('mousemove',function(e){
+      var r=stage.getBoundingClientRect();
+      stage.style.setProperty('--px',(((e.clientX-r.left)/r.width)-0.5).toFixed(3));
+      stage.style.setProperty('--py',(((e.clientY-r.top)/r.height)-0.5).toFixed(3));
+    },{passive:true});
+    stage.addEventListener('mouseleave',function(){stage.style.setProperty('--px','0');stage.style.setProperty('--py','0');});
+  }
+  // ---- interactive star-map ----
+  var curJump=null;
+  function showTip(node){
+    if(!tip) return;
+    var sr=stage.getBoundingClientRect();
+    var b=node.getBoundingClientRect();
+    var cx=b.left+b.width/2-sr.left, cy=b.top+b.height/2-sr.top;
+    tip.querySelector('.ft-zh').textContent=node.getAttribute('data-zh')||'';
+    tip.querySelector('.ft-py').textContent=node.getAttribute('data-py')||'';
+    tip.querySelector('.ft-gloss').textContent=node.getAttribute('data-gloss')||'';
+    curJump=node.getAttribute('data-jump');
+    tip.classList.add('show');
+    var tw=tip.offsetWidth||190, th=tip.offsetHeight||120;
+    var x=cx+18, y=cy-th/2; if(x+tw>sr.width-8)x=cx-tw-18; if(x<8)x=8;
+    if(y<8)y=8; if(y+th>sr.height-8)y=sr.height-th-8;
+    tip.style.left=x+'px'; tip.style.top=y+'px';
+  }
+  function hideTip(){ if(tip){tip.classList.remove('show');curJump=null;} }
+  function scroller(){return document.scrollingElement||document.documentElement;}
+  function curY(){return window.pageYOffset||scroller().scrollTop||0;}
+  function clampY(y){var s=scroller();var max=s.scrollHeight-window.innerHeight;return Math.max(0,Math.min(y,max<0?0:max));}
+  /* This page sets body{overflow-x:clip; height:<full>} so element.scrollTop= is rejected;
+     only window.scrollTo moves it. And html{scroll-behavior:smooth} would hijack every call into a
+     competing smooth animation, stalling a per-frame tween. So we force scroll-behavior:auto for the
+     duration and drive our own eased window.scrollTo each frame, restoring behaviour at the end. */
+  function smoothTo(y,el){ y=clampY(y); var de=document.documentElement, prev=de.style.scrollBehavior; de.style.scrollBehavior='auto';
+    function settle(n){ /* after arrival, re-measure the target and correct for any reflow above it */
+      if(!el){ de.style.scrollBehavior=prev; return; }
+      var off=el.getBoundingClientRect().top-12;
+      if(Math.abs(off)>16 && n<6){ window.scrollTo(0,clampY(curY()+off)); requestAnimationFrame(function(){settle(n+1);}); }
+      else { de.style.scrollBehavior=prev; } }
+    if(reduce){ window.scrollTo(0,y); settle(0); return; }
+    var from=curY(),d=y-from,t0=null,dur=Math.min(1000,Math.max(380,Math.abs(d)*0.42));
+    function step(ts){ if(t0===null)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=p<0.5?2*p*p:1-Math.pow(-2*p+2,2)/2; window.scrollTo(0,Math.round(from+d*e)); if(p<1){requestAnimationFrame(step);} else { window.scrollTo(0,y); settle(0); } }
+    requestAnimationFrame(step); }
+  function go(j){ var t=j&&document.querySelector(j); if(!t)return; hideTip();
+    var y1=t.getBoundingClientRect().top+curY()-12;
+    requestAnimationFrame(function(){ var y2=t.getBoundingClientRect().top+curY()-12; smoothTo(Math.abs(y2-y1)>4?y2:y1, t); }); }
+  if(mode==='overture'){
+    var nodes=sec.querySelectorAll('.chub,.csat,.ccentre');
+    nodes.forEach(function(n){
+      n.addEventListener('mouseenter',function(){if(live)showTip(n);});
+      n.addEventListener('mouseleave',function(){hideTip();});
+      n.addEventListener('focus',function(){if(live)showTip(n);});
+      n.addEventListener('blur',function(){hideTip();});
+      n.addEventListener('click',function(){go(n.getAttribute('data-jump'));});
+      n.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();go(n.getAttribute('data-jump'));}});
+    });
+    if(tip){ tip.querySelector('.ft-go').addEventListener('click',function(){go(curJump);});
+      tip.addEventListener('mouseleave',hideTip); }
+  }
+  // controls
+  var skip=sec.querySelector('.film-skip');
+  if(skip)skip.addEventListener('click',function(){go(skip.getAttribute('data-skip'));});
+  var replay=sec.querySelector('.film-replay');
+  if(replay)replay.addEventListener('click',function(){var y=sec.getBoundingClientRect().top+curY()-2;smoothTo(y,sec);});
 })();
 </script></body>
 </html>
